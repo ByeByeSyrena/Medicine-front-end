@@ -2,8 +2,8 @@ import React from "react";
 import css from "./ShoppingCartPage.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+// import { useDispatch } from "react-redux";
+// import { AppDispatch } from "../../redux/store";
 import classNames from "classnames";
 
 const validationSchema = Yup.object().shape({
@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const ShoppingCartPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const formik = useFormik({
     initialValues: {
