@@ -72,6 +72,7 @@ const ShopPage = () => {
                     style={{ objectFit: "contain" }}
                   />
                   <h3>{item.item}</h3>
+                  <p>{item.price}</p>
                   <p>{item.quantity}</p>
                   <button type="button">Add to Cart</button>
                 </li>

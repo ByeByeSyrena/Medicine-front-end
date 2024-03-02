@@ -15,13 +15,14 @@ import { storesReducer } from "./stores/storesSlice";
 import { ordersReducer } from "./orders/ordersSlice";
 
 const persistConfig = {
-  key: "favorites",
+  key: "persistedStates",
   storage,
+  whitelist: ["stores", "cart", "favorites"],
 };
 
 const rootReducer = combineReducers({
   orders: ordersReducer,
-  stores: storesReducer,
+  stores: persistReducer(persistConfig, storesReducer),
   //   favorites: persistReducer(persistConfig, favoritesReducer),
 });
 

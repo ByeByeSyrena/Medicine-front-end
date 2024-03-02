@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Pharmacy } from "../../@types/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Medicine, Pharmacy } from "../../@types/types";
 import { getAllStores, getOneStore } from "./operations";
 
 type initialStateTypes = {
   items: Pharmacy[];
   item: Pharmacy | null;
+  cart: Medicine[];
   isLoading?: boolean;
   error?: string | null;
 };
@@ -12,13 +13,22 @@ type initialStateTypes = {
 const catalogInitialState: initialStateTypes = {
   items: [],
   item: null,
+  cart: [],
   isLoading: false,
   error: null,
 };
+
 const storesSlice = createSlice({
   name: "stores",
   initialState: catalogInitialState,
-  reducers: {},
+  reducers: {
+    addToCart(state, action: PayloadAction<Medicine>) {
+      state.cart.push(action.payload);
+    },
+    deleteFromCart(state, action: PayloadAction<string>) {
+      state.cart = state.cart.filter((item) => item._id !== action.payload);
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(getAllStores.pending, (state) => {
@@ -50,3 +60,5 @@ const storesSlice = createSlice({
 });
 
 export const storesReducer = storesSlice.reducer;
+
+export const { addToCart, deleteFromCart } = storesSlice.actions;
