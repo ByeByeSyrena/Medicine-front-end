@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Medicine-front-end/static/css/main.e511a666.css",
+    "main.js": "/Medicine-front-end/static/js/main.6302cd7e.js",
+    "static/js/453.ed3810f9.chunk.js": "/Medicine-front-end/static/js/453.ed3810f9.chunk.js",
+    "static/media/pill-bottle-311809_1280.png": "/Medicine-front-end/static/media/pill-bottle-311809_1280.1644442aead46346da93.png",
+    "index.html": "/Medicine-front-end/index.html",
+    "main.e511a666.css.map": "/Medicine-front-end/static/css/main.e511a666.css.map",
+    "main.6302cd7e.js.map": "/Medicine-front-end/static/js/main.6302cd7e.js.map",
+    "453.ed3810f9.chunk.js.map": "/Medicine-front-end/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e511a666.css",
+    "static/js/main.6302cd7e.js"
+  ]
+}
