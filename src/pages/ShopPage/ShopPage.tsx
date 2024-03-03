@@ -17,8 +17,6 @@ const ShopPage = () => {
 
   const medicines = storesAndDrugs.flatMap((store: Pharmacy) => store.items);
 
-  console.log(medicines);
-
   useEffect(() => {
     dispatch(getAllStores());
   }, [dispatch]);

@@ -8,7 +8,6 @@ import { selectCart } from "../../redux/stores/selectors";
 export const Header = () => {
   const addedToCart = useSelector(selectCart);
   const isLength = addedToCart.length;
-  console.log(isLength);
 
   return (
     <header className={css.header}>
