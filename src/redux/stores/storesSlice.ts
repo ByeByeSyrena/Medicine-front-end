@@ -22,11 +22,14 @@ const storesSlice = createSlice({
   name: "stores",
   initialState: catalogInitialState,
   reducers: {
-    addToCart(state, action: PayloadAction<Medicine>) {
+    addToCart(state, action) {
       state.cart.push(action.payload);
     },
-    deleteFromCart(state, action: PayloadAction<string>) {
+    deleteFromCart(state, action) {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
+    },
+    clearCart(state) {
+      state.cart = [];
     },
   },
   extraReducers: (builder) =>
@@ -61,4 +64,4 @@ const storesSlice = createSlice({
 
 export const storesReducer = storesSlice.reducer;
 
-export const { addToCart, deleteFromCart } = storesSlice.actions;
+export const { addToCart, deleteFromCart, clearCart } = storesSlice.actions;

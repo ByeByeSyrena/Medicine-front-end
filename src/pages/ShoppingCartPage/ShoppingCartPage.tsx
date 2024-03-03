@@ -2,9 +2,13 @@ import React from "react";
 import css from "./ShoppingCartPage.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../redux/stores/selectors";
+import { Medicine } from "../../@types/types";
+import { deleteFromCart } from "../../redux/stores/storesSlice";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -16,7 +20,14 @@ const validationSchema = Yup.object().shape({
 });
 
 const ShoppingCartPage = () => {
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
+  const cartItems = useSelector(selectCart);
+
+  console.log(cartItems);
+
+  const handleDeleteFromCartClick = (id: string) => {
+    dispatch(deleteFromCart(id));
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -51,7 +62,7 @@ const ShoppingCartPage = () => {
               })}
             />
             {formik.errors.name && formik.touched.name && (
-              <div>{formik.errors.name}</div>
+              <div className={css.errorMessage}>{formik.errors.name}</div>
             )}
           </div>
           <div>
@@ -69,7 +80,7 @@ const ShoppingCartPage = () => {
               })}
             />
             {formik.errors.email && formik.touched.email && (
-              <div>{formik.errors.email}</div>
+              <div className={css.errorMessage}>{formik.errors.email}</div>
             )}
           </div>
           <div>
@@ -87,7 +98,7 @@ const ShoppingCartPage = () => {
               })}
             />
             {formik.errors.phone && formik.touched.phone && (
-              <div>{formik.errors.phone}</div>
+              <div className={css.errorMessage}>{formik.errors.phone}</div>
             )}
           </div>
           <div>
@@ -105,12 +116,45 @@ const ShoppingCartPage = () => {
               })}
             />
             {formik.errors.address && formik.touched.address && (
-              <div>{formik.errors.address}</div>
+              <div className={css.errorMessage}>{formik.errors.address}</div>
             )}
           </div>
         </form>
       </div>
-      <div className={css.shopPage}>{/* Items from the shop page */}</div>
+      <div className={css.shopPage}>
+        <ul className={css.cartList}>
+          {cartItems &&
+            cartItems.map((item: Medicine, index: number) => (
+              <li key={item._id} className={css.cartLi}>
+                <img
+                  src={require("../../images/pill-bottle-311809_1280.png")}
+                  alt={item.item}
+                  className={css.image}
+                  style={{ objectFit: "contain" }}
+                />
+                <div className={css.itemInnerDiv}>
+                  <h3>{item.item}</h3>
+                  <p>{item.price}</p>
+                  <input
+                    type="number"
+                    min="0"
+                    className={classNames(
+                      css["dark-input"],
+                      css["quantity-input"]
+                    )}
+                  />
+                  <button
+                    className={css.removeButton}
+                    type="button"
+                    onClick={() => handleDeleteFromCartClick(item._id ?? "")}
+                  >
+                    Remove
+                  </button>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
       <div>
         <div>
           <span>Total Price</span>

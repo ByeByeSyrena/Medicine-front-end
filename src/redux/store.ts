@@ -8,8 +8,8 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+} from "reduxjs-toolkit-persist";
+import storage from "reduxjs-toolkit-persist/lib/storage";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { storesReducer } from "./stores/storesSlice";
 import { ordersReducer } from "./orders/ordersSlice";
@@ -22,8 +22,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   orders: ordersReducer,
+  // stores: storesReducer,
   stores: persistReducer(persistConfig, storesReducer),
-  //   favorites: persistReducer(persistConfig, favoritesReducer),
+  // favorites: persistReducer(persistConfig, favoritesReducer),
 });
 
 export const store = configureStore({
