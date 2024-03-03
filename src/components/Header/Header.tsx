@@ -1,19 +1,18 @@
 import css from "./Header.module.css";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./header.css";
+import { selectCart } from "../../redux/stores/selectors";
 
 export const Header = () => {
+  const addedToCart = useSelector(selectCart);
+  const isLength = addedToCart.length;
+  console.log(isLength);
+
   return (
     <header className={css.header}>
       <div className={css.container}>
-        {/* <NavLink to="/welcome">
-          <img
-            src={require('../../images/icons8-car-50.png')}
-            alt="logo"
-            className={css.logo}
-          />
-        </NavLink> */}
         <nav>
           <ul className={css.nav}>
             <li>
@@ -22,15 +21,17 @@ export const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cart" className={css.link}>
-                Shopping Cart
+              <NavLink to="/cart" className={css.logo}>
+                <img
+                  src={require("../../images/icons8-cart-30.png")}
+                  alt="logo"
+                  className={css.logo}
+                />
+                {isLength > 0 && (
+                  <span className={css.lengthSpan}>{isLength}</span>
+                )}
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink to="/favorites" className={css.link}>
-                Favorites
-              </NavLink>
-            </li> */}
           </ul>
         </nav>
       </div>
