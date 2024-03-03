@@ -3,11 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Medicine, Pharmacy } from "../../@types/types";
 import { AppDispatch } from "../../redux/store";
 import { getAllStores, getOneStore } from "../../redux/stores/operations";
-import {
-  selectAllStores,
-  selectCart,
-  selectOneStore,
-} from "../../redux/stores/selectors";
+import { selectAllStores, selectOneStore } from "../../redux/stores/selectors";
 import { addToCart } from "../../redux/stores/storesSlice";
 import css from "./ShopPage.module.css";
 
@@ -16,11 +12,12 @@ const ShopPage = () => {
   const dispatchCart = useDispatch();
   const storesAndDrugs = useSelector(selectAllStores);
   const onePharmacy = useSelector(selectOneStore);
-  const addedToCart = useSelector(selectCart);
 
   const [displayAll, setDisplayAll] = useState<boolean>(true);
 
   const medicines = storesAndDrugs.flatMap((store: Pharmacy) => store.items);
+
+  console.log(medicines);
 
   useEffect(() => {
     dispatch(getAllStores());

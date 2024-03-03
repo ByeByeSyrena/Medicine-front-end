@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./ShoppingCartPage.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -134,10 +134,14 @@ const ShoppingCartPage = () => {
                 />
                 <div className={css.itemInnerDiv}>
                   <h3>{item.item}</h3>
-                  <p>{item.price}</p>
+                  <p>{item.price} per 1</p>
                   <input
                     type="number"
                     min="0"
+                    // onChange={() => {
+                    //   handleTotalPrice();
+                    // }}
+                    placeholder="Set amount"
                     className={classNames(
                       css["dark-input"],
                       css["quantity-input"]
@@ -156,9 +160,7 @@ const ShoppingCartPage = () => {
         </ul>
       </div>
       <div>
-        <div>
-          <span>Total Price</span>
-        </div>
+        <div>{/* <span>Total Price: {totalPrice}</span> */}</div>
         <button
           type="submit"
           onClick={() => {

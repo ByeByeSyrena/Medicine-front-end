@@ -7,6 +7,7 @@ type initialStateTypes = {
   items: Pharmacy[];
   item: Pharmacy | null;
   cart: Medicine[];
+  totalPrice: number;
   isLoading?: boolean;
   error?: string | null;
 };
@@ -15,6 +16,7 @@ const catalogInitialState: initialStateTypes = {
   items: [],
   item: null,
   cart: [],
+  totalPrice: 0,
   isLoading: false,
   error: null,
 };
@@ -24,21 +26,16 @@ const storesSlice = createSlice({
   initialState: catalogInitialState,
   reducers: {
     addToCart(state, action: PayloadAction<Medicine>) {
-      try {
-        const newItem = action.payload;
-        const exists = state.cart.find(
-          (item) =>
-            item.item === newItem.item &&
-            item.quantity === newItem.quantity &&
-            item.price === newItem.price
-        );
-        if (!exists) {
-          state.cart.push(newItem);
-        } else {
-          toast.info("Already added");
-        }
-      } catch (err) {
-        console.log(err as string);
+      const newItem = action.payload;
+      const price = parseFloat((newItem.price as string).substring(1));
+
+      const existingItem = state.cart.find((item) => item._id === newItem._id);
+
+      if (!existingItem) {
+        state.cart.push({ ...newItem, price: price, amount: 1 });
+      } else {
+        (existingItem.amount as number)++;
+        toast.info("Already added");
       }
     },
     deleteFromCart(state, action) {
@@ -46,6 +43,20 @@ const storesSlice = createSlice({
     },
     clearCart(state) {
       state.cart = [];
+    },
+    increaseQuantity(state, action: PayloadAction<string | number>) {
+      const itemId = action.payload;
+      const item = state.cart.find((item) => item._id === itemId);
+      if (item && typeof itemId === "number") {
+        (item.amount as number)++;
+      }
+    },
+    decreaseQuantity(state, action: PayloadAction<string | number>) {
+      const itemId = action.payload;
+      const item = state.cart.find((item) => item._id === itemId);
+      if (item && typeof itemId === "number") {
+        (item.amount as number)--;
+      }
     },
   },
   extraReducers: (builder) =>
@@ -80,4 +91,10 @@ const storesSlice = createSlice({
 
 export const storesReducer = storesSlice.reducer;
 
-export const { addToCart, deleteFromCart, clearCart } = storesSlice.actions;
+export const {
+  addToCart,
+  deleteFromCart,
+  clearCart,
+  increaseQuantity,
+  decreaseQuantity,
+} = storesSlice.actions;

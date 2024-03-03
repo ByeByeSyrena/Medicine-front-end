@@ -2,7 +2,8 @@ export type Medicine = {
   _id?: string;
   item: string;
   quantity: string;
-  price: string;
+  price: string | number;
+  amount?: number;
 };
 
 export type Pharmacy = {
