@@ -26,14 +26,6 @@ const ShoppingCartPage = () => {
         <Form cartItems={cartItems} totalPrice={totalPrice} />
       </div>
       <CartList cartItems={cartItems} />
-
-      <div>
-        <div className={css.totalPriceWrapper}>
-          <div className={css.totalPrice}>
-            <span>Total Price: ${totalPrice}</span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 };

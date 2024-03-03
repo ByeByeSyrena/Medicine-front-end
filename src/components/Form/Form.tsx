@@ -45,89 +45,98 @@ const Form: React.FC<FormProps> = ({ totalPrice, cartItems }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className={css.form}>
-      <div>
-        <label htmlFor="name" className={css["dark-label"]}>
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-          className={classNames(css["dark-input"], {
-            [css["error"]]: formik.touched.name && formik.errors.name,
-          })}
-        />
-        {formik.errors.name && formik.touched.name && (
-          <div className={css.errorMessage}>{formik.errors.name}</div>
-        )}
+    <>
+      <form onSubmit={formik.handleSubmit} className={css.form}>
+        <div>
+          <label htmlFor="name" className={css["dark-label"]}>
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            className={classNames(css["dark-input"], {
+              [css["error"]]: formik.touched.name && formik.errors.name,
+            })}
+          />
+          {formik.errors.name && formik.touched.name && (
+            <div className={css.errorMessage}>{formik.errors.name}</div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="email" className={css["dark-label"]}>
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            className={classNames(css["dark-input"], {
+              [css["error"]]: formik.touched.email && formik.errors.email,
+            })}
+          />
+          {formik.errors.email && formik.touched.email && (
+            <div className={css.errorMessage}>{formik.errors.email}</div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="phone" className={css["dark-label"]}>
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.phone}
+            className={classNames(css["dark-input"], {
+              [css["error"]]: formik.touched.phone && formik.errors.phone,
+            })}
+          />
+          {formik.errors.phone && formik.touched.phone && (
+            <div className={css.errorMessage}>{formik.errors.phone}</div>
+          )}
+        </div>
+        <div>
+          <label htmlFor="address" className={css["dark-label"]}>
+            Address
+          </label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.address}
+            className={classNames(css["dark-input"], {
+              [css["error"]]: formik.touched.address && formik.errors.address,
+            })}
+          />
+          {formik.errors.address && formik.touched.address && (
+            <div className={css.errorMessage}>{formik.errors.address}</div>
+          )}
+        </div>
+      </form>
+      <div className={css.elementWrapper}>
+        <div className={css.totalPriceWrapper}>
+          <div className={css.totalPrice}>
+            <span>Total Price: ${totalPrice}</span>
+          </div>
+        </div>
+        <button
+          type="submit"
+          className={css.submitButton}
+          onSubmit={() => {
+            formik.handleSubmit();
+          }}
+        >
+          Submit
+        </button>
       </div>
-      <div>
-        <label htmlFor="email" className={css["dark-label"]}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          className={classNames(css["dark-input"], {
-            [css["error"]]: formik.touched.email && formik.errors.email,
-          })}
-        />
-        {formik.errors.email && formik.touched.email && (
-          <div className={css.errorMessage}>{formik.errors.email}</div>
-        )}
-      </div>
-      <div>
-        <label htmlFor="phone" className={css["dark-label"]}>
-          Phone
-        </label>
-        <input
-          id="phone"
-          name="phone"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.phone}
-          className={classNames(css["dark-input"], {
-            [css["error"]]: formik.touched.phone && formik.errors.phone,
-          })}
-        />
-        {formik.errors.phone && formik.touched.phone && (
-          <div className={css.errorMessage}>{formik.errors.phone}</div>
-        )}
-      </div>
-      <div>
-        <label htmlFor="address" className={css["dark-label"]}>
-          Address
-        </label>
-        <input
-          id="address"
-          name="address"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.address}
-          className={classNames(css["dark-input"], {
-            [css["error"]]: formik.touched.address && formik.errors.address,
-          })}
-        />
-        {formik.errors.address && formik.touched.address && (
-          <div className={css.errorMessage}>{formik.errors.address}</div>
-        )}
-      </div>
-      <button
-        type="submit"
-        className={css.submitButton}
-        onSubmit={() => {
-          formik.handleSubmit();
-        }}
-      >
-        Submit
-      </button>
-    </form>
+    </>
   );
 };
 

@@ -161,18 +161,6 @@
   cursor: pointer;
 }
 
-.totalPrice {
-  color: white;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.totalPriceWrapper {
-  display: flex;
-  gap: 20px;
-}
-
 .svg {
   width: 20px;
   height: 20px;

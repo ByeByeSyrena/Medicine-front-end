@@ -5,6 +5,10 @@
   border-radius: 8px;
 }
 
+.form {
+  margin-bottom: 120px;
+}
+
 .dark-label {
   margin-bottom: 8px;
   display: block;
@@ -62,4 +66,23 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.totalPrice {
+  color: white;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.totalPriceWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.elementWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
 }
