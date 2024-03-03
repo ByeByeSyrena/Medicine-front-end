@@ -21,7 +21,7 @@ Medicine Shop is an online platform for purchasing medicines from various pharma
 - **TypeScript**: A statically typed superset of JavaScript for improving development and catching errors early.
 - **React**: Frontend framework for building the user interface.
 - **React Router**: For routing within the application.
-- **Redux**: State management library for managing the application's state.
+- **Redux Toolkit**: State management library for managing the application's state.
 - **Formik & Yup**: For form management and validation.
 - **React Toastify**: For displaying toast notifications.
 - **Axios**: Promise-based HTTP client for making requests to the backend.
