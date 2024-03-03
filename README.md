@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Medicine Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Medicine Shop is an online platform for purchasing medicines from various pharmacies. Users can browse through different pharmacies and their available medicines, add them to their cart, and place orders.
 
-In the project directory, you can run:
+[Frontend](https://github.com/ByeByeSyrena/Medicine-front-end)
+[Backend](https://github.com/ByeByeSyrena/Medicine-backend-2)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Browse Medicines**: Users can view a list of available medicines from different pharmacies.
+- **Add to Cart**: Users can add medicines to their shopping cart for purchase.
+- **Order Placement**: Users can fulfill order details such as name, email, phone, and address to place orders.
+- **Cart Management**: Users can manage their shopping cart by deleting items, increasing or decreasing quantities, and viewing the total price.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **TypeScript**: A statically typed superset of JavaScript for improving development and catching errors early.
+- **React**: Frontend framework for building the user interface.
+- **React Router**: For routing within the application.
+- **Redux**: State management library for managing the application's state.
+- **Formik & Yup**: For form management and validation.
+- **React Toastify**: For displaying toast notifications.
+- **Axios**: Promise-based HTTP client for making requests to the backend.
+- **classnames**: Utility for conditionally joining classNames together.
+- **normalize.css**: CSS reset for consistent styling across browsers.
 
-### `npm run build`
+### Backend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Node.js**: Backend runtime environment for executing JavaScript code.
+- **Express.js**: Web application framework for building APIs.
+- **MongoDB**: NoSQL database for storing data related to pharmacies and medicines.
+- **Mongoose**: MongoDB object modeling tool for Node.js.
+- **Cors**: Middleware for enabling Cross-Origin Resource Sharing.
+- **dotenv**: For loading environment variables from a .env file.
+- **morgan**: HTTP request logger middleware for logging incoming requests.
+- **Joi**: For validating request data.
+- **Nodemon**: Utility for automatically restarting the server during development.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repository.
+2. Install dependencies for both frontend and backend using `npm install`.
+3. Create a `.env` file in the backend directory and set up environment variables.
+4. Start the backend server using `npm run start` or `npm run dev`.
+5. Start the frontend development server using `npm run start`.
 
-### `npm run eject`
+## Deployment
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The frontend is deployed using GitHub Pages, while the backend can be deployed to a hosting provider like Heroku, Render, Cyclic or AWS.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you want to deploy frontend using GitHub Pages, then follow further steps:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Install the gh-pages package as a development dependency: `npm install gh-pages --save-dev`.
+2. Set homepage in package.json: `"homepage": "https://username.github.io/repository-name"`,
+3. Deploy project using `npm run deploy`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contributors
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Iryna Shevchenko](https://github.com/ByeByeSyrena)
