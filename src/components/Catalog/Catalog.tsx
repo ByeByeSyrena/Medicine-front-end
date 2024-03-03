@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Medicine, Pharmacy } from "../../@types/types";
 import css from "./Catalog.module.css";
 

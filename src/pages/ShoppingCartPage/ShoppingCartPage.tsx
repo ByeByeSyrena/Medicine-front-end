@@ -17,7 +17,7 @@ const ShoppingCartPage = () => {
 
   useEffect(() => {
     dispatch(getTotalPrice());
-  }, [totalPrice]);
+  }, [totalPrice, dispatch]);
 
   return (
     <section className={css.container}>
