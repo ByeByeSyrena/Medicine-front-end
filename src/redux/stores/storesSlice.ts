@@ -58,10 +58,12 @@ const storesSlice = createSlice({
     decreaseQuantity(state, action: PayloadAction<string | number>) {
       const itemId = action.payload;
       const itemIndex = state.cart.findIndex((item) => item._id === itemId);
-      state.cart[itemIndex] = {
-        ...state.cart[itemIndex],
-        amount: (state.cart[itemIndex].amount as number) - 1,
-      };
+      if ((state.cart[itemIndex].amount as number) > 1) {
+        state.cart[itemIndex] = {
+          ...state.cart[itemIndex],
+          amount: (state.cart[itemIndex].amount as number) - 1,
+        };
+      }
     },
     getTotalPrice(state) {
       state.totalPrice = parseFloat(
