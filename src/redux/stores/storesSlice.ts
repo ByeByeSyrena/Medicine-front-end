@@ -63,6 +63,17 @@ const storesSlice = createSlice({
         amount: (state.cart[itemIndex].amount as number) - 1,
       };
     },
+    getTotalPrice(state) {
+      state.totalPrice = parseFloat(
+        state.cart
+          .reduce(
+            (total, item) =>
+              total + (item.price as number) * (item.amount as number),
+            0
+          )
+          .toFixed(2)
+      );
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -102,4 +113,5 @@ export const {
   clearCart,
   increaseQuantity,
   decreaseQuantity,
+  getTotalPrice,
 } = storesSlice.actions;

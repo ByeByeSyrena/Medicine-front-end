@@ -17,7 +17,7 @@ import { ordersReducer } from "./orders/ordersSlice";
 const persistConfig = {
   key: "persistedStates",
   storage,
-  whitelist: ["stores", "cart"],
+  whitelist: ["stores", "cart", "totalPrice"],
 };
 
 const rootReducer = combineReducers({

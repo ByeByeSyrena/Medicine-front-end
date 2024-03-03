@@ -107,7 +107,6 @@
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #555;
-  box-shadow: 4px 4px 4px rgba(255, 255, 0, 0.5);
 }
 
 .itemInnerDiv {
@@ -128,6 +127,12 @@
 
 .quantity-input {
   width: 150px;
+  padding: 8px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: white;
+  background-color: #444;
+  outline: none;
 }
 
 .errorMessage {
@@ -144,17 +149,33 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
+  margin-bottom: 16px;
 }
 
 .darkButton {
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  width: 20px;
-  height: 40px;
+  height: 36px;
   background-color: #555;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.totalPrice {
+  color: white;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.totalPriceWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+  fill: yellow;
+  stroke: yellow;
 }

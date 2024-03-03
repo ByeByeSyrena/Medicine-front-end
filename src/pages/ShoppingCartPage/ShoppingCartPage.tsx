@@ -6,13 +6,17 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../redux/stores/selectors";
+import { selectCart, selectTotalPrice } from "../../redux/stores/selectors";
 import { Medicine } from "../../@types/types";
 import {
   deleteFromCart,
   increaseQuantity,
   decreaseQuantity,
+  getTotalPrice,
 } from "../../redux/stores/storesSlice";
+import { ReactComponent as Plus } from "../../images/plus-small.svg";
+import { ReactComponent as Minus } from "../../images/minus-small.svg";
+import { createOrder } from "../../redux/orders/operations";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -26,19 +30,23 @@ const validationSchema = Yup.object().shape({
 const ShoppingCartPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector(selectCart);
+  const totalPrice = useSelector(selectTotalPrice);
 
   console.log(cartItems);
 
   const handleDeleteFromCartClick = (id: string) => {
     dispatch(deleteFromCart(id));
+    dispatch(getTotalPrice());
   };
 
   const handleIncreaseQuantity = (id: string) => {
     dispatch(increaseQuantity(id));
+    dispatch(getTotalPrice());
   };
 
   const handleDecreaseQuantity = (id: string) => {
     dispatch(decreaseQuantity(id));
+    dispatch(getTotalPrice());
   };
 
   const formik = useFormik({
@@ -50,7 +58,13 @@ const ShoppingCartPage = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      const newOrder = {
+        ...values,
+        totalPrice: totalPrice,
+        medicines: cartItems,
+      };
+      dispatch(createOrder(newOrder));
+      console.log(newOrder);
     },
   });
 
@@ -146,31 +160,28 @@ const ShoppingCartPage = () => {
                 />
                 <div className={css.itemInnerDiv}>
                   <h3>{item.item}</h3>
-                  <p>{item.price} per 1</p>
+                  <p>${item.price} per 1</p>
                   <div className={css.counter}>
                     <button
                       className={css.darkButton}
                       type="button"
                       onClick={() => handleDecreaseQuantity(item._id ?? "")}
                     >
-                      -
+                      <Minus className={css.svg} />
                     </button>
                     <input
                       type="number"
                       min="0"
                       value={item.amount}
                       readOnly
-                      className={classNames(
-                        css["dark-input"],
-                        css["quantity-input"]
-                      )}
+                      className={css["quantity-input"]}
                     />
                     <button
                       className={css.darkButton}
                       type="button"
                       onClick={() => handleIncreaseQuantity(item._id ?? "")}
                     >
-                      +
+                      <Plus className={css.svg} />
                     </button>
                   </div>
                   <button
@@ -186,15 +197,19 @@ const ShoppingCartPage = () => {
         </ul>
       </div>
       <div>
-        <div>{/* <span>Total Price: {totalPrice}</span> */}</div>
-        <button
-          type="submit"
-          onClick={() => {
-            formik.handleSubmit();
-          }}
-        >
-          Submit
-        </button>
+        <div className={css.totalPriceWrapper}>
+          <div className={css.totalPrice}>
+            <span>Total Price: ${totalPrice}</span>
+          </div>
+          <button
+            type="submit"
+            onClick={() => {
+              formik.handleSubmit();
+            }}
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </section>
   );

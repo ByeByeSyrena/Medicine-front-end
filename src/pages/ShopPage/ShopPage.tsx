@@ -4,7 +4,7 @@ import { Medicine, Pharmacy } from "../../@types/types";
 import { AppDispatch } from "../../redux/store";
 import { getAllStores, getOneStore } from "../../redux/stores/operations";
 import { selectAllStores, selectOneStore } from "../../redux/stores/selectors";
-import { addToCart } from "../../redux/stores/storesSlice";
+import { addToCart, getTotalPrice } from "../../redux/stores/storesSlice";
 import css from "./ShopPage.module.css";
 
 const ShopPage = () => {
@@ -35,6 +35,7 @@ const ShopPage = () => {
 
   const handleAddToCartClick = (item: Medicine) => {
     dispatchCart(addToCart(item));
+    dispatch(getTotalPrice());
   };
 
   return (
