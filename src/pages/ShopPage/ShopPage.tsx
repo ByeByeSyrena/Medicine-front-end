@@ -37,12 +37,6 @@ const ShopPage = () => {
   };
 
   const handleAddToCartClick = (item: Medicine) => {
-    const isInCart = addedToCart.some(
-      (cartItem: Medicine) => cartItem._id === item._id
-    );
-    if (isInCart) {
-      return;
-    }
     dispatchCart(addToCart(item));
   };
 

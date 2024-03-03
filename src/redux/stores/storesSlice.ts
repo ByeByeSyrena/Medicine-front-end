@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Medicine, Pharmacy } from "../../@types/types";
 import { getAllStores, getOneStore } from "./operations";
+import { toast } from "react-toastify";
 
 type initialStateTypes = {
   items: Pharmacy[];
@@ -23,15 +24,21 @@ const storesSlice = createSlice({
   initialState: catalogInitialState,
   reducers: {
     addToCart(state, action: PayloadAction<Medicine>) {
-      const newItem = action.payload;
-      const exists = state.cart.find(
-        (item) =>
-          item.item === newItem.item &&
-          item.quantity === newItem.quantity &&
-          item.price === newItem.price
-      );
-      if (!exists) {
-        state.cart.push(newItem);
+      try {
+        const newItem = action.payload;
+        const exists = state.cart.find(
+          (item) =>
+            item.item === newItem.item &&
+            item.quantity === newItem.quantity &&
+            item.price === newItem.price
+        );
+        if (!exists) {
+          state.cart.push(newItem);
+        } else {
+          toast.info("Already added");
+        }
+      } catch (err) {
+        console.log(err as string);
       }
     },
     deleteFromCart(state, action) {
