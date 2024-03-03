@@ -22,7 +22,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   orders: ordersReducer,
-  // stores: storesReducer,
   stores: persistReducer(persistConfig, storesReducer),
   // favorites: persistReducer(persistConfig, favoritesReducer),
 });

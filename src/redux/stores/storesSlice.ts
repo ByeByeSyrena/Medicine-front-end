@@ -22,8 +22,17 @@ const storesSlice = createSlice({
   name: "stores",
   initialState: catalogInitialState,
   reducers: {
-    addToCart(state, action) {
-      state.cart.push(action.payload);
+    addToCart(state, action: PayloadAction<Medicine>) {
+      const newItem = action.payload;
+      const exists = state.cart.find(
+        (item) =>
+          item.item === newItem.item &&
+          item.quantity === newItem.quantity &&
+          item.price === newItem.price
+      );
+      if (!exists) {
+        state.cart.push(newItem);
+      }
     },
     deleteFromCart(state, action) {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
