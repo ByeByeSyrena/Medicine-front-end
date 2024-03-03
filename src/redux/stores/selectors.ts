@@ -9,3 +9,5 @@ export const selectLoading = (state: RootState) => state.stores.isLoading;
 export const selectError = (state: RootState) => state.stores.error;
 
 export const selectCart = (state: RootState) => state.stores.cart;
+
+export const selectTotalPrice = (state: RootState) => state.stores.totalPrice;

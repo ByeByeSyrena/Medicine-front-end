@@ -8,7 +8,11 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/stores/selectors";
 import { Medicine } from "../../@types/types";
-import { deleteFromCart } from "../../redux/stores/storesSlice";
+import {
+  deleteFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../../redux/stores/storesSlice";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -27,6 +31,14 @@ const ShoppingCartPage = () => {
 
   const handleDeleteFromCartClick = (id: string) => {
     dispatch(deleteFromCart(id));
+  };
+
+  const handleIncreaseQuantity = (id: string) => {
+    dispatch(increaseQuantity(id));
+  };
+
+  const handleDecreaseQuantity = (id: string) => {
+    dispatch(decreaseQuantity(id));
   };
 
   const formik = useFormik({
@@ -135,18 +147,32 @@ const ShoppingCartPage = () => {
                 <div className={css.itemInnerDiv}>
                   <h3>{item.item}</h3>
                   <p>{item.price} per 1</p>
-                  <input
-                    type="number"
-                    min="0"
-                    // onChange={() => {
-                    //   handleTotalPrice();
-                    // }}
-                    placeholder="Set amount"
-                    className={classNames(
-                      css["dark-input"],
-                      css["quantity-input"]
-                    )}
-                  />
+                  <div className={css.counter}>
+                    <button
+                      className={css.darkButton}
+                      type="button"
+                      onClick={() => handleDecreaseQuantity(item._id ?? "")}
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      min="0"
+                      value={item.amount}
+                      readOnly
+                      className={classNames(
+                        css["dark-input"],
+                        css["quantity-input"]
+                      )}
+                    />
+                    <button
+                      className={css.darkButton}
+                      type="button"
+                      onClick={() => handleIncreaseQuantity(item._id ?? "")}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     className={css.removeButton}
                     type="button"

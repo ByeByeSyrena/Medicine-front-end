@@ -29,13 +29,16 @@ const storesSlice = createSlice({
       const newItem = action.payload;
       const price = parseFloat((newItem.price as string).substring(1));
 
-      const existingItem = state.cart.find((item) => item._id === newItem._id);
+      const exist = state.cart.find(
+        (item) =>
+          item.item === newItem.item && item.quantity === newItem.quantity
+      );
 
-      if (!existingItem) {
+      if (!exist) {
         state.cart.push({ ...newItem, price: price, amount: 1 });
-      } else {
-        (existingItem.amount as number)++;
-        toast.info("Already added");
+      } else if (exist) {
+        (exist.amount as number)++;
+        toast.info("Already added, go to the cart for the next steps");
       }
     },
     deleteFromCart(state, action) {
@@ -46,17 +49,19 @@ const storesSlice = createSlice({
     },
     increaseQuantity(state, action: PayloadAction<string | number>) {
       const itemId = action.payload;
-      const item = state.cart.find((item) => item._id === itemId);
-      if (item && typeof itemId === "number") {
-        (item.amount as number)++;
-      }
+      const itemIndex = state.cart.findIndex((item) => item._id === itemId);
+      state.cart[itemIndex] = {
+        ...state.cart[itemIndex],
+        amount: (state.cart[itemIndex].amount as number) + 1,
+      };
     },
     decreaseQuantity(state, action: PayloadAction<string | number>) {
       const itemId = action.payload;
-      const item = state.cart.find((item) => item._id === itemId);
-      if (item && typeof itemId === "number") {
-        (item.amount as number)--;
-      }
+      const itemIndex = state.cart.findIndex((item) => item._id === itemId);
+      state.cart[itemIndex] = {
+        ...state.cart[itemIndex],
+        amount: (state.cart[itemIndex].amount as number) - 1,
+      };
     },
   },
   extraReducers: (builder) =>
