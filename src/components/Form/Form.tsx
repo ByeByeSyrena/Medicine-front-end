@@ -7,6 +7,7 @@ import { Medicine } from "../../@types/types";
 import { useDispatch } from "react-redux";
 import { createOrder } from "../../redux/orders/operations";
 import { AppDispatch } from "../../redux/store";
+import { clearCart } from "../../redux/stores/storesSlice";
 
 interface FormProps {
   totalPrice: number;
@@ -40,7 +41,8 @@ const Form: React.FC<FormProps> = ({ totalPrice, cartItems }) => {
         medicines: cartItems,
       };
       dispatch(createOrder(newOrder));
-      console.log(newOrder);
+      dispatch(clearCart());
+      formik.resetForm();
     },
   });
 
@@ -119,23 +121,23 @@ const Form: React.FC<FormProps> = ({ totalPrice, cartItems }) => {
             <div className={css.errorMessage}>{formik.errors.address}</div>
           )}
         </div>
-      </form>
-      <div className={css.elementWrapper}>
-        <div className={css.totalPriceWrapper}>
-          <div className={css.totalPrice}>
-            <span>Total Price: ${totalPrice}</span>
+        <div className={css.elementWrapper}>
+          <div className={css.totalPriceWrapper}>
+            <div className={css.totalPrice}>
+              <span>Total Price: ${totalPrice}</span>
+            </div>
           </div>
+          <button
+            type="submit"
+            className={css.submitButton}
+            onSubmit={() => {
+              formik.handleSubmit();
+            }}
+          >
+            Submit
+          </button>
         </div>
-        <button
-          type="submit"
-          className={css.submitButton}
-          onSubmit={() => {
-            formik.handleSubmit();
-          }}
-        >
-          Submit
-        </button>
-      </div>
+      </form>
     </>
   );
 };

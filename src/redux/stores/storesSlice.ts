@@ -46,6 +46,7 @@ const storesSlice = createSlice({
     },
     clearCart(state) {
       state.cart = [];
+      state.totalPrice = 0;
     },
     increaseQuantity(state, action: PayloadAction<string | number>) {
       const itemId = action.payload;
