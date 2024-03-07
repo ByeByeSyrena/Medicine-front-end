@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Medicine-front-end/static/css/main.85009e3e.css",
-    "main.js": "/Medicine-front-end/static/js/main.09714816.js",
+    "main.js": "/Medicine-front-end/static/js/main.b2c1dd6e.js",
     "static/js/453.ed3810f9.chunk.js": "/Medicine-front-end/static/js/453.ed3810f9.chunk.js",
     "static/media/pills_PNG16500.png": "/Medicine-front-end/static/media/pills_PNG16500.30ead68a8341eb655754.png",
     "static/media/pill-bottle-311809_1280.png": "/Medicine-front-end/static/media/pill-bottle-311809_1280.1644442aead46346da93.png",
@@ -9,11 +9,11 @@
     "static/media/minus-small.svg": "/Medicine-front-end/static/media/minus-small.bb2c74332283917d09dbf924e1fa5619.svg",
     "static/media/plus-small.svg": "/Medicine-front-end/static/media/plus-small.828c526367d984344d2bcfaac8f1b8c5.svg",
     "main.85009e3e.css.map": "/Medicine-front-end/static/css/main.85009e3e.css.map",
-    "main.09714816.js.map": "/Medicine-front-end/static/js/main.09714816.js.map",
+    "main.b2c1dd6e.js.map": "/Medicine-front-end/static/js/main.b2c1dd6e.js.map",
     "453.ed3810f9.chunk.js.map": "/Medicine-front-end/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85009e3e.css",
-    "static/js/main.09714816.js"
+    "static/js/main.b2c1dd6e.js"
   ]
 }
