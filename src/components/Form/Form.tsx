@@ -37,7 +37,7 @@ const validationSchema = Yup.object().shape({
   address: Yup.string().required("Address is required"),
   pnNumbers: Yup.array()
     .of(Yup.string().required("At least one phone number is required"))
-    .min(1),
+    .min(1, "At least one phone number is required"),
 });
 
 const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
@@ -124,7 +124,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
           </label>
           <Field name="address">
             {(props: any) => {
-              const { field, form, meta } = props;
+              const { field, meta } = props;
               return (
                 <div>
                   <input
@@ -149,8 +149,9 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
           <FieldArray name="pnNumbers">
             {(fieldArrayProps) => {
               const { push, remove, form } = fieldArrayProps;
-              const { values } = form;
+              const { values, errors } = form;
               const { pnNumbers } = values;
+
               return (
                 <div>
                   {pnNumbers.map((pnNumber: string, index: number) => (
@@ -159,24 +160,39 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
                         name={`pnNumbers[${index}]`}
                         className={classNames(css["dark-input"])}
                       />
+                      {errors &&
+                        Array.isArray(errors.pnNumbers) &&
+                        errors.pnNumbers[index] && (
+                          <ErrorMessage
+                            name={`pnNumbers[${index}]`}
+                            component={TextError as React.ComponentType<{}>}
+                          />
+                        )}
                       {index > 0 && (
                         <button type="button" onClick={() => remove(index)}>
                           Delete
                         </button>
                       )}
-                      <button type="button" onClick={() => push("")}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          push("");
+                        }}
+                      >
                         Add
                       </button>
                     </div>
                   ))}
+                  {errors && !Array.isArray(errors.pnNumbers) && (
+                    <ErrorMessage
+                      name="pnNumbers"
+                      component={TextError as React.ComponentType<{}>}
+                    />
+                  )}
                 </div>
               );
             }}
           </FieldArray>
-          <ErrorMessage
-            name="pnNumbers"
-            component={TextError as React.ComponentType<{}>}
-          />
         </div>
 
         <div className={css["form-control"]}>

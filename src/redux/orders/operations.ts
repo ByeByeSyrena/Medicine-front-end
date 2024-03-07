@@ -4,6 +4,8 @@ import { Order } from "../../@types/types";
 
 axios.defaults.baseURL = "http://localhost:3001";
 
+// axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/";
+
 export const createOrder = createAsyncThunk<Order, Order>(
   "orders/createOrder",
   async (orderData, { rejectWithValue }) => {

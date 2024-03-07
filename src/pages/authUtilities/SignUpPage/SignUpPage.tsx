@@ -2,8 +2,8 @@ import React from "react";
 import css from "./SignUpPage.module.css";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
+// import { useDispatch } from "react-redux";
+// import { AppDispatch } from "../../../redux/store";
 import classNames from "classnames";
 import TextError from "../../../components/TextError/TextError";
 
@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignUpPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
 
   const initialValues = {
     name: "",
@@ -35,9 +35,9 @@ const SignUpPage = () => {
   };
 
   const onSubmit = (values: valuesTypes) => {
-    const newUser = {
-      values,
-    };
+    // const newUser = {
+    //   values,
+    // };
   };
 
   return (
