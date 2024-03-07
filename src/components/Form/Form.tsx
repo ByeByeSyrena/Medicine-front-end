@@ -1,5 +1,12 @@
 import React from "react";
-import { useFormik } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FormikHelpers,
+} from "formik";
 import * as Yup from "yup";
 import classNames from "classnames";
 import css from "./Form.module.css";
@@ -8,118 +15,185 @@ import { useDispatch } from "react-redux";
 import { createOrder } from "../../redux/orders/operations";
 import { AppDispatch } from "../../redux/store";
 import { clearCart } from "../../redux/stores/storesSlice";
+import { toast } from "react-toastify";
+import TextError from "../TextError/TextError";
 
-interface FormProps {
+interface OrderFormProps {
   totalPrice: number;
   cartItems: Medicine[];
 }
 
+type Values = {
+  name: string;
+  email: string;
+  address: string;
+  comments?: string | "";
+  pnNumbers: string[];
+};
+
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
-  phone: Yup.string()
-    .matches(/^\d{10}$/, "Invalid phone number")
-    .required("Phone number is required"),
   address: Yup.string().required("Address is required"),
+  pnNumbers: Yup.array()
+    .of(Yup.string().required("At least one phone number is required"))
+    .min(1),
 });
 
-const Form: React.FC<FormProps> = ({ totalPrice, cartItems }) => {
+const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      address: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      const newOrder = {
-        ...values,
-        totalPrice: totalPrice,
-        medicines: cartItems,
-      };
-      dispatch(createOrder(newOrder));
-      dispatch(clearCart());
-      formik.resetForm();
-    },
-  });
+  const initialValues: Values = {
+    name: "",
+    email: "",
+    address: "",
+    comments: "",
+    pnNumbers: [""],
+  };
+
+  const onSubmit = (values: Values, { resetForm }: FormikHelpers<Values>) => {
+    let newComments = values.comments as string;
+
+    if (newComments.trim() === "") {
+      newComments = "none";
+    }
+
+    const newOrder = {
+      ...values,
+      comments: newComments,
+      totalPrice: totalPrice,
+      medicines: cartItems,
+    };
+
+    if (newOrder.medicines.length === 0) {
+      toast.info("Please add medicines to the cart to create an order");
+      return;
+    }
+
+    console.log(newOrder);
+
+    dispatch(createOrder(newOrder));
+    dispatch(clearCart());
+
+    resetForm();
+  };
 
   return (
-    <>
-      <form onSubmit={formik.handleSubmit} className={css.form}>
-        <div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+      validateOnBlur={false}
+    >
+      <Form className={css.form}>
+        <div className={css["form-control"]}>
           <label htmlFor="name" className={css["dark-label"]}>
             Name
           </label>
-          <input
+          <Field
             id="name"
             name="name"
             type="text"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            className={classNames(css["dark-input"], {
-              [css["error"]]: formik.touched.name && formik.errors.name,
-            })}
+            className={classNames(css["dark-input"])}
           />
-          {formik.errors.name && formik.touched.name && (
-            <div className={css.errorMessage}>{formik.errors.name}</div>
-          )}
+          <ErrorMessage
+            name="name"
+            component={TextError as React.ComponentType<{}>}
+          />
         </div>
-        <div>
+
+        <div className={css["form-control"]}>
           <label htmlFor="email" className={css["dark-label"]}>
             Email
           </label>
-          <input
+          <Field
             id="email"
             name="email"
             type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            className={classNames(css["dark-input"], {
-              [css["error"]]: formik.touched.email && formik.errors.email,
-            })}
+            className={classNames(css["dark-input"])}
           />
-          {formik.errors.email && formik.touched.email && (
-            <div className={css.errorMessage}>{formik.errors.email}</div>
-          )}
-        </div>
-        <div>
-          <label htmlFor="phone" className={css["dark-label"]}>
-            Phone
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.phone}
-            className={classNames(css["dark-input"], {
-              [css["error"]]: formik.touched.phone && formik.errors.phone,
-            })}
+          <ErrorMessage
+            name="email"
+            component={TextError as React.ComponentType<{}>}
           />
-          {formik.errors.phone && formik.touched.phone && (
-            <div className={css.errorMessage}>{formik.errors.phone}</div>
-          )}
         </div>
-        <div>
+
+        <div className={css["form-control"]}>
           <label htmlFor="address" className={css["dark-label"]}>
             Address
           </label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.address}
-            className={classNames(css["dark-input"], {
-              [css["error"]]: formik.touched.address && formik.errors.address,
-            })}
+          <Field name="address">
+            {(props: any) => {
+              const { field, form, meta } = props;
+              return (
+                <div>
+                  <input
+                    type="text"
+                    id="address"
+                    className={classNames(css["dark-input"])}
+                    {...field}
+                  />
+                  {meta.touched && meta.error ? (
+                    <div className={css["error"]}>{meta.error}</div>
+                  ) : null}
+                </div>
+              );
+            }}
+          </Field>
+        </div>
+
+        <div className={css["form-control"]}>
+          <label htmlFor="phone" className={css["dark-label"]}>
+            Add your contact numbers
+          </label>
+          <FieldArray name="pnNumbers">
+            {(fieldArrayProps) => {
+              const { push, remove, form } = fieldArrayProps;
+              const { values } = form;
+              const { pnNumbers } = values;
+              return (
+                <div>
+                  {pnNumbers.map((pnNumber: string, index: number) => (
+                    <div key={index}>
+                      <Field
+                        name={`pnNumbers[${index}]`}
+                        className={classNames(css["dark-input"])}
+                      />
+                      {index > 0 && (
+                        <button type="button" onClick={() => remove(index)}>
+                          Delete
+                        </button>
+                      )}
+                      <button type="button" onClick={() => push("")}>
+                        Add
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
+          <ErrorMessage
+            name="pnNumbers"
+            component={TextError as React.ComponentType<{}>}
           />
-          {formik.errors.address && formik.touched.address && (
-            <div className={css.errorMessage}>{formik.errors.address}</div>
-          )}
+        </div>
+
+        <div className={css["form-control"]}>
+          <label htmlFor="password" className={css["dark-label"]}>
+            Comments
+          </label>
+          <Field
+            as="textarea"
+            id="comments"
+            name="comments"
+            type="text"
+            className={classNames(css["dark-input"])}
+          />
+          <ErrorMessage
+            name="comments"
+            component={TextError as React.ComponentType<{}>}
+          />
         </div>
         <div className={css.elementWrapper}>
           <div className={css.totalPriceWrapper}>
@@ -127,19 +201,13 @@ const Form: React.FC<FormProps> = ({ totalPrice, cartItems }) => {
               <span>Total Price: ${totalPrice}</span>
             </div>
           </div>
-          <button
-            type="submit"
-            className={css.submitButton}
-            onSubmit={() => {
-              formik.handleSubmit();
-            }}
-          >
+          <button type="submit" className={css.submitButton}>
             Submit
           </button>
         </div>
-      </form>
-    </>
+      </Form>
+    </Formik>
   );
 };
 
-export default Form;
+export default OrderForm;

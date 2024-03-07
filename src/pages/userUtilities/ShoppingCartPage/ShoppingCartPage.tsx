@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import css from "./ShoppingCartPage.module.css";
 
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { AppDispatch } from "../../../redux/store";
 import { useSelector } from "react-redux";
-import { selectCart, selectTotalPrice } from "../../redux/stores/selectors";
-import { getTotalPrice } from "../../redux/stores/storesSlice";
+import { selectCart, selectTotalPrice } from "../../../redux/stores/selectors";
+import { getTotalPrice } from "../../../redux/stores/storesSlice";
 
-import Form from "../../components/Form/Form";
-import CartList from "../../components/CartList/CartList";
+import OrderForm from "../../../components/Form/Form";
+import CartList from "../../../components/CartList/CartList";
 
 const ShoppingCartPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,7 +23,7 @@ const ShoppingCartPage = () => {
     <section className={css.container}>
       <div>
         <h1>Fullfill order details</h1>
-        <Form cartItems={cartItems} totalPrice={totalPrice} />
+        <OrderForm cartItems={cartItems} totalPrice={totalPrice} />
       </div>
       <CartList cartItems={cartItems} />
     </section>
