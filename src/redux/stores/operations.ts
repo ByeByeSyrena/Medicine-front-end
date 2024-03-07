@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Pharmacy } from "../../@types/types";
 
-axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3001";
 
 export const getAllStores = createAsyncThunk<Pharmacy[]>(
   "stores/fetchStores",

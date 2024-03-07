@@ -13,17 +13,18 @@ import storage from "reduxjs-toolkit-persist/lib/storage";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { storesReducer } from "./stores/storesSlice";
 import { ordersReducer } from "./orders/ordersSlice";
+import { favoritesReducer } from "./favorites/favoritesSlice";
 
 const persistConfig = {
   key: "persistedStates",
   storage,
-  whitelist: ["stores", "cart", "totalPrice"],
+  whitelist: ["stores", "cart", "totalPrice", "favorites"],
 };
 
 const rootReducer = combineReducers({
   orders: ordersReducer,
   stores: persistReducer(persistConfig, storesReducer),
-  // favorites: persistReducer(persistConfig, favoritesReducer),
+  favorites: persistReducer(persistConfig, favoritesReducer),
 });
 
 export const store = configureStore({

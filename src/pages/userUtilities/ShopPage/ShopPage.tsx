@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Medicine, Pharmacy } from "../../@types/types";
-import Catalog from "../../components/Catalog/Catalog";
-import StoresList from "../../components/StoresList/StoresList";
-import { AppDispatch } from "../../redux/store";
-import { getAllStores, getOneStore } from "../../redux/stores/operations";
-import { selectAllStores, selectOneStore } from "../../redux/stores/selectors";
-import { addToCart, getTotalPrice } from "../../redux/stores/storesSlice";
+import { Medicine, Pharmacy } from "../../../@types/types";
+import Catalog from "../../../components/Catalog/Catalog";
+import StoresList from "../../../components/StoresList/StoresList";
+import { AppDispatch } from "../../../redux/store";
+import { getAllStores, getOneStore } from "../../../redux/stores/operations";
+import {
+  selectAllStores,
+  selectOneStore,
+} from "../../../redux/stores/selectors";
+import { addToCart, getTotalPrice } from "../../../redux/stores/storesSlice";
 import css from "./ShopPage.module.css";
 
 const ShopPage = () => {
