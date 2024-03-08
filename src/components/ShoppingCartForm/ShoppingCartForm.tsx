@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  FieldArray,
-  FormikHelpers,
-} from "formik";
+import { Formik, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import classNames from "classnames";
 import css from "./Form.module.css";
 import { Medicine } from "../../@types/types";
 import { useDispatch } from "react-redux";
@@ -16,7 +8,6 @@ import { createOrder } from "../../redux/orders/operations";
 import { AppDispatch } from "../../redux/store";
 import { clearCart } from "../../redux/stores/storesSlice";
 import { toast } from "react-toastify";
-import TextError from "../TextError/TextError";
 import FormControl from "../FormControl/FormControl";
 
 interface OrderFormProps {
