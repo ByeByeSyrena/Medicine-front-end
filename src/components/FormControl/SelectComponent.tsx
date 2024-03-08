@@ -2,12 +2,13 @@ import React from "react";
 import { Field, ErrorMessage } from "formik";
 import TextError from "../TextError/TextError";
 import css from "./Form.module.css";
+import { Option } from "./FormControl";
 
 interface SelectProps {
   label: string;
   name: string;
   type: string;
-  options?: string[];
+  options?: Option[];
   labelClassName?: string | null;
   inputClassName?: string | null;
   wrapperClassName?: string | null;
@@ -34,8 +35,17 @@ const SelectComponent: React.FC<SelectProps> = ({
         type={type}
         className={`${css[inputClassName as string]}`}
       >
-        {options && (options as string[]).map((option, index) => {})}
+        {options &&
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
       </Field>
+      <ErrorMessage
+        name={name}
+        component={TextError as React.ComponentType<{}>}
+      />
     </div>
   );
 };

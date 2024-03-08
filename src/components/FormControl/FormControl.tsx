@@ -1,8 +1,20 @@
 import React from "react";
 import FieldArrayComponent from "./FieldArray";
 import Input from "./Input";
+import RadioButtons from "./RadioButtons";
 import SelectComponent from "./SelectComponent";
 import TextArea from "./TextArea";
+
+export interface Option {
+  value: string;
+  label: string;
+  key: string;
+}
+
+export interface radioOption {
+  value: string;
+  key: string;
+}
 
 type Control =
   | "input"
@@ -18,10 +30,11 @@ type Props = {
   label: string;
   name: string;
   type: string;
-  options?: string[];
+  options?: Option[];
   labelClassName?: string | null;
   inputClassName?: string | null;
   wrapperClassName?: string | null;
+  radioOptions?: radioOption[];
 };
 
 const FormControl: React.FC<Props> = ({ control, ...rest }) => {
@@ -34,7 +47,8 @@ const FormControl: React.FC<Props> = ({ control, ...rest }) => {
       return <TextArea {...rest} />;
     case "select":
       return <SelectComponent {...rest} />;
-    // Add cases for other control types as needed
+    case "radio":
+      return <RadioButtons {...rest} />;
     default:
       return null;
   }

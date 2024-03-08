@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Medicine, Pharmacy } from "../../../@types/types";
 import Catalog from "../../../components/Catalog/Catalog";
+import Filters from "../../../components/Filters/Filters";
 import StoresList from "../../../components/StoresList/StoresList";
 import { AppDispatch } from "../../../redux/store";
 import { getAllStores, getOneStore } from "../../../redux/stores/operations";
@@ -55,6 +56,7 @@ const ShopPage = () => {
             onStoreClick={handleOneStoreClick}
           />
         </div>
+        <Filters />
       </aside>
       <div className={css.willbelist}>
         <Catalog
