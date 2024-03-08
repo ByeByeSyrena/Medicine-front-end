@@ -65,6 +65,16 @@
   cursor: pointer;
 }
 
+.dark-button:disabled {
+  background-color: #555;
+  color: white;
+  opacity: 0.5;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .dark-button:hover {
   background-color: #777;
 }

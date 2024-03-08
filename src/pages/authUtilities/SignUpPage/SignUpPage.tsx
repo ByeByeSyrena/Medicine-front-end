@@ -31,13 +31,13 @@ const SignUpPage = () => {
     name: "",
     email: "",
     password: "",
-    comments: "",
   };
 
   const onSubmit = (values: valuesTypes) => {
     // const newUser = {
     //   values,
     // };
+    console.log("Form data", values);
   };
 
   return (
@@ -46,64 +46,66 @@ const SignUpPage = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
+        validateOnMount
       >
-        <Form className={css.form}>
-          <div className={css["form-control"]}>
-            <label htmlFor="name" className={css["dark-label"]}>
-              Name
-            </label>
-            <Field
-              id="name"
-              name="name"
-              type="text"
-              className={classNames(css["dark-input"])}
-            />
-            <ErrorMessage
-              name="name"
-              component={TextError as React.ComponentType<{}>}
-            />
-          </div>
-          <div className={css["form-control"]}>
-            <label htmlFor="email" className={css["dark-label"]}>
-              Email
-            </label>
-            <Field
-              id="email"
-              name="email"
-              type="email"
-              className={classNames(css["dark-input"])}
-            />
-            <ErrorMessage
-              name="email"
-              component={TextError as React.ComponentType<{}>}
-            />
-          </div>
-          <div className={css["form-control"]}>
-            <label htmlFor="password" className={css["dark-label"]}>
-              Password
-            </label>
-            <Field
-              id="password"
-              name="password"
-              type="text"
-              className={classNames(css["dark-input"])}
-            />
-            <ErrorMessage
-              name="password"
-              component={TextError as React.ComponentType<{}>}
-            />
-          </div>
-          {/* <div>
-            <p>Select your position:</p>
-            <input type="radio" name="seller" />
-            <label htmlFor="seller">Entrepreneur</label>
-            <input type="radio" name="user" />
-            <label htmlFor="user">Customer</label>
-          </div> */}
-          <button type="submit" className={css.submitButton}>
-            Submit
-          </button>
-        </Form>
+        {(formik) => {
+          return (
+            <Form className={css.form}>
+              <div className={css["form-control"]}>
+                <label htmlFor="name" className={css["dark-label"]}>
+                  Name
+                </label>
+                <Field
+                  id="name"
+                  name="name"
+                  type="text"
+                  className={classNames(css["dark-input"])}
+                />
+                <ErrorMessage
+                  name="name"
+                  component={TextError as React.ComponentType<{}>}
+                />
+              </div>
+              <div className={css["form-control"]}>
+                <label htmlFor="email" className={css["dark-label"]}>
+                  Email
+                </label>
+                <Field
+                  id="email"
+                  name="email"
+                  type="email"
+                  className={classNames(css["dark-input"])}
+                />
+                <ErrorMessage
+                  name="email"
+                  component={TextError as React.ComponentType<{}>}
+                />
+              </div>
+              <div className={css["form-control"]}>
+                <label htmlFor="password" className={css["dark-label"]}>
+                  Password
+                </label>
+                <Field
+                  id="password"
+                  name="password"
+                  type="text"
+                  className={classNames(css["dark-input"])}
+                />
+                <ErrorMessage
+                  name="password"
+                  component={TextError as React.ComponentType<{}>}
+                />
+              </div>
+              <button
+                type="submit"
+                className={classNames(css["dark-button"])}
+                disabled={!formik.isValid}
+              >
+                Submit
+              </button>
+            </Form>
+          );
+        }}
       </Formik>
     </section>
   );

@@ -17,6 +17,7 @@ import { AppDispatch } from "../../redux/store";
 import { clearCart } from "../../redux/stores/storesSlice";
 import { toast } from "react-toastify";
 import TextError from "../TextError/TextError";
+import FormControl from "./FormControl";
 
 interface OrderFormProps {
   totalPrice: number;
@@ -86,61 +87,33 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
       validateOnBlur={false}
     >
       <Form className={css.form}>
-        <div className={css["form-control"]}>
-          <label htmlFor="name" className={css["dark-label"]}>
-            Name
-          </label>
-          <Field
-            id="name"
-            name="name"
-            type="text"
-            className={classNames(css["dark-input"])}
-          />
-          <ErrorMessage
-            name="name"
-            component={TextError as React.ComponentType<{}>}
-          />
-        </div>
-
-        <div className={css["form-control"]}>
-          <label htmlFor="email" className={css["dark-label"]}>
-            Email
-          </label>
-          <Field
-            id="email"
-            name="email"
-            type="email"
-            className={classNames(css["dark-input"])}
-          />
-          <ErrorMessage
-            name="email"
-            component={TextError as React.ComponentType<{}>}
-          />
-        </div>
-
-        <div className={css["form-control"]}>
-          <label htmlFor="address" className={css["dark-label"]}>
-            Address
-          </label>
-          <Field name="address">
-            {(props: any) => {
-              const { field, meta } = props;
-              return (
-                <div>
-                  <input
-                    type="text"
-                    id="address"
-                    className={classNames(css["dark-input"])}
-                    {...field}
-                  />
-                  {meta.touched && meta.error ? (
-                    <div className={css["error"]}>{meta.error}</div>
-                  ) : null}
-                </div>
-              );
-            }}
-          </Field>
-        </div>
+        <FormControl
+          control="input"
+          label="Name"
+          name="name"
+          type="text"
+          labelClassName="dark-label"
+          inputClassName="dark-input"
+          wrapperClassName="form-control"
+        />
+        <FormControl
+          control="input"
+          label="Email"
+          name="email"
+          type="email"
+          labelClassName="dark-label"
+          inputClassName="dark-input"
+          wrapperClassName="form-control"
+        />
+        <FormControl
+          control="input"
+          label="Address"
+          name="address"
+          type="text"
+          labelClassName="dark-label"
+          inputClassName="dark-input"
+          wrapperClassName="form-control"
+        />
 
         <div className={css["form-control"]}>
           <label htmlFor="phone" className={css["dark-label"]}>
@@ -160,14 +133,12 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
                         name={`pnNumbers[${index}]`}
                         className={classNames(css["dark-input"])}
                       />
-                      {errors &&
-                        Array.isArray(errors.pnNumbers) &&
-                        errors.pnNumbers[index] && (
-                          <ErrorMessage
-                            name={`pnNumbers[${index}]`}
-                            component={TextError as React.ComponentType<{}>}
-                          />
-                        )}
+                      {errors && Array.isArray(errors.pnNumbers) && (
+                        <ErrorMessage
+                          name={`pnNumbers[${index}]`}
+                          component={TextError as React.ComponentType<{}>}
+                        />
+                      )}
                       {index > 0 && (
                         <button type="button" onClick={() => remove(index)}>
                           Delete
