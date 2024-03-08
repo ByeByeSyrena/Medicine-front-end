@@ -1,29 +1,31 @@
 import React from "react";
-import { Formik, Form } from "formik";
+import data from "../../data/surveyOptions.json";
 import * as Yup from "yup";
-import data from "../../data/filterOptions.json";
+import { Formik, Form } from "formik";
 import FormControl from "../FormControl/FormControl";
 
-const radioOptions = data;
+const checkboxOptions = data;
 
 type valueTypes = {
-  radioOption: string;
+  checkboxOption: string[];
 };
 
 const initialValues: valueTypes = {
-  radioOption: "",
+  checkboxOption: [],
 };
 
 const validationSchema = () =>
   Yup.object({
-    radioOption: Yup.string().required("Please choose the filter"),
+    checkboxOption: Yup.array().of(
+      Yup.string().required("Please choose options")
+    ),
   });
 
 const onSubmit = (values: valueTypes) => {
   console.log("radio", values);
 };
 
-const Filters: React.FC = () => {
+const Survey: React.FC = () => {
   return (
     <Formik
       initialValues={initialValues}
@@ -31,12 +33,13 @@ const Filters: React.FC = () => {
       onSubmit={onSubmit}
     >
       <Form>
+        <h1>Survey</h1>
         <FormControl
-          control="radio"
-          label="Filters"
-          name="radioOption"
-          radioOptions={radioOptions}
-          type="radio"
+          control="checkbox"
+          label="What do you use more?"
+          name="checkboxOption"
+          checkboxOptions={checkboxOptions}
+          type="checkbox"
         />
         <button type="submit">Apply</button>
       </Form>
@@ -44,4 +47,4 @@ const Filters: React.FC = () => {
   );
 };
 
-export default Filters;
+export default Survey;

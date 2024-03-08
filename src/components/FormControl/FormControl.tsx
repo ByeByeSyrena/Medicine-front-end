@@ -1,4 +1,5 @@
 import React from "react";
+import CheckboxGroup from "./CheckboxGroup";
 import FieldArrayComponent from "./FieldArray";
 import Input from "./Input";
 import RadioButtons from "./RadioButtons";
@@ -12,6 +13,11 @@ export interface Option {
 }
 
 export interface radioOption {
+  value: string;
+  key: string;
+}
+
+export interface checkboxOption {
   value: string;
   key: string;
 }
@@ -35,6 +41,7 @@ type Props = {
   inputClassName?: string | null;
   wrapperClassName?: string | null;
   radioOptions?: radioOption[];
+  checkboxOptions?: checkboxOption[];
 };
 
 const FormControl: React.FC<Props> = ({ control, ...rest }) => {
@@ -49,6 +56,8 @@ const FormControl: React.FC<Props> = ({ control, ...rest }) => {
       return <SelectComponent {...rest} />;
     case "radio":
       return <RadioButtons {...rest} />;
+    case "checkbox":
+      return <CheckboxGroup {...rest} />;
     default:
       return null;
   }

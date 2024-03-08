@@ -4,6 +4,7 @@ import { Medicine, Pharmacy } from "../../../@types/types";
 import Catalog from "../../../components/Catalog/Catalog";
 import Filters from "../../../components/Filters/Filters";
 import StoresList from "../../../components/StoresList/StoresList";
+import Survey from "../../../components/SurveyPart/Survey";
 import { AppDispatch } from "../../../redux/store";
 import { getAllStores, getOneStore } from "../../../redux/stores/operations";
 import {
@@ -57,6 +58,7 @@ const ShopPage = () => {
           />
         </div>
         <Filters />
+        <Survey />
       </aside>
       <div className={css.willbelist}>
         <Catalog
