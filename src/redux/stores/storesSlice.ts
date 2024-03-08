@@ -40,9 +40,11 @@ const storesSlice = createSlice({
         (exist.amount as number)++;
         toast.info("Already added, go to the cart for the next steps");
       }
+      state.totalPrice = calculateTotalPrice(state.cart);
     },
     deleteFromCart(state, action) {
       state.cart = state.cart.filter((item) => item._id !== action.payload);
+      state.totalPrice = calculateTotalPrice(state.cart);
     },
     clearCart(state) {
       state.cart = [];
@@ -55,6 +57,7 @@ const storesSlice = createSlice({
         ...state.cart[itemIndex],
         amount: (state.cart[itemIndex].amount as number) + 1,
       };
+      state.totalPrice = calculateTotalPrice(state.cart);
     },
     decreaseQuantity(state, action: PayloadAction<string | number>) {
       const itemId = action.payload;
@@ -65,17 +68,7 @@ const storesSlice = createSlice({
           amount: (state.cart[itemIndex].amount as number) - 1,
         };
       }
-    },
-    getTotalPrice(state) {
-      state.totalPrice = parseFloat(
-        state.cart
-          .reduce(
-            (total, item) =>
-              total + (item.price as number) * (item.amount as number),
-            0
-          )
-          .toFixed(2)
-      );
+      state.totalPrice = calculateTotalPrice(state.cart);
     },
   },
   extraReducers: (builder) =>
@@ -116,5 +109,13 @@ export const {
   clearCart,
   increaseQuantity,
   decreaseQuantity,
-  getTotalPrice,
 } = storesSlice.actions;
+
+// Utility function to calculate total price
+const calculateTotalPrice = (cart: Medicine[]) => {
+  const totalPrice = cart.reduce(
+    (total, item) => total + (item.price as number) * (item.amount as number),
+    0
+  );
+  return parseFloat(totalPrice.toFixed(2));
+};

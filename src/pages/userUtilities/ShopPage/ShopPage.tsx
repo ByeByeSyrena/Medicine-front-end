@@ -11,7 +11,7 @@ import {
   selectAllStores,
   selectOneStore,
 } from "../../../redux/stores/selectors";
-import { addToCart, getTotalPrice } from "../../../redux/stores/storesSlice";
+import { addToCart } from "../../../redux/stores/storesSlice";
 import css from "./ShopPage.module.css";
 
 const ShopPage = () => {
@@ -43,7 +43,6 @@ const ShopPage = () => {
 
   const handleAddToCartClick = (item: Medicine) => {
     dispatchCart(addToCart(item));
-    dispatch(getTotalPrice());
   };
 
   return (

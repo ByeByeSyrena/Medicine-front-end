@@ -3,15 +3,15 @@ import { Formik, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import css from "./Form.module.css";
 import { Medicine } from "../../@types/types";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../redux/orders/operations";
 import { AppDispatch } from "../../redux/store";
 import { clearCart } from "../../redux/stores/storesSlice";
 import { toast } from "react-toastify";
 import FormControl from "../FormControl/FormControl";
+import { selectTotalPrice } from "../../redux/stores/selectors";
 
 interface OrderFormProps {
-  totalPrice: number;
   cartItems: Medicine[];
 }
 
@@ -32,8 +32,9 @@ const validationSchema = Yup.object().shape({
     .min(1, "At least one phone number is required"),
 });
 
-const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
+const OrderForm: React.FC<OrderFormProps> = ({ cartItems }) => {
   const dispatch = useDispatch<AppDispatch>();
+  const totalPrice = useSelector(selectTotalPrice);
 
   const initialValues: Values = {
     name: "",

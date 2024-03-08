@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { useSelector } from "react-redux";
 import { selectCart, selectTotalPrice } from "../../../redux/stores/selectors";
-import { getTotalPrice } from "../../../redux/stores/storesSlice";
 
 import OrderForm from "../../../components/ShoppingCartForm/ShoppingCartForm";
 import CartList from "../../../components/CartList/CartList";
@@ -15,15 +14,11 @@ const ShoppingCartPage = () => {
   const cartItems = useSelector(selectCart);
   const totalPrice = useSelector(selectTotalPrice);
 
-  useEffect(() => {
-    dispatch(getTotalPrice());
-  }, [totalPrice, dispatch]);
-
   return (
     <section className={css.container}>
       <div>
         <h1>Fullfill order details</h1>
-        <OrderForm cartItems={cartItems} totalPrice={totalPrice} />
+        <OrderForm cartItems={cartItems} />
       </div>
       <CartList cartItems={cartItems} />
     </section>
