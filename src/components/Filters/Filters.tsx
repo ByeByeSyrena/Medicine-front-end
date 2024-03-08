@@ -18,7 +18,7 @@ const initialValues: valueTypes = {
 
 const validationSchema = () =>
   Yup.object({
-    radioOption: Yup.string().required("Please choose your status"),
+    radioOption: Yup.string().required("Please choose filter"),
   });
 
 const onSubmit = (values: valueTypes) => {
@@ -40,7 +40,7 @@ const Filters: React.FC = () => {
           radioOptions={radioOptions}
           type="radio"
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Apply</button>
       </Form>
     </Formik>
   );
