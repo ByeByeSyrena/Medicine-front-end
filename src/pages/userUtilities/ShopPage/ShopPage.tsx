@@ -49,7 +49,6 @@ const ShopPage = () => {
     <section className={css.container}>
       <aside className={css.sidebar}>
         <div className={css.storesPositioning}>
-          <h1>Stores</h1>
           <StoresList
             stores={storesAndDrugs}
             onAllClick={handleAllClick}

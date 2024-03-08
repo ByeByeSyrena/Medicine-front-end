@@ -37,9 +37,9 @@ type Props = {
   name: string;
   type: string;
   options?: Option[];
-  labelClassName?: string | null;
-  inputClassName?: string | null;
-  wrapperClassName?: string | null;
+  labelClassName?: string;
+  inputClassName?: string;
+  wrapperClassName?: string;
   radioOptions?: radioOption[];
   checkboxOptions?: checkboxOption[];
 };

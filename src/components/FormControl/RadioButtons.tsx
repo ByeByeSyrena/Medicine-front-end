@@ -10,6 +10,8 @@ interface RadioProps {
   type: string;
   radioOptions?: radioOption[];
   wrapperClassName?: string | null;
+  labelClassName?: string;
+  inputClassName?: string;
 }
 
 const RadioButtons: React.FC<RadioProps> = ({
@@ -18,33 +20,42 @@ const RadioButtons: React.FC<RadioProps> = ({
   radioOptions,
   type,
   wrapperClassName,
+  labelClassName,
+  inputClassName,
 }) => {
   return (
     <div className={`${css[wrapperClassName as string]}`}>
-      <label htmlFor={name}>{label}</label>
-      <Field name={name}>
-        {(fieldProps: FieldProps) => {
-          const { field } = fieldProps;
-          if (!radioOptions || radioOptions.length === 0) {
-            return null;
-          }
-          return radioOptions.map((option) => {
-            return (
-              <React.Fragment key={option.value}>
-                <input
-                  type={type}
-                  id={option.value}
-                  name={name}
-                  value={option.value}
-                  checked={field.value === option.value}
-                  onChange={field.onChange}
-                />
-                <label htmlFor={option.value}>{option.key}</label>
-              </React.Fragment>
-            );
-          });
-        }}
-      </Field>
+      <div>
+        <Field name={name}>
+          {(fieldProps: FieldProps) => {
+            const { field } = fieldProps;
+            if (!radioOptions || radioOptions.length === 0) {
+              return null;
+            }
+            return radioOptions.map((option) => {
+              return (
+                <React.Fragment key={option.value}>
+                  <input
+                    type={type}
+                    id={option.value}
+                    name={name}
+                    value={option.value}
+                    checked={field.value === option.value}
+                    onChange={field.onChange}
+                    className={`${css[inputClassName as string]}`}
+                  />
+                  <label
+                    htmlFor={option.value}
+                    className={`${css[labelClassName as string]}`}
+                  >
+                    {option.key}
+                  </label>
+                </React.Fragment>
+              );
+            });
+          }}
+        </Field>
+      </div>
       <ErrorMessage
         name={name}
         component={TextError as React.ComponentType<{}>}

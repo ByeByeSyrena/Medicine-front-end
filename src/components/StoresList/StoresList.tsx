@@ -1,5 +1,6 @@
 import React from "react";
 import { Pharmacy } from "../../@types/types";
+import css from "./StoresList.module.css";
 
 interface StoresListProps {
   stores: Pharmacy[];
@@ -13,7 +14,8 @@ const StoresList: React.FC<StoresListProps> = ({
   onStoreClick,
 }) => {
   return (
-    <div>
+    <div className={css.background}>
+      <h1>Stores</h1>
       <button onClick={onAllClick}>All</button>
       {stores &&
         stores.map((item: Pharmacy) => (
