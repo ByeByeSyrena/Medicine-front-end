@@ -114,58 +114,14 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
           inputClassName="dark-input"
           wrapperClassName="form-control"
         />
-
-        <div className={css["form-control"]}>
-          <label htmlFor="phone" className={css["dark-label"]}>
-            Add your contact numbers
-          </label>
-          <FieldArray name="pnNumbers">
-            {(fieldArrayProps) => {
-              const { push, remove, form } = fieldArrayProps;
-              const { values, errors } = form;
-              const { pnNumbers } = values;
-
-              return (
-                <div>
-                  {pnNumbers.map((pnNumber: string, index: number) => (
-                    <div key={index}>
-                      <Field
-                        name={`pnNumbers[${index}]`}
-                        className={classNames(css["dark-input"])}
-                      />
-                      {errors && Array.isArray(errors.pnNumbers) && (
-                        <ErrorMessage
-                          name={`pnNumbers[${index}]`}
-                          component={TextError as React.ComponentType<{}>}
-                        />
-                      )}
-                      {index > 0 && (
-                        <button type="button" onClick={() => remove(index)}>
-                          Delete
-                        </button>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          push("");
-                        }}
-                      >
-                        Add
-                      </button>
-                    </div>
-                  ))}
-                  {errors && !Array.isArray(errors.pnNumbers) && (
-                    <ErrorMessage
-                      name="pnNumbers"
-                      component={TextError as React.ComponentType<{}>}
-                    />
-                  )}
-                </div>
-              );
-            }}
-          </FieldArray>
-        </div>
-
+        <FormControl
+          control="fieldArray"
+          label="Add your contact numbers"
+          name="pnNumbers"
+          type="text"
+          labelClassName="dark-label"
+          wrapperClassName="form-control"
+        />
         <div className={css["form-control"]}>
           <label htmlFor="password" className={css["dark-label"]}>
             Comments

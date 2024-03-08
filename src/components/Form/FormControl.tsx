@@ -1,8 +1,16 @@
 // FormControl.tsx
 import React from "react";
+import FieldArrayComponent from "./FieldArray";
 import Input from "./Input";
 
-type Control = "input" | "textarea" | "select" | "radio" | "checkbox" | "date";
+type Control =
+  | "input"
+  | "textarea"
+  | "select"
+  | "radio"
+  | "checkbox"
+  | "date"
+  | "fieldArray";
 
 type Props = {
   control: Control;
@@ -18,6 +26,8 @@ const FormControl: React.FC<Props> = ({ control, ...rest }) => {
   switch (control) {
     case "input":
       return <Input {...rest} />;
+    case "fieldArray":
+      return <FieldArrayComponent {...rest} />;
 
     // Add cases for other control types as needed
     default:
