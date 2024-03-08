@@ -2,6 +2,7 @@
 import React from "react";
 import FieldArrayComponent from "./FieldArray";
 import Input from "./Input";
+import TextArea from "./TextArea";
 
 type Control =
   | "input"
@@ -28,7 +29,8 @@ const FormControl: React.FC<Props> = ({ control, ...rest }) => {
       return <Input {...rest} />;
     case "fieldArray":
       return <FieldArrayComponent {...rest} />;
-
+    case "textarea":
+      return <TextArea {...rest} />;
     // Add cases for other control types as needed
     default:
       return null;

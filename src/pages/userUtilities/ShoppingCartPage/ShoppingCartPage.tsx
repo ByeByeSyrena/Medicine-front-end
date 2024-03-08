@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { selectCart, selectTotalPrice } from "../../../redux/stores/selectors";
 import { getTotalPrice } from "../../../redux/stores/storesSlice";
 
-import OrderForm from "../../../components/Form/Form";
+import OrderForm from "../../../components/ShoppingCartForm/ShoppingCartForm";
 import CartList from "../../../components/CartList/CartList";
 
 const ShoppingCartPage = () => {

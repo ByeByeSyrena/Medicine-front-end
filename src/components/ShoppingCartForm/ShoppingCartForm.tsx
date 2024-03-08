@@ -17,7 +17,7 @@ import { AppDispatch } from "../../redux/store";
 import { clearCart } from "../../redux/stores/storesSlice";
 import { toast } from "react-toastify";
 import TextError from "../TextError/TextError";
-import FormControl from "./FormControl";
+import FormControl from "../FormControl/FormControl";
 
 interface OrderFormProps {
   totalPrice: number;
@@ -122,22 +122,15 @@ const OrderForm: React.FC<OrderFormProps> = ({ totalPrice, cartItems }) => {
           labelClassName="dark-label"
           wrapperClassName="form-control"
         />
-        <div className={css["form-control"]}>
-          <label htmlFor="password" className={css["dark-label"]}>
-            Comments
-          </label>
-          <Field
-            as="textarea"
-            id="comments"
-            name="comments"
-            type="text"
-            className={classNames(css["dark-input"])}
-          />
-          <ErrorMessage
-            name="comments"
-            component={TextError as React.ComponentType<{}>}
-          />
-        </div>
+        <FormControl
+          control="textarea"
+          label="Comments"
+          name="comments"
+          type="text"
+          labelClassName="dark-label"
+          inputClassName="scrollWrapperInput"
+          wrapperClassName="form-control"
+        />
         <div className={css.elementWrapper}>
           <div className={css.totalPriceWrapper}>
             <div className={css.totalPrice}>

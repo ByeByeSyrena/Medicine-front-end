@@ -6,6 +6,7 @@ import * as Yup from "yup";
 // import { AppDispatch } from "../../../redux/store";
 import classNames from "classnames";
 import TextError from "../../../components/TextError/TextError";
+import FormControl from "../../../components/FormControl/FormControl";
 
 type valuesTypes = {
   name: string;
@@ -51,51 +52,34 @@ const SignUpPage = () => {
         {(formik) => {
           return (
             <Form className={css.form}>
-              <div className={css["form-control"]}>
-                <label htmlFor="name" className={css["dark-label"]}>
-                  Name
-                </label>
-                <Field
-                  id="name"
-                  name="name"
-                  type="text"
-                  className={classNames(css["dark-input"])}
-                />
-                <ErrorMessage
-                  name="name"
-                  component={TextError as React.ComponentType<{}>}
-                />
-              </div>
-              <div className={css["form-control"]}>
-                <label htmlFor="email" className={css["dark-label"]}>
-                  Email
-                </label>
-                <Field
-                  id="email"
-                  name="email"
-                  type="email"
-                  className={classNames(css["dark-input"])}
-                />
-                <ErrorMessage
-                  name="email"
-                  component={TextError as React.ComponentType<{}>}
-                />
-              </div>
-              <div className={css["form-control"]}>
-                <label htmlFor="password" className={css["dark-label"]}>
-                  Password
-                </label>
-                <Field
-                  id="password"
-                  name="password"
-                  type="text"
-                  className={classNames(css["dark-input"])}
-                />
-                <ErrorMessage
-                  name="password"
-                  component={TextError as React.ComponentType<{}>}
-                />
-              </div>
+              <FormControl
+                control="input"
+                label="Name"
+                name="name"
+                type="text"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+              <FormControl
+                control="input"
+                label="Email"
+                name="email"
+                type="email"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+              <FormControl
+                control="input"
+                label="Password"
+                name="password"
+                type="password"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+
               <button
                 type="submit"
                 className={classNames(css["dark-button"])}
