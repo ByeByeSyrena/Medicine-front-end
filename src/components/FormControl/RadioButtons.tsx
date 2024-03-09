@@ -25,7 +25,8 @@ const RadioButtons: React.FC<RadioProps> = ({
 }) => {
   return (
     <div className={`${css[wrapperClassName as string]}`}>
-      <div>
+      <h1>{label}</h1>
+      <div className={css["fieldRadioClass"]}>
         <Field name={name}>
           {(fieldProps: FieldProps) => {
             const { field } = fieldProps;
@@ -34,7 +35,7 @@ const RadioButtons: React.FC<RadioProps> = ({
             }
             return radioOptions.map((option) => {
               return (
-                <React.Fragment key={option.value}>
+                <div key={option.value}>
                   <input
                     type={type}
                     id={option.value}
@@ -50,7 +51,7 @@ const RadioButtons: React.FC<RadioProps> = ({
                   >
                     {option.key}
                   </label>
-                </React.Fragment>
+                </div>
               );
             });
           }}

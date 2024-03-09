@@ -40,8 +40,11 @@ const Survey: React.FC = () => {
           name="checkboxOption"
           checkboxOptions={checkboxOptions}
           type="checkbox"
+          labelClassName="checkboxLabel"
+          inputClassName="checkboxInput"
+          wrapperClassName="checkboxWrapper"
         />
-        <button type="submit">Apply</button>
+        <button type="submit">Vote</button>
       </Form>
     </Formik>
   );

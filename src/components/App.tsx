@@ -6,6 +6,7 @@ import SharedLayout from "./SharedLayout/SharedLayout";
 import ShopPage from "../pages/userUtilities/ShopPage/ShopPage";
 import ShoppingCartPage from "../pages/userUtilities/ShoppingCartPage/ShoppingCartPage";
 import SignUpPage from "../pages/authUtilities/SignUpPage/SignUpPage";
+import LoginPage from "../pages/authUtilities/LoginPage/LoginPage";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="cart" element={<ShoppingCartPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="signup" element={<SignUpPage />} />
+        <Route path="login" element={<LoginPage />} />
       </Route>
     </Routes>
   );

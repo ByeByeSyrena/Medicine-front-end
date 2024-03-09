@@ -1,5 +1,6 @@
 import React from "react";
 import CheckboxGroup from "./CheckboxGroup";
+import DatePicker from "./DatePicker";
 import FieldArrayComponent from "./FieldArray";
 import Input from "./Input";
 import RadioButtons from "./RadioButtons";
@@ -58,6 +59,8 @@ const FormControl: React.FC<Props> = ({ control, ...rest }) => {
       return <RadioButtons {...rest} />;
     case "checkbox":
       return <CheckboxGroup {...rest} />;
+    case "date":
+      return <DatePicker {...rest} />;
     default:
       return null;
   }

@@ -21,6 +21,7 @@ type Values = {
   address: string;
   comments?: string | "";
   pnNumbers: string[];
+  deliveryDate?: null;
 };
 
 const validationSchema = Yup.object().shape({
@@ -30,6 +31,8 @@ const validationSchema = Yup.object().shape({
   pnNumbers: Yup.array()
     .of(Yup.string().required("At least one phone number is required"))
     .min(1, "At least one phone number is required"),
+  comments: Yup.string(),
+  deliveryDate: Yup.date().nullable(),
 });
 
 const OrderForm: React.FC<OrderFormProps> = ({ cartItems }) => {

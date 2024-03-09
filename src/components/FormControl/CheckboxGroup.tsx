@@ -9,7 +9,9 @@ interface CheckboxProps {
   name: string;
   type: string;
   checkboxOptions?: checkboxOption[];
-  wrapperClassName?: string | null;
+  wrapperClassName?: string;
+  labelClassName?: string;
+  inputClassName?: string;
 }
 
 const CheckboxGroup: React.FC<CheckboxProps> = ({
@@ -18,11 +20,15 @@ const CheckboxGroup: React.FC<CheckboxProps> = ({
   checkboxOptions,
   type,
   wrapperClassName,
+  labelClassName,
+  inputClassName,
 }) => {
   return (
-    <div className={`${css[wrapperClassName as string]}`}>
-      <label htmlFor={name}>{label}</label>
-      <Field name={name}>
+    <div className={css["upperCheckboxWrapper"]}>
+      <label htmlFor={name} className={css["labelMargin"]}>
+        {label}
+      </label>
+      <Field name={name} className={`${css[wrapperClassName as string]}`}>
         {(fieldProps: FieldProps) => {
           const { field } = fieldProps;
           if (!checkboxOptions || checkboxOptions.length === 0) {
@@ -30,7 +36,7 @@ const CheckboxGroup: React.FC<CheckboxProps> = ({
           }
           return checkboxOptions.map((option) => {
             return (
-              <React.Fragment key={option.value}>
+              <div key={option.value}>
                 <input
                   type={type}
                   id={option.value}
@@ -38,9 +44,15 @@ const CheckboxGroup: React.FC<CheckboxProps> = ({
                   value={option.value}
                   checked={field.value.includes(option.value)}
                   onChange={field.onChange}
+                  className={`${css[inputClassName as string]}`}
                 />
-                <label htmlFor={option.value}>{option.key}</label>
-              </React.Fragment>
+                <label
+                  htmlFor={option.value}
+                  className={`${css[labelClassName as string]}`}
+                >
+                  {option.key}
+                </label>
+              </div>
             );
           });
         }}

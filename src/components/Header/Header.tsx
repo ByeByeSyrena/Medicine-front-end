@@ -25,6 +25,11 @@ export const Header = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink to="/login" className={css.link}>
+                Login
+              </NavLink>
+            </li>
+            <li>
               <NavLink to="/cart" className={css.logo}>
                 <img
                   src={require("../../images/icons8-cart-30.png")}

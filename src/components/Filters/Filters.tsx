@@ -31,7 +31,6 @@ const Filters: React.FC = () => {
       onSubmit={onSubmit}
     >
       <Form>
-        <h1>Filters</h1>
         <FormControl
           control="radio"
           label="Filters"

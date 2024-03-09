@@ -1,4 +1,4 @@
 [
-    {"key": "option 1", "value": "Seller"},
-    {"key": "option 1", "value": "Customer"}
+    {"key": "Seller", "value": "seller"},
+    {"key": "Customer", "value": "customer"}
 ]
