@@ -44,8 +44,8 @@ const LoginPage = () => {
     <section className={css.container}>
       <h1>Login</h1>
       <div>
-        <button type="button">Want to buy</button>
-        <button type="button">Want to sell</button>
+        <button type="button">I am a buyer</button>
+        <button type="button">I am a seller</button>
       </div>
       <Formik
         initialValues={initialValues}

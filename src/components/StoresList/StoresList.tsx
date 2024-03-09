@@ -16,17 +16,19 @@ const StoresList: React.FC<StoresListProps> = ({
   return (
     <div className={css.background}>
       <h1>Stores</h1>
-      <button onClick={onAllClick}>All</button>
-      {stores &&
-        stores.map((item: Pharmacy) => (
-          <button
-            type="button"
-            key={item.name}
-            onClick={() => onStoreClick(item._id ?? "")}
-          >
-            {item.name}
-          </button>
-        ))}
+      <div className={css.scrollWrapper}>
+        <button onClick={onAllClick}>All</button>
+        {stores &&
+          stores.map((item: Pharmacy) => (
+            <button
+              type="button"
+              key={item.name}
+              onClick={() => onStoreClick(item._id ?? "")}
+            >
+              {item.name}
+            </button>
+          ))}
+      </div>
     </div>
   );
 };

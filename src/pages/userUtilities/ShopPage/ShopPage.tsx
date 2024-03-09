@@ -55,8 +55,12 @@ const ShopPage = () => {
             onStoreClick={handleOneStoreClick}
           />
         </div>
-        <Filters />
-        <Survey />
+        <div className={css.filtersDiv}>
+          <Filters />
+        </div>
+        <div className={css.filtersDiv}>
+          <Survey />
+        </div>
       </aside>
       <div className={css.willbelist}>
         <Catalog
