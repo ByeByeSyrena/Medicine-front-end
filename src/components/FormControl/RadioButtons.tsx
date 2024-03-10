@@ -25,7 +25,7 @@ const RadioButtons: React.FC<RadioProps> = ({
 }) => {
   return (
     <div className={`${css[wrapperClassName as string]}`}>
-      <h1>{label}</h1>
+      <h2 className={css["radioLabel"]}>{label}</h2>
       <div className={css["fieldRadioClass"]}>
         <Field name={name}>
           {(fieldProps: FieldProps) => {

@@ -33,7 +33,7 @@ const Survey: React.FC = () => {
       onSubmit={onSubmit}
     >
       <Form>
-        <h1>Survey</h1>
+        <h2>Survey</h2>
         <FormControl
           control="checkbox"
           label="What do you use more?"

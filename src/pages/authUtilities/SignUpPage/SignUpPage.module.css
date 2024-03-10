@@ -22,7 +22,7 @@
     justify-items: center;
     align-items: center;
     max-width: 1440px;
-    padding: 12px 112px;
+    padding: 30px 112px;
   }
 }
 
@@ -127,4 +127,8 @@
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
+}
+
+.container h1 {
+  margin-bottom: 30px;
 }

@@ -41,13 +41,22 @@ const SignUpPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "",
+    role: "seller",
   };
 
   const onSubmit = (values: valuesTypes) => {
-    // const newUser = {
-    //   values,
-    // };
+    const newUser = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+
+    if (values.role && values.role === "seller") {
+    }
+
+    if (values.role && values.role === "customer") {
+    }
+
     console.log("Form data", values);
   };
 
@@ -65,7 +74,7 @@ const SignUpPage = () => {
             <Form className={css.form}>
               <FormControl
                 control="input"
-                label="Name"
+                label="Name / Pharmacy account's name"
                 name="name"
                 type="text"
                 labelClassName="dark-label"

@@ -32,14 +32,26 @@
   color: #fff;
 }
 
+.sidebar h1 {
+  margin-bottom: 10px;
+}
+
+.sidebar h2 {
+  margin-bottom: 10px;
+}
+
 .storesPositioning {
   top: 20px;
 }
 
-.storesPositioning button {
+.sidebar .storesPositioning button {
   margin-bottom: 10px;
   color: #fff;
   font-size: 16px;
+}
+
+.storesPositioning button:last-child {
+  margin-bottom: 0px;
 }
 
 .storesPositioning button:hover {
@@ -60,5 +72,3 @@
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
-
