@@ -8,6 +8,11 @@ declare module "*.png" {
   export default content;
 }
 
+declare module "*.jpeg" {
+  const content: any;
+  export default content;
+}
+
 declare module "redux-persist/integration/react" {
   import { PersistGateProps } from "redux-persist/es/integration/react";
 

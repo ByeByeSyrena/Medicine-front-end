@@ -13,19 +13,19 @@ const favoritesSlice = createSlice({
     error: null,
   } as favoritesTypes,
   reducers: {
-    clearFavoritesState(state) {
-      state.items = [];
-      state.error = null;
-    },
-    addFavorites(state, action: PayloadAction<Medicine>) {
-      state.items.push(action.payload);
-    },
-    deleteFavorites(state, action: PayloadAction<string>) {
-      state.items = state.items.filter((item) => item._id !== action.payload);
-    },
+    // clearFavoritesState(state) {
+    //   state.items = [];
+    //   state.error = null;
+    // },
+    // addFavorites(state, action: PayloadAction<Medicine>) {
+    //   state.items.push(action.payload);
+    // },
+    // deleteFavorites(state, action: PayloadAction<string>) {
+    //   state.items = state.items.filter((item) => item._id !== action.payload);
+    // },
   },
 });
 export const favoritesReducer = favoritesSlice.reducer;
 
-export const { clearFavoritesState, addFavorites, deleteFavorites } =
-  favoritesSlice.actions;
+// export const { clearFavoritesState, addFavorites, deleteFavorites } =
+//   favoritesSlice.actions;

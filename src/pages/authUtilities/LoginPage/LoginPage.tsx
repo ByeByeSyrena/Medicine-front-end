@@ -1,43 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./LoginPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
 import classNames from "classnames";
 import FormControl from "../../../components/FormControl/FormControl";
+import { loginUser } from "../../../redux/auth/users/operations";
+import { selectUserError } from "../../../redux/auth/users/selectors";
 
-type valuesTypes = {
-  name: string;
+export type valuesTypes = {
   email: string;
   password: string;
 };
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .matches(
       /^(?=.*[a-zA-Z])(?=.*\d).+$/,
-      "Password must contain both letters and numbers"
+      "Password must contain both uppercase and lowercase letters and numbers"
     )
     .required("Password is required"),
 });
 
 const LoginPage = () => {
-  // const dispatch = useDispatch<AppDispatch>();
+  const error = useSelector(selectUserError);
+
+  console.log(error);
+
+  useEffect(() => {
+    if (error?.errorCode === 400) {
+      console.log("Bad request");
+      return;
+    } else if (error?.errorCode === 401) {
+      console.log("Unauthorized");
+      return;
+    } else if (error?.errorCode === 500) {
+      console.log("Internal Server error");
+      return;
+    }
+  }, [error]);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const initialValues = {
-    name: "",
     email: "",
     password: "",
   };
 
   const onSubmit = (values: valuesTypes) => {
-    // const newUser = {
-    //   values,
-    // };
+
     console.log("Form data", values);
+    dispatch(loginUser(values));
   };
 
   return (

@@ -14,14 +14,16 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { storesReducer } from "./stores/storesSlice";
 import { ordersReducer } from "./orders/ordersSlice";
 import { favoritesReducer } from "./favorites/favoritesSlice";
+import { usersReducer } from "./auth/users/usersSlice";
 
 const persistConfig = {
   key: "persistedStates",
   storage,
-  whitelist: ["stores", "cart", "totalPrice", "favorites"],
+  whitelist: ["stores", "cart", "totalPrice", "token"],
 };
 
 const rootReducer = combineReducers({
+  usersAuth: persistReducer(persistConfig, usersReducer),
   orders: ordersReducer,
   stores: persistReducer(persistConfig, storesReducer),
   favorites: persistReducer(persistConfig, favoritesReducer),

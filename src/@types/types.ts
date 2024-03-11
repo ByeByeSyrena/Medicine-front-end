@@ -1,3 +1,5 @@
+// OLD TYPES - IN USE NOW 3/11
+
 export type Medicine = {
   _id?: string;
   item: string;
@@ -21,4 +23,17 @@ export type Order = {
   comments?: string;
   totalPrice: number;
   medicines: Medicine[];
+};
+
+// NEW TYPES
+
+export type User = {
+  _id?: string;
+  name?: string;
+  email: string;
+  password?: string;
+  role?: string;
+  favorites?: string[];
+  seller?: string;
+  token?: string;
 };

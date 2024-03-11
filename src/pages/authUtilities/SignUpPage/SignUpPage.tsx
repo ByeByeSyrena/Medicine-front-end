@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./SignUpPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-// import { useDispatch } from "react-redux";
-// import { AppDispatch } from "../../../redux/store";
+
 import classNames from "classnames";
 import FormControl from "../../../components/FormControl/FormControl";
-import data from "../../../data/authOptions.json";
-
-const authRoles = data;
+import { createUser } from "../../../redux/auth/users/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+import { selectUserError } from "../../../redux/auth/users/selectors";
 
 type valuesTypes = {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  role: string;
 };
 
 const validationSchema = Yup.object().shape({
@@ -23,25 +22,40 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .matches(
-      /^(?=.*[a-zA-Z])(?=.*\d).+$/,
-      "Password must contain both letters and numbers"
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+      "Password must contain 8 characters. At least one digit, one lowercase letter, one uppercase letter"
     )
     .required("Password is required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), ""], "Passwords must match")
     .required("Confirmation is required"),
-  role: Yup.string().required("Choose your status"),
 });
 
 const SignUpPage = () => {
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const error = useSelector(selectUserError);
+
+  console.log(error);
+
+  useEffect(() => {
+    if (error?.errorCode === 400) {
+      console.log("Bad request");
+      return;
+    } else if (error?.errorCode === 401) {
+      console.log("Unauthorized");
+      return;
+    } else if (error?.errorCode === 500) {
+      console.log("Internal Server error");
+      return;
+    }
+  }, [error]);
 
   const initialValues = {
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
-    role: "seller",
   };
 
   const onSubmit = (values: valuesTypes) => {
@@ -51,13 +65,9 @@ const SignUpPage = () => {
       password: values.password,
     };
 
-    if (values.role && values.role === "seller") {
-    }
+    dispatch(createUser(newUser));
 
-    if (values.role && values.role === "customer") {
-    }
-
-    console.log("Form data", values);
+    console.log("Form data", newUser);
   };
 
   return (
@@ -105,16 +115,6 @@ const SignUpPage = () => {
                 name="confirmPassword"
                 type="password"
                 labelClassName="dark-label"
-                inputClassName="dark-input"
-                wrapperClassName="form-control"
-              />
-              <FormControl
-                control="radio"
-                label="Choose your role"
-                name="role"
-                radioOptions={authRoles}
-                type="radio"
-                labelClassName="radioLabel"
                 inputClassName="dark-input"
                 wrapperClassName="form-control"
               />
