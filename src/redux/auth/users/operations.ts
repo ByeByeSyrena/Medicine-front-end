@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../../../@types/types";
 import { requestRegister } from "./services";
-import { UsersState } from "./usersSlice";
+// import { UsersState } from "./usersSlice";
 import { useSelector } from "react-redux";
 import { selectUserAccessToken } from "./selectors";
 import { toast } from "react-toastify";

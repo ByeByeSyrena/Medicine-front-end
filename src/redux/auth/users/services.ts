@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { User } from "../../../@types/types";
 
 const userInstance = axios.create({

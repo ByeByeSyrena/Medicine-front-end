@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import css from "./EnterPage.module.css";
 
-import imageLinks from "../../data/imageLinks";
-
 import { NavLink } from "react-router-dom";
 
 import image1 from "../../images/main-page/blue-pills.jpg";
