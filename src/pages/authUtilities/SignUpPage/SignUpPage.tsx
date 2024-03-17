@@ -9,6 +9,7 @@ import { createUser } from "../../../redux/auth/users/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { selectUserError } from "../../../redux/auth/users/selectors";
+import { NavLink } from "react-router-dom";
 
 type valuesTypes = {
   name: string;
@@ -129,6 +130,12 @@ const SignUpPage = () => {
           );
         }}
       </Formik>
+      <p>
+        Have an account? Log in{" "}
+        <NavLink to="/login" className={css.navlinkToForm}>
+          here
+        </NavLink>
+      </p>
     </section>
   );
 };

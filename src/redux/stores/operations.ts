@@ -15,7 +15,7 @@ export const getAllStores = createAsyncThunk<Pharmacy[]>(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue((error as any).payload);
     }
   }
 );
@@ -29,7 +29,7 @@ export const getOneStore = createAsyncThunk<Pharmacy, string>(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue((error as any).payload);
     }
   }
 );

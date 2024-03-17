@@ -1,53 +1,20 @@
+import React from "react";
 import css from "./Header.module.css";
-import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { selectIsUserLoggedIn } from "../../redux/auth/users/selectors";
 
 import "./header.css";
-import { selectCart } from "../../redux/stores/selectors";
+import NotAuthUserNav from "./NotAuthUserNav/NotAuthUserNav";
+import AuthUserNav from "./AuthUserNav/AuthUserNav";
 
 export const Header = () => {
-  const addedToCart = useSelector(selectCart);
-  const isLength = addedToCart.length;
+  const isUserAccess = useSelector(selectIsUserLoggedIn);
 
   return (
     <header className={css.header}>
       <div className={css.container}>
-        <nav>
-          <ul className={css.nav}>
-            <li>
-              <NavLink to="/shop" className={css.link}>
-                Shop
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/signup" className={css.link}>
-                SignUp
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/login" className={css.link}>
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/logout" className={css.link}>
-                Logout
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/cart" className={css.logo}>
-                <img
-                  src={require("../../images/icons8-cart-30.png")}
-                  alt="logo"
-                  className={css.logo}
-                />
-                {isLength > 0 && (
-                  <span className={css.lengthSpan}>{isLength}</span>
-                )}
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
+        {!isUserAccess && <NotAuthUserNav />}
+        {isUserAccess && <AuthUserNav />}
       </div>
     </header>
   );

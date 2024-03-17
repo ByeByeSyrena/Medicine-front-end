@@ -132,3 +132,8 @@
 .container h1 {
   margin-bottom: 30px;
 }
+
+.navlinkToForm {
+  cursor: pointer;
+  color: yellow;
+}

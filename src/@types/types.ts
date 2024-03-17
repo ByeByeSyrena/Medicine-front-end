@@ -32,8 +32,8 @@ export type User = {
   name?: string;
   email: string;
   password?: string;
-  role?: string;
+  roles?: string[];
   favorites?: string[];
-  seller?: string;
+  seller?: string | null;
   token?: string;
 };

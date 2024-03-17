@@ -81,6 +81,9 @@ const EnterPage: React.FC = () => {
       <NavLink to="/signup" className={css.signupBtn}>
         SIGN UP
       </NavLink>
+      <NavLink to="/shop" className={css.shopBtn}>
+        GO TO SHOP
+      </NavLink>
       <h1 className={css.shopName}>MEDICINE SHOP</h1>
     </section>
   );

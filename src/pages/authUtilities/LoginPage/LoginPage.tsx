@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import css from "./LoginPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import classNames from "classnames";
 import FormControl from "../../../components/FormControl/FormControl";
 import { loginUser } from "../../../redux/auth/users/operations";
-import { selectUserError } from "../../../redux/auth/users/selectors";
+import {
+  NavLink,
+  // useLocation, useNavigate // if restricted, you go to login and it helps to return to that page you wanted to go, but was unuathorized
+} from "react-router-dom";
 
 export type valuesTypes = {
   email: string;
@@ -25,24 +28,13 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginPage = () => {
-  const error = useSelector(selectUserError);
-
-  console.log(error);
-
-  useEffect(() => {
-    if (error?.errorCode === 400) {
-      console.log("Bad request");
-      return;
-    } else if (error?.errorCode === 401) {
-      console.log("Unauthorized");
-      return;
-    } else if (error?.errorCode === 500) {
-      console.log("Internal Server error");
-      return;
-    }
-  }, [error]);
+  const formikRef = useRef<any>(null);
 
   const dispatch = useDispatch<AppDispatch>();
+
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
 
   const initialValues = {
     email: "",
@@ -50,19 +42,17 @@ const LoginPage = () => {
   };
 
   const onSubmit = (values: valuesTypes) => {
-
     console.log("Form data", values);
     dispatch(loginUser(values));
+    formikRef.current.resetForm();
+    // navigate(from, { replace: true });
   };
 
   return (
     <section className={css.container}>
       <h1>Login</h1>
-      <div>
-        <button type="button">I am a buyer</button>
-        <button type="button">I am a seller</button>
-      </div>
       <Formik
+        innerRef={formikRef}
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
@@ -93,7 +83,7 @@ const LoginPage = () => {
               <button
                 type="submit"
                 className={classNames(css["dark-button"])}
-                disabled={!formik.isValid}
+                disabled={!formik.isValid || !formik.dirty}
               >
                 Submit
               </button>
@@ -101,6 +91,12 @@ const LoginPage = () => {
           );
         }}
       </Formik>
+      <p>
+        Don't have an account? Log in{" "}
+        <NavLink to="/signup" className={css.navlinkToForm}>
+          here
+        </NavLink>
+      </p>
     </section>
   );
 };
