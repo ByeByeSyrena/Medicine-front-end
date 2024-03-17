@@ -24,9 +24,9 @@ interface UserData {
   accessToken: string;
 }
 
-axios.defaults.baseURL = "http://localhost:3001/api/v1";
+// axios.defaults.baseURL = "http://localhost:3001/api/v1";
 
-// axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
+axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
 
 const token = {
   setToken(token: string) {
