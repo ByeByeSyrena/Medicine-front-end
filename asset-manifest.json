@@ -1,19 +1,28 @@
 {
   "files": {
-    "main.css": "/Medicine-front-end/static/css/main.1b3bc5df.css",
-    "main.js": "/Medicine-front-end/static/js/main.80af0b9c.js",
+    "main.css": "/Medicine-front-end/static/css/main.e66f39c4.css",
+    "main.js": "/Medicine-front-end/static/js/main.0d86e6b7.js",
     "static/js/453.68693753.chunk.js": "/Medicine-front-end/static/js/453.68693753.chunk.js",
     "static/media/pills_PNG16500.png": "/Medicine-front-end/static/media/pills_PNG16500.30ead68a8341eb655754.png",
     "static/media/pill-bottle-311809_1280.png": "/Medicine-front-end/static/media/pill-bottle-311809_1280.1644442aead46346da93.png",
+    "static/media/suit.jpg": "/Medicine-front-end/static/media/suit.ccb7f34cfc8421e91947.jpg",
+    "static/media/bottle.jpg": "/Medicine-front-end/static/media/bottle.0f52138b3cb4881e1ab8.jpg",
+    "static/media/staff.jpg": "/Medicine-front-end/static/media/staff.1b480afb294e7e457213.jpg",
+    "static/media/books.jpg": "/Medicine-front-end/static/media/books.4c08c0cac12390a541c2.jpg",
+    "static/media/nurse.jpg": "/Medicine-front-end/static/media/nurse.b40805d1599b51e64379.jpg",
+    "static/media/herbs-in-bottles.jpg": "/Medicine-front-end/static/media/herbs-in-bottles.a44dca755035cd8dcec2.jpg",
+    "static/media/pill-and-water.jpg": "/Medicine-front-end/static/media/pill-and-water.44e42891f1731c62b232.jpg",
+    "static/media/pipette.jpg": "/Medicine-front-end/static/media/pipette.70099ceba18584c20121.jpg",
+    "static/media/blue-pills.jpg": "/Medicine-front-end/static/media/blue-pills.4989731a93a4f9718a22.jpg",
     "index.html": "/Medicine-front-end/index.html",
     "static/media/minus-small.svg": "/Medicine-front-end/static/media/minus-small.bb2c74332283917d09dbf924e1fa5619.svg",
     "static/media/plus-small.svg": "/Medicine-front-end/static/media/plus-small.828c526367d984344d2bcfaac8f1b8c5.svg",
-    "main.1b3bc5df.css.map": "/Medicine-front-end/static/css/main.1b3bc5df.css.map",
-    "main.80af0b9c.js.map": "/Medicine-front-end/static/js/main.80af0b9c.js.map",
+    "main.e66f39c4.css.map": "/Medicine-front-end/static/css/main.e66f39c4.css.map",
+    "main.0d86e6b7.js.map": "/Medicine-front-end/static/js/main.0d86e6b7.js.map",
     "453.68693753.chunk.js.map": "/Medicine-front-end/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b3bc5df.css",
-    "static/js/main.80af0b9c.js"
+    "static/css/main.e66f39c4.css",
+    "static/js/main.0d86e6b7.js"
   ]
 }
