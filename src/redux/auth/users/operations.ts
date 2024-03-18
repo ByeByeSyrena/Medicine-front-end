@@ -44,8 +44,6 @@ const token = {
   },
   unsetToken() {
     axios.defaults.headers.common.Authorization = "";
-    delete axios.defaults.headers.common["Content-Type"];
-    axios.defaults.withCredentials = false;
   },
 };
 
@@ -126,12 +124,11 @@ export const logoutThunk = createAsyncThunk(
   "usersAuth/logout",
   async (_, { rejectWithValue }) => {
     try {
+      await refreshToken();
       await axios.get("/users/logout");
 
       token.unsetToken();
 
-      axios.defaults.headers.common["Content-Type"] = "application/json";
-      axios.defaults.withCredentials = true;
       return;
     } catch (error) {
       toast.info("Logout failed");
