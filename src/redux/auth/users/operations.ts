@@ -36,12 +36,12 @@ interface createAnswer {
 // axios.defaults.baseURL = "http://localhost:3001/api/v1";
 
 axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
+axios.defaults.withCredentials = true;
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const token = {
   setToken(token: string) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    axios.defaults.headers.common["Content-Type"] = "application/json";
-    axios.defaults.withCredentials = true;
   },
   unsetToken() {
     axios.defaults.headers.common.Authorization = "";
@@ -49,6 +49,32 @@ const token = {
     axios.defaults.withCredentials = false;
   },
 };
+
+const setAuthToken = (token: string) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  axios.defaults.headers.common["Content-Type"] = "application/json";
+  axios.defaults.withCredentials = true;
+};
+
+axios.interceptors.response.use(
+  (response) => {
+    if (response.headers["set-cookie"]) {
+      const cookies = response.headers["set-cookie"];
+      const jwtCookie = cookies.find((cookie: string) =>
+        cookie.includes("jwt=")
+      );
+
+      if (jwtCookie) {
+        const token = jwtCookie.split("jwt=")[1].split(";")[0];
+        setAuthToken(token);
+      }
+    }
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const createUser = createAsyncThunk(
   "usersAuth/createUser",
@@ -111,13 +137,9 @@ export const logoutThunk = createAsyncThunk(
 export const refreshToken = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
-    const persistedToken = useSelector(selectUserAccessToken);
-    if (!persistedToken) {
-      return rejectWithValue("No saved token. Please log in.");
-    }
-    token.setToken(persistedToken);
     try {
       const { data } = await axios.get("/users/refresh");
+      console.log(data);
       return data;
     } catch (error) {
       toast.info("Access denied");
