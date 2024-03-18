@@ -76,7 +76,6 @@ const usersSlice = createSlice({
         state.user.seller = null;
         state.token = "";
         state.isLoggedIn = false;
-        state.isFetchingCurrentUser = false;
       })
       .addCase(logoutThunk.rejected, (state, action) => {
         state.error = action.payload as string;
@@ -85,27 +84,19 @@ const usersSlice = createSlice({
       .addCase(refreshToken.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.isFetchingCurrentUser = true;
+        state.isLoggedIn = true;
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.token = action.payload.accessToken;
-        state.user.roles = action.payload.roles;
-        state.isFetchingCurrentUser = false;
+        state.isLoggedIn = true;
       })
       .addCase(refreshToken.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.payload as string;
-        state.isFetchingCurrentUser = false;
+        state.isLoggedIn = false;
       }),
 });
 
-// export const {
-//   setUser,
-//   setToken,
-//   setLoading,
-//   setError,
-//   setIsFetchingCurrentUser,
-// } = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

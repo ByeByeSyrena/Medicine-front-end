@@ -10,29 +10,23 @@ import LoginPage from "../pages/authUtilities/LoginPage/LoginPage";
 import EnterPage from "../pages/EnterPage/EnterPage";
 import SellerPage from "../pages/sellerUtilities/Seller page/SellerPage";
 import SellerOrdersPage from "../pages/sellerUtilities/OrderPage/SellerOrdersPage";
-import RequireAuth from "../HOCs/RequireAuth";
-import { useDispatch, useSelector } from "react-redux";
+import RequireAuth from "../HOCs/RequiresAuth";
+import { useSelector } from "react-redux";
 import { selectIsUserLoggedIn } from "../redux/auth/users/selectors";
-// import PersistLogin from "../HOCs/PersistLogin";
-import { refreshToken } from "../redux/auth/users/operations";
-import { AppDispatch } from "../redux/store";
+import IsOnlyForUsers from "../HOCs/IsOnlyForUsers";
+import IsGeneral from "../HOCs/IsGeneral";
 
 const App: React.FC = () => {
   const isLoggedIn = useSelector(selectIsUserLoggedIn);
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(refreshToken());
-  }, [dispatch]);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Navigate to="enter" />} />
-
-          <Route path="cart" element={<ShoppingCartPage />} />
+          <Route element={<IsOnlyForUsers />}>
+            <Route path="cart" element={<ShoppingCartPage />} />
+          </Route>
 
           <Route element={<RequireAuth allowedRoles={["2024"]} />}>
             <Route path="seller-settings" element={<SellerPage />} />
@@ -42,7 +36,9 @@ const App: React.FC = () => {
             <Route path="seller-orders" element={<SellerOrdersPage />} />
           </Route>
 
-          <Route path="shop" element={<ShopPage />} />
+          <Route element={<IsGeneral />}>
+            <Route path="shop" element={<ShopPage />} />
+          </Route>
 
           <Route path="signup" element={<SignUpPage />} />
 

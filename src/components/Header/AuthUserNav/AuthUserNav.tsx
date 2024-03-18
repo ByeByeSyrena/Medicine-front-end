@@ -1,12 +1,27 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import css from "./AuthUserNav.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../../redux/stores/selectors";
+
+import { AppDispatch } from "../../../redux/store";
+import { logoutThunk } from "../../../redux/auth/users/operations";
 
 const AuthUserNav: React.FC = () => {
   const addedToCart = useSelector(selectCart);
   const isLength = addedToCart.length;
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/shop";
+
+  const handleClick = () => {
+    dispatch(logoutThunk());
+    navigate(from, { replace: true });
+  };
+
   return (
     <nav>
       <ul className={css.nav}>
@@ -25,6 +40,7 @@ const AuthUserNav: React.FC = () => {
             {isLength > 0 && <span className={css.lengthSpan}>{isLength}</span>}
           </NavLink>
         </li>
+        <button onClick={handleClick}>LOGOUT</button>
       </ul>
     </nav>
   );

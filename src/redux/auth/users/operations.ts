@@ -31,9 +31,10 @@ interface createAnswer {
   user: regUser;
   message: string;
 }
-// axios.defaults.baseURL = "http://localhost:3001/api/v1";
+axios.defaults.baseURL = "http://localhost:3001/api/v1";
 
-axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
+// axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
+
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
@@ -70,6 +71,8 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
+    console.log(error);
+
     return Promise.reject(error);
   }
 );
@@ -109,6 +112,7 @@ export const loginUser = createAsyncThunk<UserData, User>(
     try {
       const response = await axios.post("/users/login", formData);
       token.setToken(response.data.accessToken);
+      console.log(response);
 
       return response.data;
     } catch (error) {
@@ -123,10 +127,14 @@ export const logoutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await axios.get("/users/logout");
+
       token.unsetToken();
+
+      axios.defaults.headers.common["Content-Type"] = "application/json";
+      axios.defaults.withCredentials = true;
+      return;
     } catch (error) {
       toast.info("Logout failed");
-
       return rejectWithValue((error as any).payload);
     }
   }
@@ -134,7 +142,12 @@ export const logoutThunk = createAsyncThunk(
 
 export const refreshToken = createAsyncThunk(
   "auth/refresh",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
+    const persistedToken = (getState() as any).usersAuth.token;
+    if (!persistedToken) {
+      return rejectWithValue("No saved token. Please log in.");
+    }
+    token.setToken(persistedToken);
     try {
       const { data } = await axios.get("/users/refresh");
       console.log(data);
