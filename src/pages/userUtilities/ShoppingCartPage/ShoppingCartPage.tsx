@@ -6,22 +6,16 @@ import { selectCart } from "../../../redux/stores/selectors";
 
 import OrderForm from "../../../components/ShoppingCartForm/ShoppingCartForm";
 import CartList from "../../../components/CartList/CartList";
-import { selectIsFetchingCurrentUser } from "../../../redux/auth/users/selectors";
 import { AppDispatch } from "../../../redux/store";
 import { logoutThunk } from "../../../redux/auth/users/operations";
 
 const ShoppingCartPage = () => {
   const cartItems = useSelector(selectCart);
-  const test = useSelector(selectIsFetchingCurrentUser);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleClick = () => {
     dispatch(logoutThunk());
   };
-
-  useEffect(() => {
-    console.log(test);
-  }, [test]);
 
   return (
     <section className={css.container}>

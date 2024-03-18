@@ -9,7 +9,7 @@ import { createUser } from "../../../redux/auth/users/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
 import { selectUserError } from "../../../redux/auth/users/selectors";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 type valuesTypes = {
   name: string;
@@ -36,6 +36,10 @@ const SignUpPage = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const error = useSelector(selectUserError);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/login";
 
   console.log(error);
 
@@ -69,6 +73,7 @@ const SignUpPage = () => {
     dispatch(createUser(newUser));
 
     console.log("Form data", newUser);
+    navigate(from, { replace: true });
   };
 
   return (

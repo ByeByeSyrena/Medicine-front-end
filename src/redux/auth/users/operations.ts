@@ -1,7 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../../../@types/types";
-import { requestRegister } from "./services";
 // import { UsersState } from "./usersSlice";
 import { useSelector } from "react-redux";
 import { selectUserAccessToken } from "./selectors";
@@ -18,12 +17,22 @@ interface foundUser {
   seller?: string;
 }
 
+interface regUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface UserData {
   foundUser: foundUser;
 
   accessToken: string;
 }
 
+interface createAnswer {
+  user: regUser;
+  message: string;
+}
 // axios.defaults.baseURL = "http://localhost:3001/api/v1";
 
 axios.defaults.baseURL = "https://medicine-backend-2.onrender.com/api/v1";
@@ -41,13 +50,28 @@ const token = {
   },
 };
 
-export const createUser = createAsyncThunk<User, User>(
+export const createUser = createAsyncThunk(
   "usersAuth/createUser",
-  async (formData, { rejectWithValue }) => {
+  async (formData: regUser, { rejectWithValue }) => {
     try {
-      const response = await requestRegister(formData);
+      const response: AxiosResponse<createAnswer> = await axios.post(
+        "/users/register",
+        formData,
+        {}
+      );
       console.log(response);
-      return response;
+
+      if (response?.status === 201) {
+        toast.info("User created");
+      }
+
+      const responseData = {
+        data: response.data,
+        headers: {
+          "content-type": response.headers["content-type"],
+        },
+      };
+      return responseData;
     } catch (error) {
       toast.info("Registration failed");
       return rejectWithValue((error as any).payload);
@@ -57,9 +81,9 @@ export const createUser = createAsyncThunk<User, User>(
 
 export const loginUser = createAsyncThunk<UserData, User>(
   "auth/login",
-  async (formatData, { rejectWithValue }) => {
+  async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/users/login", formatData);
+      const response = await axios.post("/users/login", formData);
       token.setToken(response.data.accessToken);
 
       return response.data;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, Navigate, Outlet, useNavigate } from "react-router";
 import {
@@ -21,11 +21,14 @@ const RequireAuth: React.FC<Props> = ({ allowedRoles }) => {
     allowedRoles?.includes(role)
   );
 
+  useEffect(() => {
+    if (isLoggedIn && !allowed) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, isLoggedIn, allowed, from]);
+
   if (isLoggedIn && allowed) {
     return <Outlet />;
-  } else if (isLoggedIn) {
-    navigate(from, { replace: true });
-    return null;
   } else {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
