@@ -13,7 +13,7 @@ import SellerOrdersPage from "../pages/sellerUtilities/OrderPage/SellerOrdersPag
 import RequireAuth from "../HOCs/RequireAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsUserLoggedIn } from "../redux/auth/users/selectors";
-import PersistLogin from "../HOCs/PersistLogin";
+// import PersistLogin from "../HOCs/PersistLogin";
 import { refreshToken } from "../redux/auth/users/operations";
 import { AppDispatch } from "../redux/store";
 
@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(refreshToken());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
