@@ -53,27 +53,27 @@ const setAuthToken = (token: string) => {
   axios.defaults.withCredentials = true;
 };
 
-axios.interceptors.response.use(
-  (response) => {
-    if (response.headers["set-cookie"]) {
-      const cookies = response.headers["set-cookie"];
-      const jwtCookie = cookies.find((cookie: string) =>
-        cookie.includes("jwt=")
-      );
+// axios.interceptors.response.use(
+//   (response) => {
+//     if (response.headers["set-cookie"]) {
+//       const cookies = response.headers["set-cookie"];
+//       const jwtCookie = cookies.find((cookie: string) =>
+//         cookie.includes("jwt=")
+//       );
 
-      if (jwtCookie) {
-        const token = jwtCookie.split("jwt=")[1].split(";")[0];
-        setAuthToken(token);
-      }
-    }
-    return response;
-  },
-  (error) => {
-    console.log(error);
+//       if (jwtCookie) {
+//         const token = jwtCookie.split("jwt=")[1].split(";")[0];
+//         setAuthToken(token);
+//       }
+//     }
+//     return response;
+//   },
+//   (error) => {
+//     console.log(error);
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
 export const createUser = createAsyncThunk(
   "usersAuth/createUser",
@@ -124,7 +124,6 @@ export const logoutThunk = createAsyncThunk(
   "usersAuth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await refreshToken();
       await axios.get("/users/logout");
 
       token.unsetToken();

@@ -10,7 +10,7 @@ import LoginPage from "../pages/authUtilities/LoginPage/LoginPage";
 import EnterPage from "../pages/EnterPage/EnterPage";
 import SellerPage from "../pages/sellerUtilities/Seller page/SellerPage";
 import SellerOrdersPage from "../pages/sellerUtilities/OrderPage/SellerOrdersPage";
-import RequireAuth from "../HOCs/RequiresAuth";
+import RequireAuth from "../HOCs/RequireAuth";
 import { useSelector } from "react-redux";
 import { selectIsUserLoggedIn } from "../redux/auth/users/selectors";
 import IsOnlyForUsers from "../HOCs/IsOnlyForUsers";
@@ -36,9 +36,7 @@ const App: React.FC = () => {
             <Route path="seller-orders" element={<SellerOrdersPage />} />
           </Route>
 
-          <Route element={<IsGeneral />}>
-            <Route path="shop" element={<ShopPage />} />
-          </Route>
+          <Route path="shop" element={<ShopPage />} />
 
           <Route path="signup" element={<SignUpPage />} />
 
