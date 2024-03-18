@@ -22,7 +22,9 @@ export const Header = () => {
     <header className={css.header}>
       <div className={css.container}>
         {!isUserAccess && <NotAuthUserNav />}
-        {isUserAccess && <AuthUserNav />}
+        {/* {isUserAccess && */}
+        <AuthUserNav />
+        {/* } */}
         <button type="button" onClick={handleSubmit}>
           Refresh
         </button>
