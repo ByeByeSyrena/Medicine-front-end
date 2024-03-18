@@ -15,6 +15,7 @@ export const Header = () => {
 
   const handleSubmit = () => {
     const result = dispatch(refreshToken());
+    console.log(result);
   };
 
   return (

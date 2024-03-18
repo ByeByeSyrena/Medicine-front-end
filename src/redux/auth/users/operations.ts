@@ -1,9 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../../../@types/types";
-// import { UsersState } from "./usersSlice";
-import { useSelector } from "react-redux";
-import { selectUserAccessToken } from "./selectors";
+
 import { toast } from "react-toastify";
 
 interface foundUser {

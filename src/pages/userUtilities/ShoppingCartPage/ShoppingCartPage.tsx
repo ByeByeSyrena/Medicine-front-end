@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import css from "./ShoppingCartPage.module.css";
 
 import { useDispatch, useSelector } from "react-redux";

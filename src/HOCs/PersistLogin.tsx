@@ -1,29 +1,28 @@
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { refreshToken } from "../redux/auth/users/operations";
+import { useEffect } from "react";
 import {
-  selectIsUserLoggedIn,
-  selectUserAccessToken,
-  selectUserLoading,
-} from "../redux/auth/users/selectors";
+  useDispatch,
+  // useSelector
+} from "react-redux";
+// import {
+//   selectIsUserLoggedIn,
+//   selectUserAccessToken,
+//   selectUserLoading,
+// } from "../redux/auth/users/selectors";
 import { AppDispatch } from "../redux/store";
+import { refreshToken } from "../redux/auth/users/operations";
 
 const PersistLogin = () => {
-  const isLoggedIn = useSelector(selectIsUserLoggedIn);
-  const isLoading = useSelector(selectUserLoading);
-  const token = useSelector(selectUserAccessToken);
-
   const dispatch = useDispatch<AppDispatch>();
 
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     dispatch(refreshToken());
-  //   }
-  // }, [dispatch, isLoggedIn, token]);
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, [dispatch]);
 
   return (
-    <>{!isLoggedIn ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>
+      <Outlet />;
+    </>
   );
 };
 

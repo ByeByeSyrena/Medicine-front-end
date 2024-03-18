@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound/NotFound";
 import SharedLayout from "./SharedLayout/SharedLayout";
@@ -8,15 +8,23 @@ import ShoppingCartPage from "../pages/userUtilities/ShoppingCartPage/ShoppingCa
 import SignUpPage from "../pages/authUtilities/SignUpPage/SignUpPage";
 import LoginPage from "../pages/authUtilities/LoginPage/LoginPage";
 import EnterPage from "../pages/EnterPage/EnterPage";
-// import { PublicRoute, PrivateUserRoute } from "../HOCs/Routes";
 import SellerPage from "../pages/sellerUtilities/Seller page/SellerPage";
 import SellerOrdersPage from "../pages/sellerUtilities/OrderPage/SellerOrdersPage";
 import RequireAuth from "../HOCs/RequireAuth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsUserLoggedIn } from "../redux/auth/users/selectors";
+import PersistLogin from "../HOCs/PersistLogin";
+import { refreshToken } from "../redux/auth/users/operations";
+import { AppDispatch } from "../redux/store";
 
 const App: React.FC = () => {
   const isLoggedIn = useSelector(selectIsUserLoggedIn);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(refreshToken());
+  }, []);
 
   return (
     <>
@@ -24,9 +32,7 @@ const App: React.FC = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Navigate to="enter" />} />
 
-          <Route element={<RequireAuth allowedRoles={["2021"]} />}>
-            <Route path="cart" element={<ShoppingCartPage />} />
-          </Route>
+          <Route path="cart" element={<ShoppingCartPage />} />
 
           <Route element={<RequireAuth allowedRoles={["2024"]} />}>
             <Route path="seller-settings" element={<SellerPage />} />
