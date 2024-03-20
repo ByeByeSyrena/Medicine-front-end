@@ -13,7 +13,7 @@ import image7 from "../../images/main-page/pipette.jpg";
 import image8 from "../../images/main-page/staff.jpg";
 import image9 from "../../images/main-page/suit.jpg";
 
-const EnterPage: React.FC = () => {
+const EnterPage = () => {
   const [panX, setPanX] = useState<number>(0);
   const [panY, setPanY] = useState<number>(0);
 

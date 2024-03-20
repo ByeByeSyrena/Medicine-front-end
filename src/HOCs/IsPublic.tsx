@@ -1,11 +1,7 @@
-import { useLocation, Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import {
-  selectUserAccessToken,
-  selectUserRoles,
-} from "../redux/auth/users/selectors";
-import { toast } from "react-toastify";
+import { selectUserAccessToken } from "../redux/auth/users/selectors";
 
 type Props = {
   children: React.ReactNode;
@@ -13,16 +9,13 @@ type Props = {
 
 const IsPublic: React.FC<Props> = ({ children }) => {
   const isLoggedIn = useSelector(selectUserAccessToken);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn !== "") {
       navigate("/shop");
     }
-  }, [isLoggedIn]);
-
-  const navigate = (path: string) => {
-    return <Navigate to={path} replace />;
-  };
+  }, [isLoggedIn, navigate]);
 
   if (isLoggedIn === "") {
     return <>{children}</>;
