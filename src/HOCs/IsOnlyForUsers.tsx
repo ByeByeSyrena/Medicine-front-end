@@ -1,24 +1,44 @@
-import { Outlet } from "react-router-dom";
-import { useLocation, Navigate, useNavigate } from "react-router";
+import { useLocation, Navigate } from "react-router";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import {
+  selectUserAccessToken,
+  selectUserRoles,
+} from "../redux/auth/users/selectors";
+import { toast } from "react-toastify";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUserAccessToken } from "../redux/auth/users/selectors";
-import { AppDispatch } from "../redux/store";
-import { refreshToken } from "../redux/auth/users/operations";
-
-const PersistLogin = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-  const isLoggedIn = useSelector(selectUserAccessToken);
-
-  useEffect(() => {
-    dispatch(refreshToken());
-  }, [dispatch, refreshToken]);
-
-  return <>{isLoggedIn && <Outlet />}</>;
+type Props = {
+  allowedRoles: string[];
+  children: React.ReactNode;
 };
 
-export default PersistLogin;
+const IsOnlyForUsers: React.FC<Props> = ({ children, allowedRoles }) => {
+  const isLoggedIn = useSelector(selectUserAccessToken);
+  const userRoles = useSelector(selectUserRoles);
+
+  const allowed = userRoles.some((role: string) =>
+    allowedRoles?.includes(role)
+  );
+
+  useEffect(() => {
+    if (isLoggedIn !== "" && !allowed) {
+      toast.info("You shall not pass");
+      navigate("/shop");
+    } else if (!isLoggedIn && allowed) {
+      toast.info("You shall not pass");
+      navigate("/login");
+    }
+  }, [isLoggedIn, allowed]);
+
+  const navigate = (path: string) => {
+    return <Navigate to={path} replace />;
+  };
+
+  if (isLoggedIn !== "" && allowed) {
+    return <>{children}</>;
+  } else {
+    return null;
+  }
+};
+
+export default IsOnlyForUsers;

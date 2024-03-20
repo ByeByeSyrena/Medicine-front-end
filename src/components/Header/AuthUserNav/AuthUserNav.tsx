@@ -40,6 +40,7 @@ const AuthUserNav: React.FC = () => {
             {isLength > 0 && <span className={css.lengthSpan}>{isLength}</span>}
           </NavLink>
         </li>
+
         <button onClick={handleClick}>LOGOUT</button>
       </ul>
     </nav>

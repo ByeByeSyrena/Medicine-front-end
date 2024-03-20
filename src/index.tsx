@@ -15,7 +15,9 @@ const root = ReactDOM.createRoot(container as HTMLElement);
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <BrowserRouter basename="Medicine-front-end">
+      <BrowserRouter
+      // basename="Medicine-front-end"
+      >
         <App />
       </BrowserRouter>
     </PersistGate>

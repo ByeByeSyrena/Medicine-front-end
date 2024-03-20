@@ -84,18 +84,25 @@ const usersSlice = createSlice({
       .addCase(refreshToken.pending, (state) => {
         state.isLoading = true;
         state.error = null;
-        state.isLoggedIn = true;
+        state.isFetchingCurrentUser = true;
       })
-      .addCase(refreshToken.fulfilled, (state, action) => {
+      .addCase(refreshToken.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.token = action.payload.accessToken;
+        state.user.name = payload.foundUser.name;
+        state.user.email = payload.foundUser.email;
+        state.user.roles = payload.foundUser.roles;
+        state.user.favorites = payload.foundUser.favorites;
+        state.user.seller = payload.foundUser.seller;
+        state.token = payload.accessToken;
         state.isLoggedIn = true;
+        state.isFetchingCurrentUser = false;
       })
       .addCase(refreshToken.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.payload as string;
         state.isLoggedIn = false;
+        state.isFetchingCurrentUser = false;
       }),
 });
 

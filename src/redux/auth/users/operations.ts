@@ -49,31 +49,30 @@ const token = {
 
 const setAuthToken = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  axios.defaults.headers.common["Content-Type"] = "application/json";
   axios.defaults.withCredentials = true;
 };
 
-// axios.interceptors.response.use(
-//   (response) => {
-//     if (response.headers["set-cookie"]) {
-//       const cookies = response.headers["set-cookie"];
-//       const jwtCookie = cookies.find((cookie: string) =>
-//         cookie.includes("jwt=")
-//       );
+axios.interceptors.response.use(
+  (response) => {
+    if (response.headers["set-cookie"]) {
+      const cookies = response.headers["set-cookie"];
+      const jwtCookie = cookies.find((cookie: string) =>
+        cookie.includes("jwt=")
+      );
 
-//       if (jwtCookie) {
-//         const token = jwtCookie.split("jwt=")[1].split(";")[0];
-//         setAuthToken(token);
-//       }
-//     }
-//     return response;
-//   },
-//   (error) => {
-//     console.log(error);
+      if (jwtCookie) {
+        const token = jwtCookie.split("jwt=")[1].split(";")[0];
+        setAuthToken(token);
+      }
+    }
+    return response;
+  },
+  (error) => {
+    console.log(error);
 
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
 
 export const createUser = createAsyncThunk(
   "usersAuth/createUser",
@@ -146,7 +145,7 @@ export const refreshToken = createAsyncThunk(
     token.setToken(persistedToken);
     try {
       const { data } = await axios.get("/users/refresh");
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (error) {
       toast.info("Access denied");
