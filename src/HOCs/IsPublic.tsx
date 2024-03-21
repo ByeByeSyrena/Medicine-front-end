@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUserAccessToken } from "../redux/auth/users/selectors";

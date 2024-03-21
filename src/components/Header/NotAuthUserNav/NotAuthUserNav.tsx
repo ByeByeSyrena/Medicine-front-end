@@ -1,30 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import css from "./NotAuthUserNav.module.css";
+import { ReactComponent as ShopImg } from "../../../images/shop.svg";
 
 const NotAuthUserNav: React.FC = () => {
   return (
     <nav>
-      <ul className={css.nav}>
-        <li>
+      <div className={css.nav}>
+        <div>
           <NavLink to="/shop" className={css.link}>
-            Shop
+            <ShopImg className={css.shopSvg} />
           </NavLink>
-        </li>
+        </div>
 
-        <React.Fragment>
+        <ul className={css.authNav}>
           <li>
             <NavLink to="/signup" className={css.link}>
               SignUp
             </NavLink>
           </li>
           <li>
+            <div className={css.line}></div>
+          </li>
+          <li>
             <NavLink to="/login" className={css.link}>
               Login
             </NavLink>
           </li>
-        </React.Fragment>
-      </ul>
+        </ul>
+      </div>
     </nav>
   );
 };

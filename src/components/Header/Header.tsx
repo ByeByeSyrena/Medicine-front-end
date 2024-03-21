@@ -3,7 +3,6 @@ import css from "./Header.module.css";
 import { useSelector } from "react-redux";
 import { selectUserAccessToken } from "../../redux/auth/users/selectors";
 
-import "./header.css";
 import NotAuthUserNav from "./NotAuthUserNav/NotAuthUserNav";
 import AuthUserNav from "./AuthUserNav/AuthUserNav";
 

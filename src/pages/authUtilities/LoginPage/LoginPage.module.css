@@ -1,73 +1,44 @@
-@media only screen and (min-width: 320px) {
-  .container {
-    margin: 0 auto;
-    max-width: 320px;
-    min-height: 800px;
-    padding: 8px 20px;
-    color: white;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 16px 32px;
-  }
-}
-
 @media only screen and (min-width: 1440px) {
   .container {
     display: flex;
-    flex-direction: column;
-    justify-items: center;
+    justify-content: space-evenly;
     align-items: center;
-    max-width: 1440px;
-    padding: 30px 112px;
+    height: 100vh;
+    width: 100%;
+
+    color: var(--white);
   }
 }
 
 .container h1 {
   margin-bottom: 30px;
+  font-size: 45px;
+  font-family: "CormorantUnicase-Bold", sans-serif;
+  color: var(--nyanza);
 }
 
-.dark-form {
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
+.contentWrapper img {
+  width: 550px;
+  height: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loginFormWrapper h2 {
+  margin-bottom: 20px;
+  font-family: Helvetica Neue;
+  font-size: 30px;
 }
 
 .form {
-  margin-bottom: 120px;
-  width: 500px;
-}
-
-.dark-label {
-  color: white;
-  font-size: 16px;
-
-  margin-bottom: 8px;
-  display: block;
-}
-
-.dark-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #555;
-  border-radius: 4px;
-  margin-bottom: 16px;
-  color: white;
-  background-color: #444;
-  outline: none;
-}
-
-.dark-input.error {
-  border-color: red;
+  margin-bottom: 50px;
+  width: 400px;
 }
 
 .dark-button {
-  background-color: #555;
-  color: white;
+  background-color: var(--tangerine);
+  opacity: 0.8;
+
+  color: var(--white);
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -75,9 +46,9 @@
 }
 
 .dark-button:disabled {
-  background-color: #555;
-  color: white;
-  opacity: 0.5;
+  background-color: var(--tangerine);
+  color: var(--white);
+  opacity: 0.4;
   padding: 8px 16px;
   border: none;
   border-radius: 4px;
@@ -85,45 +56,19 @@
 }
 
 .dark-button:hover {
-  background-color: #777;
-}
-
-.shopPage {
-  color: white;
-  height: 500px;
-  padding: 20px;
-  overflow-y: auto;
+  background-color: var(--tangerine);
+  color: var(--white);
+  opacity: 1;
 }
 
 .form-control {
-  color: white;
+  color: var(--white);
   font-size: 10px;
   margin-bottom: 5px;
 }
 
 .form-control:last-child {
   margin-bottom: 0;
-}
-
-.darkButton {
-  height: 36px;
-  background-color: #555;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.totalPrice {
-  color: white;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.totalPriceWrapper {
-  display: flex;
-  gap: 20px;
 }
 
 .elementWrapper {
@@ -135,5 +80,5 @@
 
 .navlinkToForm {
   cursor: pointer;
-  color: yellow;
+  color: var(--nyanza);
 }

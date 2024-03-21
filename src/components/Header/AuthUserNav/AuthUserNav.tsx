@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import css from "./AuthUserNav.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart } from "../../../redux/stores/selectors";
+import { ReactComponent as ShopImg } from "../../../images/shop.svg";
 
 import { AppDispatch } from "../../../redux/store";
 import { logoutThunk } from "../../../redux/auth/users/operations";
@@ -27,7 +28,7 @@ const AuthUserNav: React.FC = () => {
       <ul className={css.nav}>
         <li>
           <NavLink to="/shop" className={css.link}>
-            Shop
+            <ShopImg />
           </NavLink>
         </li>
         <li>

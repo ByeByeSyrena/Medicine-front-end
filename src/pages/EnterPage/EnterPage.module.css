@@ -1,176 +1,41 @@
 .gallery {
-  height: 120vmax;
-  width: 120vmax;
-  position: absolute;
-}
-
-.tile {
-  border-radius: 1vmax;
-  position: absolute;
-  transition: transform 800ms ease;
-}
-
-.tile:hover {
-  transform: scale(1.1);
-}
-
-.tile:hover > img {
-  opacity: 1;
-  transform: scale(1.01);
-}
-
-.tile > img {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 100px 0;
   width: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 800ms ease, transform 800ms ease;
-}
-
-.tile:nth-child(1) {
-  background-color: rgb(255, 238, 88);
-  height: 14%;
-  width: 20%;
-  left: 5%;
-  top: 5%;
-}
-
-.tile:nth-child(2) {
-  background-color: #fdc85d;
-  height: 24%;
-  width: 14%;
-  left: 42%;
-  top: 12%;
-}
-
-.tile:nth-child(3) {
-  background-color: rgb(239, 83, 80);
-  height: 18%;
-  width: 16%;
-  left: 12%;
-  top: 34%;
-}
-
-.tile:nth-child(4) {
-  background-color: #581f18;
-  height: 14%;
-  width: 12%;
-  left: 45%;
-  top: 48%;
-}
-
-.tile:nth-child(5) {
-  background-color: #202c59;
-  height: 16%;
-  width: 32%;
-  left: 8%;
-  top: 70%;
-}
-
-.tile:nth-child(6) {
-  background-color: #dab6c4;
-  height: 24%;
-  width: 24%;
-  left: 68%;
-  top: 8%;
-}
-
-.tile:nth-child(7) {
-  background-color: #d95d39;
-  height: 16%;
-  width: 20%;
-  left: 50%;
-  top: 74%;
-}
-
-.tile:nth-child(8) {
-  background-color: #f18805;
-  height: 24%;
-  width: 18%;
-  left: 72%;
-  top: 42%;
-}
-
-.tile:nth-child(9) {
-  background-color: #5a71c4;
-  height: 10%;
-  width: 8%;
-  left: 84%;
-  top: 84%;
-}
-
-.loginBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: absolute;
-  background-color: transparent;
-  color: white;
-  height: 50px;
-  width: 120px;
-  left: 12%;
-  top: 36%;
-
-  transition: background-color 800ms ease, transform 800ms ease;
-}
-
-.loginBtn:hover,
-.loginBtn:focus {
-  background-color: #581f18;
-  color: white;
-}
-
-.signupBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-
-  position: absolute;
-  background-color: transparent;
-  height: 50px;
-  width: 120px;
-  left: 72%;
-  top: 46%;
-
-  transition: background-color 800ms ease, transform 800ms ease;
-}
-
-.signupBtn:hover,
-.signupBtn:focus {
-  background-color: #581f18;
-  color: white;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(3, 3, 66, 1) 50%
+  );
 }
 
 .shopName {
-  color: white;
-  position: absolute;
-  top: 39%;
-  left: 50%;
+  color: var(--nyanza);
+  font-family: "CormorantUnicase-Bold";
+
   transform: translate(-50%, -50%);
   font-size: 90px;
 }
 
-.shopBtn {
+.imgWrapper {
+  height: 350px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-
-  position: absolute;
-  background-color: transparent;
-  height: 50px;
-  width: 120px;
-  left: 70%;
-  top: 25%;
-
-  transition: background-color 800ms ease, transform 800ms ease;
+  gap: 20px;
 }
 
-.shopBtn:hover,
-.shopBtn:focus {
-  background-color: #581f18;
-  color: white;
+.image {
+  height: 320px;
+}
+
+.h1Wrapper {
+  width: 100%;
+  padding: 0 100px;
+}
+
+h1 {
+  margin: 0;
 }

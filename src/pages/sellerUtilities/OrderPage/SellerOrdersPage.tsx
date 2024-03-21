@@ -1,6 +1,6 @@
 import React from "react";
 
-const SellerOrdersPage: React.FC = () => {
+const SellerOrdersPage = () => {
   return (
     <div>
       <h1>OrderPage</h1>

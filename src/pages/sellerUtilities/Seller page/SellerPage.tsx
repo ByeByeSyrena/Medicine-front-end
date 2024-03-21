@@ -1,6 +1,6 @@
 import React from "react";
 
-const SellerPage: React.FC = () => {
+const SellerPage = () => {
   return (
     <div>
       <h1>SellerPage only for sellers</h1>

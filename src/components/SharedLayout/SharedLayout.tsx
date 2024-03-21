@@ -9,7 +9,7 @@ import "./toastify.css";
 
 const SharedLayout = () => {
   return (
-    <div>
+    <>
       <Header />
       <ToastContainer />
       <Suspense
@@ -21,7 +21,7 @@ const SharedLayout = () => {
       >
         <Outlet />
       </Suspense>
-    </div>
+    </>
   );
 };
 

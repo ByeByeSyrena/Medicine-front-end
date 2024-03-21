@@ -1,6 +1,6 @@
 .dark-form {
-  background-color: #333;
-  color: white;
+  background-color: var(--white);
+  color: var(--black);
   padding: 20px;
   border-radius: 8px;
 }
@@ -10,7 +10,7 @@
 }
 
 .dark-label {
-  color: white;
+  color: var(--white);
   font-size: 16px;
 
   margin-bottom: 8px;
@@ -23,8 +23,8 @@
   border: 1px solid #555;
   border-radius: 4px;
   margin-bottom: 16px;
-  color: white;
-  background-color: #444;
+  color: var(--black);
+  background-color: var(--white);
   outline: none;
 }
 
@@ -48,13 +48,13 @@
 .dark-button:hover {
   background-color: #777;
 }
-
+/* 
 .shopPage {
   color: white;
   height: 500px;
   padding: 20px;
   overflow-y: auto;
-}
+} */
 
 .form-control {
   color: white;

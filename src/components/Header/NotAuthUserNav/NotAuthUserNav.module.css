@@ -20,22 +20,6 @@
   }
 }
 
-.header {
-  background-color: #4a4a4a;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  display: flex;
-  width: 20px;
-  height: 20px;
-}
-
-.lengthSpan {
-  font-size: 10px;
-  color: white;
-}
 
 .nav {
   display: flex;
@@ -62,4 +46,27 @@
   text-align: left;
   scale: 1;
   transition: all 0.2s ease;
+}
+
+.shopSvg {
+  width: 30px;
+  height: 30px;
+  fill: var(--tangerine);
+  stroke: var(--tangerine);
+
+  color: var(--tangerine);
+}
+
+.line {
+  width: 2px;
+  height: 30px;
+  background-color: var(--tangerine);
+  border-radius: 10px;
+}
+
+.authNav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 }

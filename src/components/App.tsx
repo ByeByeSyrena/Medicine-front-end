@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
-import NotFound from "./NotFound/NotFound";
-import SharedLayout from "./SharedLayout/SharedLayout";
+
+import { NotFound, SharedLayout } from "./components";
 
 import {
   LoginPage,
@@ -9,13 +10,12 @@ import {
   EnterPage,
   ShopPage,
   ShoppingCartPage,
+  SellerPage,
+  SellerOrdersPage,
 } from "../pages/pages";
 
 import { IsOnlyForUsers, IsPublic } from "../HOCs/hoc";
 
-import SellerPage from "../pages/sellerUtilities/Seller page/SellerPage";
-import SellerOrdersPage from "../pages/sellerUtilities/OrderPage/SellerOrdersPage";
-import { useDispatch, useSelector } from "react-redux";
 import { selectIsFetchingCurrentUser } from "../redux/auth/users/selectors";
 import { AppDispatch } from "../redux/store";
 import { refreshToken } from "../redux/auth/users/operations";

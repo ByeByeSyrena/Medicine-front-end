@@ -11,6 +11,10 @@ import { AppDispatch } from "../../../redux/store";
 import { selectUserError } from "../../../redux/auth/users/selectors";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
+import HandGif from "../../../images/hand.gif";
+
+import { motion } from "framer-motion";
+
 type valuesTypes = {
   name: string;
   email: string;
@@ -41,8 +45,22 @@ const SignUpPage = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/login";
 
-  console.log(error);
-
+  const variants = {
+    initial: {
+      x: -500,
+      y: 100,
+      opacity: 0,
+    },
+    animate: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        staggerChildren: 0.5,
+      },
+    },
+  };
   useEffect(() => {
     if (error?.errorCode === 400) {
       console.log("Bad request");
@@ -77,71 +95,81 @@ const SignUpPage = () => {
   };
 
   return (
-    <section className={css.container}>
-      <h1>Registration</h1>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-        validateOnMount
-      >
-        {(formik) => {
-          return (
-            <Form className={css.form}>
-              <FormControl
-                control="input"
-                label="Name / Pharmacy account's name"
-                name="name"
-                type="text"
-                labelClassName="dark-label"
-                inputClassName="dark-input"
-                wrapperClassName="form-control"
-              />
-              <FormControl
-                control="input"
-                label="Email"
-                name="email"
-                type="email"
-                labelClassName="dark-label"
-                inputClassName="dark-input"
-                wrapperClassName="form-control"
-              />
-              <FormControl
-                control="input"
-                label="Password"
-                name="password"
-                type="password"
-                labelClassName="dark-label"
-                inputClassName="dark-input"
-                wrapperClassName="form-control"
-              />
-              <FormControl
-                control="input"
-                label="Confirm password"
-                name="confirmPassword"
-                type="password"
-                labelClassName="dark-label"
-                inputClassName="dark-input"
-                wrapperClassName="form-control"
-              />
-              <button
-                type="submit"
-                className={classNames(css["dark-button"])}
-                disabled={!formik.isValid}
-              >
-                Submit
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
-      <p>
-        Have an account? Log in{" "}
-        <NavLink to="/login" className={css.navlinkToForm}>
-          here
-        </NavLink>
-      </p>
-    </section>
+    <motion.section
+      className={css.container}
+      variants={variants}
+      initial="initial"
+      animate="animate"
+    >
+      <motion.div className={css.contentWrapper} variants={variants}>
+        <motion.img src={HandGif} alt="Hand" variants={variants} />
+      </motion.div>
+      <motion.div className={css.regFormWrapper} variants={variants}>
+        <h1>Registration</h1>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+          validateOnMount
+        >
+          {(formik) => {
+            return (
+              <Form className={css.form}>
+                <FormControl
+                  control="input"
+                  label="Name"
+                  name="name"
+                  type="text"
+                  labelClassName="dark-label"
+                  inputClassName="dark-input"
+                  wrapperClassName="form-control"
+                />
+                <FormControl
+                  control="input"
+                  label="Email"
+                  name="email"
+                  type="email"
+                  labelClassName="dark-label"
+                  inputClassName="dark-input"
+                  wrapperClassName="form-control"
+                />
+                <FormControl
+                  control="input"
+                  label="Password"
+                  name="password"
+                  type="password"
+                  labelClassName="dark-label"
+                  inputClassName="dark-input"
+                  wrapperClassName="form-control"
+                />
+                <FormControl
+                  control="input"
+                  label="Confirm password"
+                  name="confirmPassword"
+                  type="password"
+                  labelClassName="dark-label"
+                  inputClassName="dark-input"
+                  wrapperClassName="form-control"
+                />
+                <button
+                  type="submit"
+                  className={classNames(css["dark-button"])}
+                  disabled={!formik.isValid}
+                >
+                  Submit
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
+        <p>
+          Have an account? Log in{" "}
+          <NavLink to="/login" className={css.navlinkToForm}>
+            here
+          </NavLink>
+        </p>
+      </motion.div>
+    </motion.section>
   );
 };
 
