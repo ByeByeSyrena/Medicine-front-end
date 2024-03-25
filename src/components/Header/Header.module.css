@@ -1,19 +1,10 @@
-@media only screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 12px 112px;
-  }
-}
-
 .header {
   background-color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: flex;
+  align-items: center;
   width: 100%;
-
-  padding: 20px;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  height: 115px;
+  padding: 30px 120px;
 }
 
 .logo {

@@ -45,19 +45,26 @@ const FieldArrayComponent: React.FC<FieldArrayProps> = ({
                       component={TextError as React.ComponentType<{}>}
                     />
                   )}
-                  {index > 0 && (
-                    <button type="button" onClick={() => remove(index)}>
-                      Delete
+                  <div className={css.buttonsWrapper}>
+                    {index > 0 && (
+                      <button
+                        className={css.addDeleteButton}
+                        type="button"
+                        onClick={() => remove(index)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                    <button
+                      className={css.addDeleteButton}
+                      type="button"
+                      onClick={() => {
+                        push("");
+                      }}
+                    >
+                      Add
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      push("");
-                    }}
-                  >
-                    Add
-                  </button>
+                  </div>
                 </div>
               ))}
             </div>

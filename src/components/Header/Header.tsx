@@ -11,10 +11,8 @@ export const Header = () => {
 
   return (
     <header className={css.header}>
-      <div className={css.container}>
-        {!isUserAccess && <NotAuthUserNav />}
-        {isUserAccess && <AuthUserNav />}
-      </div>
+      {!isUserAccess && <NotAuthUserNav />}
+      {isUserAccess && <AuthUserNav />}
     </header>
   );
 };

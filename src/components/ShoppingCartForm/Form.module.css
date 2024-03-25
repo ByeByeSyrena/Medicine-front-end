@@ -28,34 +28,6 @@
   outline: none;
 }
 
-.dark-input.error {
-  border-color: red;
-}
-
-.error {
-  color: red;
-}
-
-.dark-button {
-  background-color: #555;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.dark-button:hover {
-  background-color: #777;
-}
-
-.shopPage {
-  color: white;
-  height: 500px;
-  padding: 20px;
-  overflow-y: auto;
-}
-
 .form-control {
   color: white;
   font-size: 10px;
@@ -66,20 +38,11 @@
   margin-bottom: 0;
 }
 
-.darkButton {
-  height: 36px;
-  background-color: #555;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .totalPrice {
-  color: white;
-  background-color: #333;
+  color: var(--chocolateCosmos);
   padding: 10px;
   border-radius: 5px;
+  background-color: var(--nyanza);
 }
 
 .totalPriceWrapper {
@@ -92,4 +55,17 @@
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
+}
+
+.submitFormButton {
+  background-color: var(--gamboge);
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submitFormButton:hover {
+  background-color: var(--tangerine);
 }

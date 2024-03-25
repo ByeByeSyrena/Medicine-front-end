@@ -12,7 +12,7 @@ const ShoppingCartPage = () => {
 
   return (
     <section className={css.container}>
-      <div>
+      <div className={css.orderFormWrapper}>
         <h1>Fullfill order details</h1>
         <OrderForm cartItems={cartItems} />
       </div>

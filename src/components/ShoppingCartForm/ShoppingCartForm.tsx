@@ -132,7 +132,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cartItems }) => {
               <span>Total Price: ${totalPrice}</span>
             </div>
           </div>
-          <button type="submit" className={css.submitButton}>
+          <button type="submit" className={css.submitFormButton}>
             Submit
           </button>
         </div>

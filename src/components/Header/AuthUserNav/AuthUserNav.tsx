@@ -60,7 +60,7 @@ const AuthUserNav = () => {
   };
 
   return (
-    <motion.div className={css.menuWrapper}>
+    <motion.nav className={css.menuWrapper}>
       <motion.button
         type="button"
         className={css.menu}
@@ -131,7 +131,7 @@ const AuthUserNav = () => {
           </motion.button>
         </motion.li>
       </motion.ul>
-    </motion.div>
+    </motion.nav>
   );
 };
 

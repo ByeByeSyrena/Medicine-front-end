@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 115px);
     width: 100%;
 
     color: var(--white);
