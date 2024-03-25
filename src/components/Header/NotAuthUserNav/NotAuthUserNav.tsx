@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./active.css";
 import css from "./NotAuthUserNav.module.css";
 import { ReactComponent as ShopImg } from "../../../images/shop.svg";
 
@@ -14,6 +15,11 @@ const NotAuthUserNav: React.FC = () => {
         </div>
 
         <ul className={css.authNav}>
+          <li className={css.sellerNavBtn}>
+            <NavLink to="/" className={css.link}>
+              I am a seller
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/signup" className={css.link}>
               SignUp

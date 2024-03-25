@@ -47,7 +47,7 @@ const ShopPage = () => {
 
   return (
     <section className={css.container}>
-      <aside className={css.sidebar}>
+      {/* <aside className={css.sidebar}>
         <div className={css.storesPositioning}>
           <StoresList
             stores={storesAndDrugs}
@@ -61,15 +61,13 @@ const ShopPage = () => {
         <div className={css.filtersDiv}>
           <Survey />
         </div>
-      </aside>
-      <div className={css.willbelist}>
-        <Catalog
-          medicines={medicines}
-          onAddToCart={handleAddToCartClick}
-          displayAll={displayAll}
-          onePharm={onePharmacy as Pharmacy}
-        />
-      </div>
+      </aside> */}
+      <Catalog
+        medicines={medicines}
+        onAddToCart={handleAddToCartClick}
+        displayAll={displayAll}
+        onePharm={onePharmacy as Pharmacy}
+      />
     </section>
   );
 };

@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../../../@types/types";
-import { createUser, loginUser, logoutThunk, refreshToken } from "./operations";
+import {
+  createUser,
+  loginUser,
+  logoutUser,
+  refreshUserTokens,
+} from "./operations";
 
 export interface UsersState {
   user: User;
@@ -63,10 +68,10 @@ const usersSlice = createSlice({
         state.isLoading = false;
         state.error = action?.payload as string;
       })
-      .addCase(logoutThunk.pending, (state) => {
+      .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(logoutThunk.fulfilled, (state) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.error = null;
         state.isLoading = false;
         state.user.name = "";
@@ -77,16 +82,16 @@ const usersSlice = createSlice({
         state.token = "";
         state.isLoggedIn = false;
       })
-      .addCase(logoutThunk.rejected, (state, action) => {
+      .addCase(logoutUser.rejected, (state, action) => {
         state.error = action.payload as string;
         state.isLoading = false;
       })
-      .addCase(refreshToken.pending, (state) => {
+      .addCase(refreshUserTokens.pending, (state) => {
         state.isLoading = true;
         state.error = null;
         state.isFetchingCurrentUser = true;
       })
-      .addCase(refreshToken.fulfilled, (state, { payload }) => {
+      .addCase(refreshUserTokens.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.user.name = payload.foundUser.name;
@@ -98,7 +103,7 @@ const usersSlice = createSlice({
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
       })
-      .addCase(refreshToken.rejected, (state, action) => {
+      .addCase(refreshUserTokens.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action?.payload as string;
         state.isLoggedIn = false;

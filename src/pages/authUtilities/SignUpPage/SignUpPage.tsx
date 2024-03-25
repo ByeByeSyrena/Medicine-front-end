@@ -14,6 +14,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import HandGif from "../../../images/hand.gif";
 
 import { motion } from "framer-motion";
+import SignUpForm from "../../../components/SignUpForm/SignUpForm";
 
 type valuesTypes = {
   name: string;
@@ -61,6 +62,7 @@ const SignUpPage = () => {
       },
     },
   };
+
   useEffect(() => {
     if (error?.errorCode === 400) {
       console.log("Bad request");
@@ -106,62 +108,7 @@ const SignUpPage = () => {
       </motion.div>
       <motion.div className={css.regFormWrapper} variants={variants}>
         <h1>Registration</h1>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validationSchema={validationSchema}
-          validateOnMount
-        >
-          {(formik) => {
-            return (
-              <Form className={css.form}>
-                <FormControl
-                  control="input"
-                  label="Name"
-                  name="name"
-                  type="text"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-                <FormControl
-                  control="input"
-                  label="Email"
-                  name="email"
-                  type="email"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-                <FormControl
-                  control="input"
-                  label="Password"
-                  name="password"
-                  type="password"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-                <FormControl
-                  control="input"
-                  label="Confirm password"
-                  name="confirmPassword"
-                  type="password"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-                <button
-                  type="submit"
-                  className={classNames(css["dark-button"])}
-                  disabled={!formik.isValid}
-                >
-                  Submit
-                </button>
-              </Form>
-            );
-          }}
-        </Formik>
+        <SignUpForm onSubmit={onSubmit} initialValues={initialValues} />
         <p>
           Have an account? Log in{" "}
           <NavLink to="/login" className={css.navlinkToForm}>

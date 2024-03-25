@@ -1,17 +1,15 @@
 import { useRef } from "react";
 import css from "./LoginPage.module.css";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
-import classNames from "classnames";
-import FormControl from "../../../components/FormControl/FormControl";
+
 import { loginUser } from "../../../redux/auth/users/operations";
 import { NavLink } from "react-router-dom";
 
 import { motion } from "framer-motion";
 
 import family from "../../../images/family.png";
+import LoginForm from "../../../components/LoginForm/LoginForm";
 
 export type valuesTypes = {
   email: string;
@@ -31,16 +29,6 @@ const variants = {
     },
   },
 };
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .matches(
-      /^(?=.*[a-zA-Z])(?=.*\d).+$/,
-      "Password must contain both uppercase and lowercase letters and numbers"
-    )
-    .required("Password is required"),
-});
 
 const LoginPage = () => {
   const formikRef = useRef<any>(null);
@@ -74,46 +62,11 @@ const LoginPage = () => {
       </motion.div>
       <div className={css.loginFormWrapper}>
         <h2>Login</h2>
-        <Formik
-          innerRef={formikRef}
-          initialValues={initialValues}
+        <LoginForm
           onSubmit={onSubmit}
-          validationSchema={validationSchema}
-          validateOnMount
-        >
-          {(formik) => {
-            return (
-              <Form className={css.form}>
-                <FormControl
-                  control="input"
-                  label="Email"
-                  name="email"
-                  type="email"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-                <FormControl
-                  control="input"
-                  label="Password"
-                  name="password"
-                  type="password"
-                  labelClassName="dark-label"
-                  inputClassName="dark-input"
-                  wrapperClassName="form-control"
-                />
-
-                <button
-                  type="submit"
-                  className={classNames(css["dark-button"])}
-                  disabled={!formik.isValid || !formik.dirty}
-                >
-                  Submit
-                </button>
-              </Form>
-            );
-          }}
-        </Formik>
+          formikRef={formikRef}
+          initialValues={initialValues}
+        />
         <p>
           Don't have an account? Sign up{" "}
           <NavLink to="/signup" className={css.navlinkToForm}>

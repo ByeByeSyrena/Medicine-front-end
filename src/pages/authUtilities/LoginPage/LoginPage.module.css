@@ -29,48 +29,6 @@
   font-size: 30px;
 }
 
-.form {
-  margin-bottom: 50px;
-  width: 400px;
-}
-
-.dark-button {
-  background-color: var(--tangerine);
-  opacity: 0.8;
-
-  color: var(--white);
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.dark-button:disabled {
-  background-color: var(--tangerine);
-  color: var(--white);
-  opacity: 0.4;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.dark-button:hover {
-  background-color: var(--tangerine);
-  color: var(--white);
-  opacity: 1;
-}
-
-.form-control {
-  color: var(--white);
-  font-size: 10px;
-  margin-bottom: 5px;
-}
-
-.form-control:last-child {
-  margin-bottom: 0;
-}
-
 .elementWrapper {
   display: flex;
   flex-direction: column;

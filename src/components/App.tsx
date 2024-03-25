@@ -18,14 +18,14 @@ import { IsOnlyForUsers, IsPublic } from "../HOCs/hoc";
 
 import { selectIsFetchingCurrentUser } from "../redux/auth/users/selectors";
 import { AppDispatch } from "../redux/store";
-import { refreshToken } from "../redux/auth/users/operations";
+import { refreshUserTokens } from "../redux/auth/users/operations";
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
 
   useEffect(() => {
-    dispatch(refreshToken());
+    dispatch(refreshUserTokens());
   }, [dispatch]);
 
   console.log("isFetchingCurrentUser:", isFetchingCurrentUser);

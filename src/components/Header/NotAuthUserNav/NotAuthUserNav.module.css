@@ -20,7 +20,6 @@
   }
 }
 
-
 .nav {
   display: flex;
   justify-content: space-between;
@@ -48,6 +47,11 @@
   transition: all 0.2s ease;
 }
 
+.link:hover,
+.link:focus {
+  color: var(--gamboge);
+}
+
 .shopSvg {
   width: 30px;
   height: 30px;
@@ -55,6 +59,7 @@
   stroke: var(--tangerine);
 
   color: var(--tangerine);
+  scale: 1;
 }
 
 .line {
@@ -69,4 +74,17 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
+}
+
+.sellerNavBtn .link {
+  background-color: var(--nyanza);
+  padding: 10px;
+  border-radius: 30px;
+  color: var(--backgroundBlue);
+  scale: 1;
+}
+
+.sellerNavBtn .link:hover,
+.sellerNavBtn .link:focus {
+  background-color: var(--tangerine);
 }
