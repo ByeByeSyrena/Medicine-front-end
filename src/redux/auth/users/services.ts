@@ -1,18 +1,18 @@
-import axios, { AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { RegUser, createAnswer, LoginUser } from "../../../@types/types";
 import axiosInstance from "../../apiSettings/axiosInstance";
 
 export const createUserRequest = async (formData: RegUser) => {
   const response: AxiosResponse<createAnswer> = await axiosInstance.post(
     "/users/register",
-    formData,
-    {}
+    formData
   );
-  return response.data;
+  return response;
 };
 
 export const loginUserRequest = async (formData: LoginUser) => {
   const response = await axiosInstance.post("/users/login", formData);
+  console.log(response);
   return response;
 };
 

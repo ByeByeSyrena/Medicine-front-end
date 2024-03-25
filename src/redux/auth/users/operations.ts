@@ -15,8 +15,9 @@ export const createUser = createAsyncThunk(
   "usersAuth/createUser",
   async (formData: RegUser, { rejectWithValue }) => {
     try {
-      const responseData = await createUserRequest(formData);
-      return responseData;
+      const response = await createUserRequest(formData);
+
+      return response.data;
     } catch (error) {
       return rejectWithValue((error as any).payload);
     }
