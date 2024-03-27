@@ -8,8 +8,11 @@ import {
   loginUserRequest,
   logoutUserRequest,
   refreshTokensRequest,
+  updateUserRequest,
 } from "./services";
 import { checkAndSetPersistedToken } from "../../apiSettings/checkAndSetPersistedToken";
+import { initialUpdateUserTypes } from "../../../pages/userUtilities/SettingsPage/SettingsPage";
+import { toast } from "react-toastify";
 
 export const createUser = createAsyncThunk(
   "usersAuth/createUser",
@@ -58,6 +61,25 @@ export const refreshUserTokens = createAsyncThunk(
     try {
       const response = await refreshTokensRequest();
       return response.data as RefreshedUser;
+    } catch (error) {
+      return rejectWithValue((error as any).payload);
+    }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async (
+    {
+      userId,
+      userData,
+    }: { userId: string; userData: Partial<initialUpdateUserTypes> },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await updateUserRequest(userId, userData);
+      accessToken.setToken(response.data.accessToken);
+      return response.data;
     } catch (error) {
       return rejectWithValue((error as any).payload);
     }

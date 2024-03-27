@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import css from "./AuthUserNav.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,11 +14,13 @@ import { ReactComponent as Logout } from "../../../images/logout-2-svgrepo-com.s
 import { ReactComponent as Arrow } from "../../../images/arrow.svg";
 
 import { motion } from "framer-motion";
+import { selectCurrentUser } from "../../../redux/auth/users/selectors";
 
 const menuVariants = {
   open: {
     opacity: 1,
     x: 0,
+    y: 0,
     height: "auto",
     transition: {
       duration: 0.3,
@@ -40,6 +42,10 @@ const menuVariants = {
 
 const AuthUserNav = () => {
   const addedToCart = useSelector(selectCart);
+  const user = useSelector(selectCurrentUser);
+
+  const menuRef = useRef<HTMLUListElement>(null);
+
   const isLength = addedToCart.length;
 
   const dispatch = useDispatch<AppDispatch>();
@@ -50,7 +56,7 @@ const AuthUserNav = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/shop";
 
-  const handleClick = () => {
+  const handleLogoutClick = () => {
     dispatch(logoutUser());
     navigate(from, { replace: true });
   };
@@ -112,10 +118,10 @@ const AuthUserNav = () => {
           variants={menuVariants}
           onClick={handleMenuButton}
         >
-          <motion.button>
+          <NavLink to={`/user-settings/${user._id}`} className={css.link}>
             <Gear className={css.gearSvg} />
             <span>Settings</span>
-          </motion.button>
+          </NavLink>
         </motion.li>
         <motion.li
           whileHover={{ scale: 1.1 }}
@@ -125,12 +131,20 @@ const AuthUserNav = () => {
           variants={menuVariants}
           onClick={handleMenuButton}
         >
-          <motion.button onClick={handleClick}>
+          <motion.button onClick={handleLogoutClick}>
             <Logout className={css.logoutSvg} />
             <span>Log out</span>
           </motion.button>
         </motion.li>
       </motion.ul>
+      <div className={css.helloUser}>
+        <p>
+          Hello <span className={css.helloUserSpan}>{user.name}</span>
+        </p>
+        <NavLink to="/cart" className={css.link}>
+          <ShopImg className={css.shopSvg} />
+        </NavLink>
+      </div>
     </motion.nav>
   );
 };

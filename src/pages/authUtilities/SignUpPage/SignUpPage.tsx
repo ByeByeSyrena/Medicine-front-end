@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 import css from "./SignUpPage.module.css";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 
-import classNames from "classnames";
-import FormControl from "../../../components/FormControl/FormControl";
 import { createUser } from "../../../redux/auth/users/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
@@ -22,20 +18,6 @@ type valuesTypes = {
   password: string;
   confirmPassword: string;
 };
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-      "Password must contain 8 characters. At least one digit, one lowercase letter, one uppercase letter"
-    )
-    .required("Password is required"),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), ""], "Passwords must match")
-    .required("Confirmation is required"),
-});
 
 const SignUpPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -92,7 +74,6 @@ const SignUpPage = () => {
 
     dispatch(createUser(newUser));
 
-    console.log("Form data", newUser);
     navigate(from, { replace: true });
   };
 

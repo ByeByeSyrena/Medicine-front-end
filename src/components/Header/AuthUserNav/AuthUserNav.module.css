@@ -1,3 +1,10 @@
+nav {
+  color: var(--white);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .shopSvg {
   width: 30px;
   height: 30px;
@@ -35,14 +42,15 @@
 
 .lengthSpan {
   font-size: 10px;
-  color: white;
+  color: var(--white);
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   gap: 15px;
-  color: #fff;
+  color: var(--white);
   font-family: Manrope;
   font-size: 20px;
   font-weight: 600;
@@ -54,7 +62,7 @@
 }
 
 .link {
-  color: #fff;
+  color: var(--white);
   font-family: Manrope;
   font-size: 20px;
   font-weight: 600;
@@ -109,10 +117,13 @@
 
 .ulMenu {
   position: absolute;
+  top: 90px;
+  left: 100px;
   width: 200px;
   border-radius: 30px;
 
   background-color: var(--nyanza);
+  z-index: 10000;
 }
 
 .ulMenu li {
@@ -154,4 +165,17 @@
   color: rgba(3, 3, 66, 1);
   font-family: "CormorantUnicase-Medium";
   font-size: 20px;
+}
+
+.helloUser {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  font-family: "CormorantUnicase-Medium";
+  font-size: 20px;
+}
+
+.helloUserSpan {
+  color: var(--nyanza);
 }

@@ -5,6 +5,7 @@ import {
   loginUser,
   logoutUser,
   refreshUserTokens,
+  updateUser,
 } from "./operations";
 
 export interface UsersState {
@@ -20,6 +21,7 @@ const initialState: UsersState = {
   isLoading: false,
   error: null,
   user: {
+    _id: "",
     name: "",
     email: "",
     roles: [],
@@ -56,6 +58,7 @@ const usersSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
+        state.user._id = payload.foundUser._id;
         state.user.name = payload.foundUser.name;
         state.user.email = payload.foundUser.email;
         state.user.roles = payload.foundUser.roles;
@@ -74,6 +77,7 @@ const usersSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state) => {
         state.error = null;
         state.isLoading = false;
+        state.user._id = "";
         state.user.name = "";
         state.user.email = "";
         state.user.roles = [];
@@ -94,6 +98,7 @@ const usersSlice = createSlice({
       .addCase(refreshUserTokens.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
+        state.user._id = payload.foundUser._id;
         state.user.name = payload.foundUser.name;
         state.user.email = payload.foundUser.email;
         state.user.roles = payload.foundUser.roles;
@@ -108,6 +113,22 @@ const usersSlice = createSlice({
         state.error = action?.payload as string;
         state.isLoggedIn = false;
         state.isFetchingCurrentUser = false;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.user._id = payload._id;
+        state.user.name = payload.name;
+        state.token = payload.accessToken;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload as string;
       }),
 });
 
