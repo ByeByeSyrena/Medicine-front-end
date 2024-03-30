@@ -1,0 +1,136 @@
+@media only screen and (min-width: 1440px) {
+  .container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    height: calc(100vh - 115px);
+    width: 100%;
+    font-family: Helvetica Neue;
+    padding: 100px;
+
+    color: var(--white);
+
+    position: relative;
+  }
+}
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding: 30px;
+  background-color: rgba(3, 3, 66, 1);
+  border-radius: 10px;
+
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 22px 70px 4px;
+
+  position: relative;
+  z-index: 1000;
+}
+
+.userInfoWrapper {
+  margin-bottom: 10px;
+}
+
+.contentWrapper p {
+  margin-bottom: 10px;
+}
+
+.contentWrapper p span {
+  margin-bottom: 10px;
+  color: var(--nyanza);
+  font-size: 18px;
+}
+
+.contentWrapper h1 {
+  margin: 0 0 20px 0;
+  font-size: 45px;
+  font-family: "CormorantUnicase-Bold", sans-serif;
+  color: var(--nyanza);
+}
+
+.contentWrapper img {
+  width: 300px;
+  height: 500px;
+}
+
+.formWrapper {
+  width: 400px;
+  padding: 30px;
+  background-color: rgba(3, 3, 66, 1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px 10px inset;
+  position: relative;
+  z-index: 1000;
+
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 22px 70px 4px;
+}
+
+.formWrapper h2 {
+  margin-bottom: 10px;
+}
+
+.submitFormButton {
+  background-color: var(--gamboge);
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitFormButton:hover,
+.submitFormButton:focus {
+  background-color: var(--tangerine);
+}
+
+.deleteUserButton {
+  background-color: var(--chocolateCosmos);
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deleteUserButton:hover,
+.deleteUserButton:focus {
+  background-color: var(--gamboge);
+}
+
+.imgBack {
+  position: absolute;
+  width: 320px;
+  max-height: 320px;
+  z-index: 100;
+  left: 230px;
+  top: 130px;
+  z-index: 900;
+}
+
+.imgBack2 {
+  position: absolute;
+  width: 320px;
+  max-height: 320px;
+  z-index: 100;
+  left: 350px;
+  top: 60px;
+  z-index: 800;
+}
+
+.imgBack3 {
+  position: absolute;
+  width: 320px;
+  max-height: 420px;
+  z-index: 100;
+  right: 150px;
+  top: 80px;
+  z-index: 800;
+}
+
+.note {
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: var(--gamboge);
+}

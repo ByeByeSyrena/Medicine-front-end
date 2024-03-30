@@ -41,7 +41,6 @@ const LoginPage = () => {
   };
 
   const onSubmit = (values: valuesTypes) => {
-    console.log("Form data", values);
     dispatch(loginUser(values));
     formikRef.current.resetForm();
   };

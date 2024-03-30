@@ -16,4 +16,7 @@ export const selectIsUserLoggedIn = (state: RootState) =>
 
 export const selectUserRoles = (state: RootState) => state.usersAuth.user.roles;
 
+export const selectUserId = (state: RootState) => state.usersAuth.user._id;
+
+
 export const selectCurrentUser = (state: RootState) => state.usersAuth.user;

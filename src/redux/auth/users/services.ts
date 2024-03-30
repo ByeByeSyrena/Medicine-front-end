@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { RegUser, createAnswer, LoginUser } from "../../../@types/types";
+import { initialUpdateUserTypes } from "../../../pages/userUtilities/SettingsPage/SettingsPage";
 import axiosInstance from "../../apiSettings/axiosInstance";
 
 export const createUserRequest = async (formData: RegUser) => {
@@ -23,5 +24,27 @@ export const logoutUserRequest = async () => {
 
 export const refreshTokensRequest = async () => {
   const response = await axiosInstance.get("/users/refresh");
+  return response;
+};
+
+export const updateUserRequest = async (
+  userId: string,
+  updatedUserData: Partial<initialUpdateUserTypes>
+) => {
+  if (updatedUserData?.name === "") {
+    delete (updatedUserData as any).name;
+  }
+
+  if (updatedUserData?.password === "") {
+    delete (updatedUserData as any).password;
+  }
+
+  console.log(updatedUserData);
+
+  const response = await axiosInstance.patch(
+    `/users/${userId}`,
+    updatedUserData
+  );
+
   return response;
 };

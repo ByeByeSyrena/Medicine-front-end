@@ -19,6 +19,7 @@ import { IsOnlyForUsers, IsPublic } from "../HOCs/hoc";
 import { selectIsFetchingCurrentUser } from "../redux/auth/users/selectors";
 import { AppDispatch } from "../redux/store";
 import { refreshUserTokens } from "../redux/auth/users/operations";
+import SettingsPage from "../pages/userUtilities/SettingsPage/SettingsPage";
 
 const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -45,6 +46,15 @@ const App: React.FC = () => {
                 <IsOnlyForUsers
                   allowedRoles={["2021"]}
                   children={<ShoppingCartPage />}
+                />
+              }
+            />
+            <Route
+              path="user-settings/:id"
+              element={
+                <IsOnlyForUsers
+                  allowedRoles={["2021"]}
+                  children={<SettingsPage />}
                 />
               }
             />
