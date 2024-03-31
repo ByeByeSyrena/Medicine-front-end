@@ -1,4 +1,3 @@
-// SettingsPage.jsx
 import React, { useRef, useState } from "react";
 import css from "./SettingsPage.module.css";
 import { Formik, Form } from "formik";

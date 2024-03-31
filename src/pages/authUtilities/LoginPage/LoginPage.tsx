@@ -10,11 +10,7 @@ import { motion } from "framer-motion";
 
 import family from "../../../images/family.png";
 import LoginForm from "../../../components/LoginForm/LoginForm";
-
-export type valuesTypes = {
-  email: string;
-  password: string;
-};
+import { LoginUser } from "../../../@types/types";
 
 const variants = {
   initial: {
@@ -40,7 +36,7 @@ const LoginPage = () => {
     password: "",
   };
 
-  const onSubmit = (values: valuesTypes) => {
+  const onSubmit = (values: LoginUser) => {
     dispatch(loginUser(values));
     formikRef.current.resetForm();
   };
