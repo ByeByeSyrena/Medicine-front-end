@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { RegUser, LoginUser, User } from "../../../@types/types";
+import { RegUser, LoginUser } from "../../../@types/types";
 import axiosInstance from "../../apiSettings/axiosInstance";
 
 export const createUserRequest = async (formData: RegUser) => {

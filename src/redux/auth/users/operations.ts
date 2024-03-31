@@ -4,7 +4,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   LoginUser,
   RegUser,
-  ApiError,
   ReturnedUser,
   UpdatedUser,
 } from "../../../@types/types";
