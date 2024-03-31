@@ -29,8 +29,6 @@ const App: React.FC = () => {
     dispatch(refreshUserTokens());
   }, [dispatch]);
 
-  console.log("isFetchingCurrentUser:", isFetchingCurrentUser);
-
   return (
     <>
       {isFetchingCurrentUser ? (
