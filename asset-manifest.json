@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Medicine-front-end/static/css/main.1436f1fa.css",
-    "main.js": "/Medicine-front-end/static/js/main.ca81ceae.js",
+    "main.css": "/Medicine-front-end/static/css/main.18926b6b.css",
+    "main.js": "/Medicine-front-end/static/js/main.8dd40ce1.js",
     "static/js/453.68693753.chunk.js": "/Medicine-front-end/static/js/453.68693753.chunk.js",
     "static/media/hand.gif": "/Medicine-front-end/static/media/hand.a56a5b63022ac86e0351.gif",
     "static/media/pills_PNG16500.png": "/Medicine-front-end/static/media/pills_PNG16500.30ead68a8341eb655754.png",
@@ -15,16 +15,20 @@
     "static/media/herbs-in-bottles.jpg": "/Medicine-front-end/static/media/herbs-in-bottles.a44dca755035cd8dcec2.jpg",
     "static/media/pill-and-water.jpg": "/Medicine-front-end/static/media/pill-and-water.44e42891f1731c62b232.jpg",
     "static/media/blue-pills.jpg": "/Medicine-front-end/static/media/blue-pills.4989731a93a4f9718a22.jpg",
+    "static/media/gear-11-svgrepo-com.svg": "/Medicine-front-end/static/media/gear-11-svgrepo-com.75e5614bc3629c547306b9551f835897.svg",
     "static/media/shop.svg": "/Medicine-front-end/static/media/shop.0c209b1dce045ac8d952a4e63238850b.svg",
     "index.html": "/Medicine-front-end/index.html",
+    "static/media/shopping-cart-drug-basket-shop.svg": "/Medicine-front-end/static/media/shopping-cart-drug-basket-shop.4a9c6ed8106e9d5405d9564034837b90.svg",
+    "static/media/logout-2-svgrepo-com.svg": "/Medicine-front-end/static/media/logout-2-svgrepo-com.d1bd6e910306c80263a40e9327edbb1d.svg",
     "static/media/minus-small.svg": "/Medicine-front-end/static/media/minus-small.bb2c74332283917d09dbf924e1fa5619.svg",
     "static/media/plus-small.svg": "/Medicine-front-end/static/media/plus-small.828c526367d984344d2bcfaac8f1b8c5.svg",
-    "main.1436f1fa.css.map": "/Medicine-front-end/static/css/main.1436f1fa.css.map",
-    "main.ca81ceae.js.map": "/Medicine-front-end/static/js/main.ca81ceae.js.map",
+    "static/media/arrow.svg": "/Medicine-front-end/static/media/arrow.38591eb283f009a6ed5325e6dc3c2c6a.svg",
+    "main.18926b6b.css.map": "/Medicine-front-end/static/css/main.18926b6b.css.map",
+    "main.8dd40ce1.js.map": "/Medicine-front-end/static/js/main.8dd40ce1.js.map",
     "453.68693753.chunk.js.map": "/Medicine-front-end/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1436f1fa.css",
-    "static/js/main.ca81ceae.js"
+    "static/css/main.18926b6b.css",
+    "static/js/main.8dd40ce1.js"
   ]
 }
