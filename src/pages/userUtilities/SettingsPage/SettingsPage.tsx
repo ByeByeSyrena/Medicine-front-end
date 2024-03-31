@@ -1,4 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { createPortal } from "react-dom";
+
 import css from "./SettingsPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -11,6 +13,7 @@ import Image5 from "../../../images/main-page/nurse.jpg";
 import { useParams } from "react-router-dom";
 import { AppDispatch } from "../../../redux/store";
 import { updateUser } from "../../../redux/auth/users/operations";
+import Popup from "../../../components/Popup/Popup";
 
 export type initialUpdateUserTypes = {
   name: string;
@@ -35,6 +38,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const SettingsPage = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { id } = useParams();
 
   const formikRef = useRef<any>(null);
@@ -54,76 +58,93 @@ const SettingsPage = () => {
     formikRef.current.resetForm();
   };
 
-  return (
-    <section className={css.container}>
-      <div className={css.contentWrapper}>
-        <h1>User Settings</h1>
-        <div className={css.userInfoWrapper}>
-          <p>
-            <span>ID:</span> {user._id}
-          </p>
-          <p>
-            <span>Name:</span> {user.name}
-          </p>
-          <p>
-            <span>Email:</span> {user.email}
-          </p>
-          <p>
-            <span>Role codes:</span> {user.roles}
-          </p>
-        </div>
-        <button className={css.deleteUserButton}>Delete User</button>
-      </div>
+  const openPopup = () => {
+    setIsOpen(true);
+  };
 
-      <div className={css.formWrapper}>
-        <h2>Update information</h2>
-        <p className={css.note}>
-          you can update only your name or password, or both
-        </p>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-          validateOnBlur={false}
-        >
-          <Form className={css.form}>
-            <FormControl
-              control="input"
-              label="Name"
-              name="name"
-              type="text"
-              labelClassName="dark-label"
-              inputClassName="dark-input"
-              wrapperClassName="form-control"
-            />
-            <FormControl
-              control="input"
-              label="New password"
-              name="password"
-              type="password"
-              labelClassName="dark-label"
-              inputClassName="dark-input"
-              wrapperClassName="form-control"
-            />
-            <FormControl
-              control="input"
-              label="Confirm new password"
-              name="confirmPassword"
-              type="password"
-              labelClassName="dark-label"
-              inputClassName="dark-input"
-              wrapperClassName="form-control"
-            />
-            <button type="submit" className={css.submitFormButton}>
-              Submit
-            </button>
-          </Form>
-        </Formik>
-      </div>
-      <img src={Image4} alt="img" className={css.imgBack} />
-      <img src={Image3} alt="img" className={css.imgBack2} />
-      <img src={Image5} alt="img" className={css.imgBack3} />
-    </section>
+  const closePopup = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <section className={css.container}>
+        <div className={css.contentWrapper}>
+          <h1>User Settings</h1>
+          <div className={css.userInfoWrapper}>
+            <p>
+              <span>ID:</span> {user._id}
+            </p>
+            <p>
+              <span>Name:</span> {user.name}
+            </p>
+            <p>
+              <span>Email:</span> {user.email}
+            </p>
+            <p>
+              <span>Role codes:</span> {user.roles}
+            </p>
+          </div>
+          <button className={css.deleteUserButton} onClick={openPopup}>
+            Delete User
+          </button>
+        </div>
+
+        <div className={css.formWrapper}>
+          <h2>Update information</h2>
+          <p className={css.note}>
+            you can update only your name or password, or both
+          </p>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={onSubmit}
+            validateOnBlur={false}
+          >
+            <Form className={css.form}>
+              <FormControl
+                control="input"
+                label="Name"
+                name="name"
+                type="text"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+              <FormControl
+                control="input"
+                label="New password"
+                name="password"
+                type="password"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+              <FormControl
+                control="input"
+                label="Confirm new password"
+                name="confirmPassword"
+                type="password"
+                labelClassName="dark-label"
+                inputClassName="dark-input"
+                wrapperClassName="form-control"
+              />
+              <button type="submit" className={css.submitFormButton}>
+                Submit
+              </button>
+            </Form>
+          </Formik>
+        </div>
+        <img src={Image4} alt="img" className={css.imgBack} />
+        <img src={Image3} alt="img" className={css.imgBack2} />
+        <img src={Image5} alt="img" className={css.imgBack3} />
+      </section>
+      {isOpen &&
+        createPortal(
+          <Popup onClose={closePopup} />,
+          document.getElementById("modal-root") || document.body
+        )}
+    </>
   );
 };
 

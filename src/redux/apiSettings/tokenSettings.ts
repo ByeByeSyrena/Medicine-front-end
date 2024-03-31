@@ -1,10 +1,10 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const accessToken = {
   setToken(token: string) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unsetToken() {
-    axios.defaults.headers.common.Authorization = "";
+    axiosInstance.defaults.headers.common.Authorization = "";
   },
 };

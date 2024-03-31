@@ -44,7 +44,7 @@ const AuthUserNav = () => {
   const addedToCart = useSelector(selectCart);
   const user = useSelector(selectCurrentUser);
 
-  const menuRef = useRef<HTMLUListElement>(null);
+  // const menuRef = useRef<HTMLUListElement>(null);
 
   const isLength = addedToCart.length;
 
@@ -77,6 +77,7 @@ const AuthUserNav = () => {
           <Arrow />
         </motion.span>
       </motion.button>
+
       <motion.ul
         className={css.ulMenu}
         initial={false}
@@ -96,6 +97,7 @@ const AuthUserNav = () => {
             <span>Shop</span>
           </NavLink>
         </motion.li>
+
         <motion.li
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -110,6 +112,7 @@ const AuthUserNav = () => {
             {isLength > 0 && <span className={css.lengthSpan}>{isLength}</span>}
           </NavLink>
         </motion.li>
+
         <motion.li
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -123,6 +126,7 @@ const AuthUserNav = () => {
             <span>Settings</span>
           </NavLink>
         </motion.li>
+
         <motion.li
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -137,6 +141,7 @@ const AuthUserNav = () => {
           </motion.button>
         </motion.li>
       </motion.ul>
+
       <div className={css.helloUser}>
         <p>
           Hello <span className={css.helloUserSpan}>{user.name}</span>

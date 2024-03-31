@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { User } from "../../../@types/types";
+import { ApiError, User } from "../../../@types/types";
 import {
   createUser,
   loginUser,
@@ -11,7 +11,7 @@ import {
 export interface UsersState {
   user: User;
   isLoading: boolean;
-  error: string | null;
+  error?: ApiError | null | string;
   token: string;
   isLoggedIn: boolean;
   isFetchingCurrentUser: boolean;
@@ -43,7 +43,7 @@ const usersSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(createUser.fulfilled, (state, action) => {
+      .addCase(createUser.fulfilled, (state, _) => {
         state.isLoading = false;
         state.error = null;
       })
@@ -69,7 +69,7 @@ const usersSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action?.payload as string;
+        state.error = action?.payload;
       })
       .addCase(logoutUser.pending, (state) => {
         state.isLoading = true;
@@ -110,7 +110,7 @@ const usersSlice = createSlice({
       })
       .addCase(refreshUserTokens.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action?.payload as string;
+        state.error = action?.payload;
         state.isLoggedIn = false;
         state.isFetchingCurrentUser = false;
       })

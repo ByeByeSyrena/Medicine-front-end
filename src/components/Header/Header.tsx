@@ -1,13 +1,13 @@
 import React from "react";
 import css from "./Header.module.css";
 import { useSelector } from "react-redux";
-import { selectUserAccessToken } from "../../redux/auth/users/selectors";
+import { selectIsUserLoggedIn } from "../../redux/auth/users/selectors";
 
 import NotAuthUserNav from "./NotAuthUserNav/NotAuthUserNav";
 import AuthUserNav from "./AuthUserNav/AuthUserNav";
 
 export const Header = () => {
-  const isUserAccess = useSelector(selectUserAccessToken);
+  const isUserAccess = useSelector(selectIsUserLoggedIn);
 
   return (
     <header className={css.header}>

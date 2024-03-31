@@ -46,26 +46,25 @@ export interface foundUser {
   favorites: string[];
   createdAt: string;
   updatedAt: string;
-  seller?: string;
+  seller: string;
+  avatar: string;
 }
 
-export interface RegUser {
-  name: string;
-  email: string;
-  password: string;
-}
+export type RegUser = Required<Pick<User, "email" | "name" | "password">>;
 
-export interface LoginUser {
-  email: string;
-  password: string;
-}
+export type LoginUser = Required<Pick<User, "email" | "password">>;
 
-export interface RefreshedUser {
+export interface ReturnedUser {
   foundUser: foundUser;
   accessToken: string;
 }
 
 export interface createAnswer {
   user: RegUser;
+  message: string;
+}
+
+export interface ApiError {
+  status: number;
   message: string;
 }
