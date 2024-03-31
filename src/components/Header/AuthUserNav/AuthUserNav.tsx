@@ -44,8 +44,6 @@ const AuthUserNav = () => {
   const addedToCart = useSelector(selectCart);
   const user = useSelector(selectCurrentUser);
 
-  // const menuRef = useRef<HTMLUListElement>(null);
-
   const isLength = addedToCart.length;
 
   const dispatch = useDispatch<AppDispatch>();

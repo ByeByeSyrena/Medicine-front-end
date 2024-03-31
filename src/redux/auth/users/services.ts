@@ -1,10 +1,9 @@
 import { AxiosResponse } from "axios";
-import { RegUser, createAnswer, LoginUser } from "../../../@types/types";
-import { initialUpdateUserTypes } from "../../../pages/userUtilities/SettingsPage/SettingsPage";
+import { RegUser, LoginUser, User } from "../../../@types/types";
 import axiosInstance from "../../apiSettings/axiosInstance";
 
 export const createUserRequest = async (formData: RegUser) => {
-  const response: AxiosResponse<createAnswer> = await axiosInstance.post(
+  const response: AxiosResponse<{ message: string }> = await axiosInstance.post(
     "/users/register",
     formData
   );
@@ -27,9 +26,14 @@ export const refreshTokensRequest = async () => {
   return response;
 };
 
+export const deleteUserRequest = async (userId: string) => {
+  await axiosInstance.delete(`/users/${userId}`);
+  return;
+};
+
 export const updateUserRequest = async (
   userId: string,
-  updatedUserData: Partial<initialUpdateUserTypes>
+  updatedUserData: { name?: string; password?: string }
 ) => {
   if (updatedUserData?.name === "") {
     delete (updatedUserData as any).name;

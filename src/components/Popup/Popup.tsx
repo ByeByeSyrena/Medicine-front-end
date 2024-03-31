@@ -1,53 +1,65 @@
-import React, { useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { AppDispatch } from "../../redux/store";
+import { motion } from "framer-motion";
 import css from "./Popup.module.css";
+import { deleteUser } from "../../redux/auth/users/operations";
 
 type Props = {
+  isVisible: boolean;
   onClose: () => void;
 };
 
 const Popup: React.FC<Props> = ({ onClose }) => {
-  const backdropRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
+  const { id } = useParams();
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
-  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === backdropRef.current) {
-      onClose();
+  const handleDeleteUser = () => {
+    if (id) {
+      dispatch(deleteUser(id));
     }
   };
 
-  return createPortal(
-    <div
+  return (
+    <motion.div
       className={css.backdrop}
-      ref={backdropRef}
-      onClick={handleBackdropClick}
+      initial={{ y: "-100vh", opacity: 0 }}
+      animate={{
+        y: 0,
+        opacity: 1,
+        transition: {
+          duration: 0.1,
+          type: "spring",
+          damping: 25,
+          stiffness: 500,
+        },
+      }}
+      exit={{
+        y: "-100vh",
+        opacity: 0,
+        transition: {
+          duration: 0.1,
+          type: "spring",
+          damping: 25,
+          stiffness: 500,
+        },
+      }}
     >
       <div className={css.modal}>
         <h1 className={css.question}>
           Are you sure that you want to delete your profile?
         </h1>
         <div className={css.buttonWrapper}>
-          <button type="button">Yes</button>
+          <button type="button" onClick={handleDeleteUser}>
+            Yes
+          </button>
           <button type="button" onClick={onClose}>
             Cancel
           </button>
         </div>
       </div>
-    </div>,
-    document.getElementById("modal-root") || document.body
+    </motion.div>
   );
 };
 

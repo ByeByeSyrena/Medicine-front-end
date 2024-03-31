@@ -1,6 +1,5 @@
+// SettingsPage.jsx
 import React, { useRef, useState } from "react";
-import { createPortal } from "react-dom";
-
 import css from "./SettingsPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -14,13 +13,11 @@ import { useParams } from "react-router-dom";
 import { AppDispatch } from "../../../redux/store";
 import { updateUser } from "../../../redux/auth/users/operations";
 import Popup from "../../../components/Popup/Popup";
+import { AnimatePresence } from "framer-motion";
 
-export type initialUpdateUserTypes = {
-  name: string;
-  password: string;
-};
+type InitProps = { name?: string; password?: string };
 
-const initialValues: initialUpdateUserTypes = {
+const initialValues: InitProps = {
   name: "",
   password: "",
 };
@@ -38,16 +35,21 @@ const validationSchema = Yup.object().shape({
 });
 
 const SettingsPage = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   const { id } = useParams();
 
   const formikRef = useRef<any>(null);
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = (values: initialUpdateUserTypes) => {
+  const onSubmit = (values: InitProps) => {
     const userId = id || "";
-    const updatedUserData: initialUpdateUserTypes = {
+    const updatedUserData: InitProps = {
       name: values.name,
       password: values.password,
     };
@@ -56,14 +58,6 @@ const SettingsPage = () => {
 
     dispatch(updateUser({ userId, userData: updatedUserData }));
     formikRef.current.resetForm();
-  };
-
-  const openPopup = () => {
-    setIsOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsOpen(false);
   };
 
   return (
@@ -85,7 +79,7 @@ const SettingsPage = () => {
               <span>Role codes:</span> {user.roles}
             </p>
           </div>
-          <button className={css.deleteUserButton} onClick={openPopup}>
+          <button className={css.deleteUserButton} onClick={toggleVisibility}>
             Delete User
           </button>
         </div>
@@ -139,11 +133,12 @@ const SettingsPage = () => {
         <img src={Image3} alt="img" className={css.imgBack2} />
         <img src={Image5} alt="img" className={css.imgBack3} />
       </section>
-      {isOpen &&
-        createPortal(
-          <Popup onClose={closePopup} />,
-          document.getElementById("modal-root") || document.body
+
+      <AnimatePresence>
+        {isVisible && (
+          <Popup isVisible={isVisible} onClose={toggleVisibility} />
         )}
+      </AnimatePresence>
     </>
   );
 };

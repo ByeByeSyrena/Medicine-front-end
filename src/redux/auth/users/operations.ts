@@ -6,18 +6,20 @@ import {
   RegUser,
   ApiError,
   ReturnedUser,
+  UpdatedUser,
 } from "../../../@types/types";
 
 import {
   createUserRequest,
+  deleteUserRequest,
   loginUserRequest,
   logoutUserRequest,
   refreshTokensRequest,
   updateUserRequest,
 } from "./services";
 import { checkAndSetPersistedToken } from "../../apiSettings/checkAndSetPersistedToken";
-import { initialUpdateUserTypes } from "../../../pages/userUtilities/SettingsPage/SettingsPage";
 import { toast } from "react-toastify";
+import { handleApiError } from "../../apiSettings/apiErrorHandler";
 
 export const createUser = createAsyncThunk(
   "usersAuth/createUser",
@@ -30,39 +32,28 @@ export const createUser = createAsyncThunk(
       }
 
       return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.payload);
+    } catch (error) {
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
     }
   }
 );
 
-export const loginUser = createAsyncThunk<
-  ReturnedUser,
-  LoginUser,
-  {
-    rejectValue: ApiError;
-  }
->("auth/login", async (formData, { rejectWithValue }) => {
-  try {
-    const response = await loginUserRequest(formData);
+export const loginUser = createAsyncThunk(
+  "auth/login",
+  async (formData: LoginUser, { rejectWithValue }) => {
+    try {
+      const response = await loginUserRequest(formData);
 
-    accessToken.setToken(response.data.accessToken);
+      accessToken.setToken(response.data.accessToken);
 
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      return rejectWithValue({
-        status: error.response.status,
-        message: error.response.data.message,
-      });
-    } else {
-      return rejectWithValue({
-        status: 500,
-        message: "An unknown error occurred",
-      });
+      return response.data as ReturnedUser;
+    } catch (error) {
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
     }
   }
-});
+);
 
 export const logoutUser = createAsyncThunk(
   "usersAuth/logout",
@@ -72,37 +63,40 @@ export const logoutUser = createAsyncThunk(
       accessToken.unsetToken();
       return;
     } catch (error) {
-      return rejectWithValue((error as any).payload);
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
     }
   }
 );
 
-export const refreshUserTokens = createAsyncThunk<
-  ReturnedUser,
-  void,
-  {
-    rejectValue: ApiError;
-  }
->("auth/refresh", async (_, { rejectWithValue, getState }) => {
-  const persistedToken = (getState() as any).usersAuth.token;
-  checkAndSetPersistedToken(persistedToken);
-  try {
-    const response = await refreshTokensRequest();
-    return response.data;
-  } catch (error: any) {
-    if (error.response) {
-      return rejectWithValue({
-        status: error.response.status,
-        message: error.response.data.message,
-      });
-    } else {
-      return rejectWithValue({
-        status: 500,
-        message: "An unknown error occurred",
-      });
+export const deleteUser = createAsyncThunk(
+  "usersAuth/delete",
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      await deleteUserRequest(userId);
+      accessToken.unsetToken();
+      return;
+    } catch (error) {
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
     }
   }
-});
+);
+
+export const refreshUserTokens = createAsyncThunk(
+  "auth/refresh",
+  async (_, { rejectWithValue, getState }) => {
+    const persistedToken = (getState() as any).usersAuth.token;
+    checkAndSetPersistedToken(persistedToken);
+    try {
+      const response = await refreshTokensRequest();
+      return response.data as ReturnedUser;
+    } catch (error) {
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
+    }
+  }
+);
 
 export const updateUser = createAsyncThunk(
   "auth/updateUser",
@@ -110,15 +104,16 @@ export const updateUser = createAsyncThunk(
     {
       userId,
       userData,
-    }: { userId: string; userData: Partial<initialUpdateUserTypes> },
+    }: { userId: string; userData: { name?: string; password?: string } },
     { rejectWithValue }
   ) => {
     try {
       const response = await updateUserRequest(userId, userData);
       accessToken.setToken(response.data.accessToken);
-      return response.data;
+      return response.data as UpdatedUser;
     } catch (error) {
-      return rejectWithValue((error as any).payload);
+      const errorObj = handleApiError(error);
+      return rejectWithValue(errorObj);
     }
   }
 );

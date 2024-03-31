@@ -28,14 +28,13 @@ export type Order = {
 // USER NEW
 
 export type User = {
-  _id?: string;
-  name?: string;
+  _id: string;
+  name: string;
   email: string;
   password?: string;
-  roles?: string[];
-  favorites?: string[];
-  seller?: string | null;
-  token?: string;
+  roles: string[];
+  favorites: string[];
+  seller: string | null;
 };
 
 export interface foundUser {
@@ -59,9 +58,10 @@ export interface ReturnedUser {
   accessToken: string;
 }
 
-export interface createAnswer {
-  user: RegUser;
-  message: string;
+export interface UpdatedUser {
+  name: string;
+  roles: string[];
+  accessToken: string;
 }
 
 export interface ApiError {

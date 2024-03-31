@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { ApiError, User } from "../../../@types/types";
 import {
   createUser,
+  deleteUser,
   loginUser,
   logoutUser,
   refreshUserTokens,
@@ -11,11 +12,21 @@ import {
 export interface UsersState {
   user: User;
   isLoading: boolean;
-  error?: ApiError | null | string;
+  error: ApiError | null;
   token: string;
   isLoggedIn: boolean;
   isFetchingCurrentUser: boolean;
 }
+
+const handlePending = (state: UsersState) => {
+  state.isLoading = true;
+  state.error = null;
+};
+
+const handleRejected = (state: UsersState, action: PayloadAction<any>) => {
+  state.isLoading = false;
+  state.error = action.payload;
+};
 
 const initialState: UsersState = {
   isLoading: false,
@@ -39,97 +50,76 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(createUser.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
       .addCase(createUser.fulfilled, (state, _) => {
         state.isLoading = false;
-        state.error = null;
-      })
-      .addCase(createUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
-      })
-      .addCase(loginUser.pending, (state) => {
-        state.isLoading = true;
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.user._id = payload.foundUser._id;
-        state.user.name = payload.foundUser.name;
-        state.user.email = payload.foundUser.email;
-        state.user.roles = payload.foundUser.roles;
-        state.user.favorites = payload.foundUser.favorites;
-        state.user.seller = payload.foundUser.seller;
+        state.user = { ...state.user, ...payload.foundUser };
         state.token = payload.accessToken;
         state.isLoggedIn = true;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action?.payload;
-      })
-      .addCase(logoutUser.pending, (state) => {
-        state.isLoading = true;
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.error = null;
         state.isLoading = false;
-        state.user._id = "";
-        state.user.name = "";
-        state.user.email = "";
-        state.user.roles = [];
-        state.user.favorites = [];
-        state.user.seller = null;
+        state.user = initialState.user;
         state.token = "";
         state.isLoggedIn = false;
       })
-      .addCase(logoutUser.rejected, (state, action) => {
-        state.error = action.payload as string;
-        state.isLoading = false;
-      })
-      .addCase(refreshUserTokens.pending, (state) => {
-        state.isLoading = true;
+      .addCase(deleteUser.fulfilled, (state) => {
         state.error = null;
-        state.isFetchingCurrentUser = true;
+        state.isLoading = false;
+        state.user = initialState.user;
+        state.token = "";
+        state.isLoggedIn = false;
       })
       .addCase(refreshUserTokens.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.user._id = payload.foundUser._id;
-        state.user.name = payload.foundUser.name;
-        state.user.email = payload.foundUser.email;
-        state.user.roles = payload.foundUser.roles;
-        state.user.favorites = payload.foundUser.favorites;
-        state.user.seller = payload.foundUser.seller;
+        state.user = { ...state.user, ...payload.foundUser };
         state.token = payload.accessToken;
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
       })
-      .addCase(refreshUserTokens.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action?.payload;
-        state.isLoggedIn = false;
-        state.isFetchingCurrentUser = false;
-      })
-      .addCase(updateUser.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
-        state.user._id = payload._id;
+        state.user.roles = payload.roles;
         state.user.name = payload.name;
         state.token = payload.accessToken;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(updateUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload as string;
-      }),
+      .addCase(refreshUserTokens.pending, (state) => {
+        state.isFetchingCurrentUser = true;
+      })
+      .addCase(refreshUserTokens.rejected, (state, action) => {
+        state.isLoggedIn = false;
+        state.isFetchingCurrentUser = false;
+      })
+      .addMatcher(
+        isAnyOf(
+          createUser.pending,
+          loginUser.pending,
+          logoutUser.pending,
+          refreshUserTokens.pending,
+          updateUser.pending,
+          deleteUser.pending
+        ),
+        handlePending
+      )
+      .addMatcher(
+        isAnyOf(
+          createUser.rejected,
+          loginUser.rejected,
+          logoutUser.rejected,
+          refreshUserTokens.rejected,
+          updateUser.rejected,
+          deleteUser.rejected
+        ),
+        handleRejected
+      ),
 });
 
 export const usersReducer = usersSlice.reducer;
