@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import css from "./SettingsPage.module.css";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import FormControl from "../../../components/FormControl/FormControl";
+import { FormControl, Popup } from "../../../components/components";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../../redux/auth/users/selectors";
 import Image4 from "../../../images/main-page/herbs-in-bottles.jpg";
@@ -11,7 +11,6 @@ import Image5 from "../../../images/main-page/nurse.jpg";
 import { useParams } from "react-router-dom";
 import { AppDispatch } from "../../../redux/store";
 import { updateUser } from "../../../redux/auth/users/operations";
-import Popup from "../../../components/Popup/Popup";
 import { AnimatePresence } from "framer-motion";
 
 type InitProps = { name?: string; password?: string };

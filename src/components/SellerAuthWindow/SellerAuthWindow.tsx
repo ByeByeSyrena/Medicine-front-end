@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { AppDispatch } from "../../redux/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import css from "./SellerAuthWindow.module.css";
 import LoginForm from "../LoginForm/LoginForm";
@@ -12,7 +12,6 @@ import {
   createPharmacy,
   loginPharmacy,
 } from "../../redux/auth/pharmacies/operations";
-import { selectIsPharmLoggedIn } from "../../redux/auth/pharmacies/selectors";
 
 type Props = {
   onClose: () => void;

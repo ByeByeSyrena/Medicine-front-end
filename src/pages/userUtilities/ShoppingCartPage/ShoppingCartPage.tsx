@@ -4,8 +4,7 @@ import css from "./ShoppingCartPage.module.css";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../../redux/stores/selectors";
 
-import OrderForm from "../../../components/ShoppingCartForm/ShoppingCartForm";
-import CartList from "../../../components/CartList/CartList";
+import { OrderForm, CartList } from "../../../components/components";
 
 const ShoppingCartPage = () => {
   const cartItems = useSelector(selectCart);
