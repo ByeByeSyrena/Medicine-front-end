@@ -5,7 +5,6 @@ import { selectUserAccessToken } from "../redux/auth/users/selectors";
 import {
   selectCurrentPharmacy,
   selectIsPharmLoggedIn,
-  selectPharmAccessToken,
 } from "../redux/auth/pharmacies/selectors";
 
 type Props = {
