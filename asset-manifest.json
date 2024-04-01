@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/Medicine-front-end/static/css/main.18926b6b.css",
-    "main.js": "/Medicine-front-end/static/js/main.ee62b8e8.js",
+    "main.css": "/Medicine-front-end/static/css/main.6bd9bd15.css",
+    "main.js": "/Medicine-front-end/static/js/main.5de113ec.js",
     "static/js/453.68693753.chunk.js": "/Medicine-front-end/static/js/453.68693753.chunk.js",
     "static/media/hand.gif": "/Medicine-front-end/static/media/hand.a56a5b63022ac86e0351.gif",
     "static/media/pills_PNG16500.png": "/Medicine-front-end/static/media/pills_PNG16500.30ead68a8341eb655754.png",
     "static/media/family.png": "/Medicine-front-end/static/media/family.b3528121eb15df24ee48.png",
     "static/media/CormorantUnicase-Bold.ttf": "/Medicine-front-end/static/media/CormorantUnicase-Bold.c988c8e25e2a17d25ffd.ttf",
     "static/media/CormorantUnicase-Medium.ttf": "/Medicine-front-end/static/media/CormorantUnicase-Medium.7893bf8c129c6952ac52.ttf",
+    "static/media/Herbal-Medicine.jpg": "/Medicine-front-end/static/media/Herbal-Medicine.c45271f33186a7c0dbe2.jpg",
     "static/media/pill-bottle-311809_1280.png": "/Medicine-front-end/static/media/pill-bottle-311809_1280.1644442aead46346da93.png",
     "static/media/bottle.jpg": "/Medicine-front-end/static/media/bottle.0f52138b3cb4881e1ab8.jpg",
     "static/media/books.jpg": "/Medicine-front-end/static/media/books.4c08c0cac12390a541c2.jpg",
@@ -20,15 +21,16 @@
     "index.html": "/Medicine-front-end/index.html",
     "static/media/shopping-cart-drug-basket-shop.svg": "/Medicine-front-end/static/media/shopping-cart-drug-basket-shop.4a9c6ed8106e9d5405d9564034837b90.svg",
     "static/media/logout-2-svgrepo-com.svg": "/Medicine-front-end/static/media/logout-2-svgrepo-com.d1bd6e910306c80263a40e9327edbb1d.svg",
+    "static/media/cross.svg": "/Medicine-front-end/static/media/cross.753f5c2cf9cfff4cbb676fb73a3c5bb7.svg",
     "static/media/minus-small.svg": "/Medicine-front-end/static/media/minus-small.bb2c74332283917d09dbf924e1fa5619.svg",
     "static/media/plus-small.svg": "/Medicine-front-end/static/media/plus-small.828c526367d984344d2bcfaac8f1b8c5.svg",
     "static/media/arrow.svg": "/Medicine-front-end/static/media/arrow.38591eb283f009a6ed5325e6dc3c2c6a.svg",
-    "main.18926b6b.css.map": "/Medicine-front-end/static/css/main.18926b6b.css.map",
-    "main.ee62b8e8.js.map": "/Medicine-front-end/static/js/main.ee62b8e8.js.map",
+    "main.6bd9bd15.css.map": "/Medicine-front-end/static/css/main.6bd9bd15.css.map",
+    "main.5de113ec.js.map": "/Medicine-front-end/static/js/main.5de113ec.js.map",
     "453.68693753.chunk.js.map": "/Medicine-front-end/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.18926b6b.css",
-    "static/js/main.ee62b8e8.js"
+    "static/css/main.6bd9bd15.css",
+    "static/js/main.5de113ec.js"
   ]
 }
