@@ -2,7 +2,7 @@
   .container {
     display: flex;
     justify-content: space-evenly;
-    align-items: start;
+    align-items: flex-start;
     height: calc(100vh - 115px);
     width: 100%;
     padding-top: 30px;

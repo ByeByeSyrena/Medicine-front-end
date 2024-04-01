@@ -13,12 +13,15 @@
 
 .modal {
   width: 90%;
-  max-height: 90%;
-  background-color: var(--nyanza);
+  min-height: 680px;
+
+  background-color: var(--chocolateCosmos);
   border-radius: 24px;
-  padding: 30px 10px;
+  padding: 30px 10px 30px 10px;
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(rgba(3, 3, 66, 0.6), rgba(3, 3, 66, 0.6)),
+    url("../../images/main-page/Herbal-Medicine.jpg") no-repeat center/cover;
 }
 
 .modal ul {
@@ -26,14 +29,15 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  margin-bottom: 30px;
 }
 
 .authButton {
-  color: var(--gamboge);
+  color: var(--nyanza);
   background: transparent;
   border: none;
   font-family: Manrope;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 600;
   line-height: 20px;
   letter-spacing: 0%;
@@ -42,14 +46,56 @@
   transition: all 0.2s ease;
 }
 
-.authButton:hover,
-.authButton:focus {
-  color: var(--federalBlue);
-}
-
 .line {
   width: 2px;
   height: 30px;
-  background-color: var(--tangerine);
+  background-color: var(--nyanza);
   border-radius: 10px;
+}
+
+.formWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--nyanza);
+  opacity: 0.7;
+}
+
+.upperStylingDiv {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeButton svg {
+  stroke: var(--federalBlue);
+}
+
+.circleArea {
+  width: 110px;
+  margin: auto;
+  height: 11px;
+  margin-bottom: 10px;
+}
+
+.circleArea2 {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+.arrow {
+  fill: var(--white);
 }

@@ -26,8 +26,7 @@
   transition: all 0.2s ease;
 }
 
-.link:hover,
-.link:focus {
+.link:hover {
   color: var(--gamboge);
 }
 

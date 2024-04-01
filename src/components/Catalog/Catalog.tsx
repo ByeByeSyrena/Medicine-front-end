@@ -15,7 +15,8 @@ const Catalog: React.FC<CatalogProps> = ({
   displayAll,
   onePharm,
 }) => {
-  const arrayToRender = displayAll ? medicines : onePharm?.items ?? [];
+  const arrayToRender = medicines;
+  // : onePharm?.items ?? [];
 
   return (
     <ul className={css.grid}>

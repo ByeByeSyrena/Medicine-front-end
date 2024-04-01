@@ -8,12 +8,6 @@ export type Medicine = {
   amount?: number;
 };
 
-export type Pharmacy = {
-  _id?: string;
-  name: string;
-  items: Medicine[];
-};
-
 export type Order = {
   _id?: string;
   name: string;
@@ -25,7 +19,7 @@ export type Order = {
   medicines: Medicine[];
 };
 
-// USER NEW
+// USER
 
 export type User = {
   _id: string;
@@ -67,4 +61,21 @@ export interface UpdatedUser {
 export interface ApiError {
   status: number;
   message: string;
+}
+
+//PHARMACY
+
+export type Pharmacy = {
+  _id: string;
+  name: string;
+  email: string;
+  password?: string;
+  roles: string[];
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+};
+
+export interface ReturnedPharmacy {
+  foundPharmacy: foundUser;
+  accessToken: string;
 }

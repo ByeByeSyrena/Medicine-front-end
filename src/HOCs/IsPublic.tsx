@@ -2,22 +2,36 @@ import { useNavigate } from "react-router";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectUserAccessToken } from "../redux/auth/users/selectors";
+import {
+  selectCurrentPharmacy,
+  selectIsPharmLoggedIn,
+  selectPharmAccessToken,
+} from "../redux/auth/pharmacies/selectors";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const IsPublic: React.FC<Props> = ({ children }) => {
-  const isLoggedIn = useSelector(selectUserAccessToken);
+  const isUserLoggedIn = useSelector(selectUserAccessToken);
+  const isPharmLoggedIn = useSelector(selectIsPharmLoggedIn);
+  const pharmID = useSelector(selectCurrentPharmacy);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggedIn !== "") {
+    if (isUserLoggedIn !== "") {
       navigate("/shop");
     }
-  }, [isLoggedIn, navigate]);
+  }, [isUserLoggedIn, navigate]);
 
-  if (isLoggedIn === "") {
+  useEffect(() => {
+    if (isPharmLoggedIn) {
+      navigate(`/seller-settings/${pharmID._id}`);
+    }
+  }, [isPharmLoggedIn, navigate]);
+
+  if (isUserLoggedIn === "" || isPharmLoggedIn === "") {
     return <>{children}</>;
   } else {
     return null;

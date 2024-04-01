@@ -30,10 +30,10 @@ const ShopPage = () => {
     dispatch(getAllStores());
   }, [dispatch]);
 
-  useEffect(() => {
-    const allMeds = storesAndDrugs.flatMap((store: Pharmacy) => store.items);
-    setMedicines(allMeds);
-  }, [storesAndDrugs]);
+  // useEffect(() => {
+  //   const allMeds = storesAndDrugs.flatMap((store: Pharmacy) => store.items);
+  //   setMedicines(allMeds);
+  // }, [storesAndDrugs]);
 
   // const handleAllClick = () => {
   //   setDisplayAll(true);

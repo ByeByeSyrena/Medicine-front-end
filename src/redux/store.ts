@@ -15,15 +15,17 @@ import { storesReducer } from "./stores/storesSlice";
 import { ordersReducer } from "./orders/ordersSlice";
 import { favoritesReducer } from "./favorites/favoritesSlice";
 import { usersReducer } from "./auth/users/usersSlice";
+import { pharmaciesReducer } from "./auth/pharmacies/pharmaciesSlice";
 
 const persistConfig = {
   key: "persistedStates",
   storage,
-  whitelist: ["stores", "cart", "totalPrice", "token"],
+  whitelist: ["stores", "cart", "totalPrice", "token", "pharmToken"],
 };
 
 const rootReducer = combineReducers({
   usersAuth: persistReducer(persistConfig, usersReducer),
+  pharmaciesAuth: persistReducer(persistConfig, pharmaciesReducer),
   orders: ordersReducer,
   stores: persistReducer(persistConfig, storesReducer),
   favorites: persistReducer(persistConfig, favoritesReducer),
