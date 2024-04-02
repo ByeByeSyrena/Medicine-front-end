@@ -30,6 +30,7 @@ const Input: React.FC<InputProps> = ({
         name={name}
         type={type}
         className={`${css[inputClassName as string]}`}
+        autoComplete="off"
       />
       <ErrorMessage
         name={name}

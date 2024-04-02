@@ -34,7 +34,7 @@ const validationSchema = Yup.object().shape({
 
 const SignUpForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
   return (
-    <>
+    <div className={css.back}>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -91,7 +91,7 @@ const SignUpForm: React.FC<Props> = ({ initialValues, onSubmit }) => {
           );
         }}
       </Formik>
-    </>
+    </div>
   );
 };
 

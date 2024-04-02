@@ -1,5 +1,4 @@
 .form {
-  margin-bottom: 50px;
   width: 500px;
 }
 
@@ -28,4 +27,13 @@
   background-color: var(--tangerine);
   color: var(--white);
   opacity: 1;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: transparent;
+  backdrop-filter: blur(5px);
 }

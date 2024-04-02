@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 
 const LoginForm: React.FC<Props> = ({ formikRef, initialValues, onSubmit }) => {
   return (
-    <>
+    <div className={css.back}>
       <Formik
         innerRef={formikRef}
         initialValues={initialValues}
@@ -70,7 +70,7 @@ const LoginForm: React.FC<Props> = ({ formikRef, initialValues, onSubmit }) => {
           );
         }}
       </Formik>
-    </>
+    </div>
   );
 };
 
