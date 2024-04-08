@@ -7,5 +7,12 @@
     align-items: center;
     gap: 50px;
     color: var(--white);
+    background: linear-gradient(
+        180deg,
+        rgba(2, 0, 36, 0.5) 0%,
+        rgba(3, 3, 66, 0.5) 50%
+      ),
+      url("../../../images/Herbal-Medicine.png");
+    background-repeat: no-repeat;
   }
 }

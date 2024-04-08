@@ -5,8 +5,8 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  baseURL: "http://localhost:3001/api/v1",
-  // baseURL: "https://medicine-backend-3.onrender.com/api/v1",
+  // baseURL: "http://localhost:3001/api/v1",
+  baseURL: "https://medicine-backend-3.onrender.com/api/v1",
 });
 
 axiosInstance.interceptors.response.use(

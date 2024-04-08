@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import css from "./AuthSellerNav.module.css";
+import Sidebar from "./Sidebar";
 
 const AuthSellerNav: React.FC = () => {
   return (
-    <div>
-      <p>Hello!</p>
+    <div className={css.navLayout}>
+      <Sidebar />
     </div>
   );
 };
